@@ -47,6 +47,8 @@ Windows 端依赖系统自带的 Edge / Chromium 内核（Win10、Win11 均有�
 | [docs/开发数据/](docs/开发数据/) | 时间线、统计、现状快照、后续路线 |
 | [VERSIONS.md](VERSIONS.md) | **全部 46 个版本的版本史**（最新在最上面） |
 | [LATEST.md](LATEST.md) | 最新版说明 + 给 AI 的四步入口 |
+| [LICENSING-LEGACY.md](LICENSING-LEGACY.md) | **谁带授权、怎么识别、怎么去掉** |
+| [AUTHORIZATION-RETROSPECTIVE.md](AUTHORIZATION-RETROSPECTIVE.md) | **授权机制与多端部署的完整复盘**：怎么设计的、为什么放弃、重来怎么做 |
 
 ## AI 技能
 
