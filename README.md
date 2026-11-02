@@ -2,7 +2,7 @@
 
 > 20,000 条动效组件，覆盖 11 类设备。桌面、手机、网页同源，完全离线。
 
-**当前版本：2.1.3** · 历史 46 个版本见 [VERSIONS.md](VERSIONS.md)
+**当前版本：2.1.3** · 入口文档见 **[LATEST.md](LATEST.md)** · 历史 46 个版本见 [VERSIONS.md](VERSIONS.md)
 
 ## 是什么
 
@@ -46,10 +46,15 @@ Windows 端依赖系统自带的 Edge / Chromium 内核（Win10、Win11 均有�
 | [docs/开发流程与防护体系报告.md](docs/开发流程与防护体系报告.md) | 构建流水线、工程决策、防护边界 |
 | [docs/开发数据/](docs/开发数据/) | 时间线、统计、现状快照、后续路线 |
 | [VERSIONS.md](VERSIONS.md) | **全部 46 个版本的版本史**（最新在最上面） |
+| [LATEST.md](LATEST.md) | 最新版说明 + 给 AI 的四步入口 |
 
 ## AI 技能
 
-[`skill/QUICKSTART.md`](skill/QUICKSTART.md) —— 五分钟上手；[`skill/SKILL.md`](skill/SKILL.md) —— 给 AI 用的取用说明：数据模型、三步检索、三种接入方式、
+[`skill/QUICKSTART.md`](skill/QUICKSTART.md) —— 五分钟上手
+[`skill/SKILL.md`](skill/SKILL.md) —— 给 AI 的技能总纲（强制检索流程、交付契约）
+
+参考文档：数据模型 / 检索手册 / 版面参数 / 设备规则 / 设置项 / 构建发版 / 接入范式，
+都在 [`skill/references/`](skill/references/)。：数据模型、三步检索、三种接入方式、
 设备适配约束、交付前自查。
 
 配套命令行工具：
