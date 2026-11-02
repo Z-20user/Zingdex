@@ -15,8 +15,10 @@
 不想开应用？用命令行也行：
 
 ```bash
-node skill/tools/find-motion.js <库目录> "商品列表" --device phone
+node skill/tools/find-motion.js "商品列表" --device phone
 ```
+
+库目录已写在 `library-path.txt` 里，不用手打；换库时才在命令后补路径。
 
 输出长这样：
 
@@ -37,7 +39,7 @@ node skill/tools/find-motion.js <库目录> "商品列表" --device phone
 **方式 B：命令行按特效 id 取**
 
 ```bash
-node skill/tools/extract-motion.js <库目录> enter-01
+node skill/tools/extract-motion.js enter-01
 ```
 
 会打印三件套：
@@ -53,8 +55,8 @@ node skill/tools/extract-motion.js <库目录> enter-01
 先不知道用哪个 id？列出来看：
 
 ```bash
-node skill/tools/extract-motion.js <库目录> --list
-node skill/tools/extract-motion.js <库目录> --list enter
+node skill/tools/extract-motion.js --list
+node skill/tools/extract-motion.js --list enter
 ```
 
 ---
