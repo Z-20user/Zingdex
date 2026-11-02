@@ -1,18 +1,18 @@
 # 使用手册 / Manual
 
-帧册 FrameFolio 3.0.1 · 安卓 APK + Windows exe
+帧册 FrameFolio 3.0.2 · 安卓 APK + Windows exe
 
 ---
 
 ## 一、安装
 
 **安卓**
-1. 下载 `FrameFolio-3.0.1-android.apk`
+1. 下载 `FrameFolio-3.0.2-android.apk`
 2. 点击安装；提示「未知来源」时允许一次
 3. 要求 Android 6.0 及以上；不申请任何权限，装完离线可用
 
 **Windows**
-1. 下载 `FrameFolio-3.0.1-windows.exe`
+1. 下载 `FrameFolio-3.0.2-windows.exe`
 2. 双击运行（无需安装）
 3. 依赖系统自带的 Edge / Chromium 内核（Win10、Win11 均有）
 
