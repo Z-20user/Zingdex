@@ -59,6 +59,9 @@
 
 ## 更新机制
 
+> **安装包保留策略**：仓库只保留最近 5 个版本的 Windows 安装包（v2.0.0 – v2.1.3）；更早的安装包仅在本地归档，不再上传。
+
+
 1. 本地构建完成后，版本号在 `app_version.py` 与 `version.txt` 两处同步
 2. `gh release create vX.Y.Z` 建版本，再 `gh release upload` 传附件
 3. 在 VERSIONS.md 顶部加一行
