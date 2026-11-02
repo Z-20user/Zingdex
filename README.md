@@ -2,7 +2,7 @@
 
 > 20,000 条动效组件，覆盖 11 类设备。桌面、手机、网页同源，完全离线。
 
-**当前版本：2.1.3** · 入口文档见 **[LATEST.md](LATEST.md)** · 历史 46 个版本见 [VERSIONS.md](VERSIONS.md)
+**当前版本：2.1.5** · 入口文档见 **[LATEST.md](LATEST.md)** · 历史 46 个版本见 [VERSIONS.md](VERSIONS.md)
 
 ## 是什么
 
