@@ -75,6 +75,53 @@ node skill/tools/find-motion.js <库目录> "商品列表"
 
 取用时**三件一起拿**，缺一件就会「不动」或「错位」。
 
+### 两种编号要分清
+
+| 编号 | 形如 | 在哪 |
+|---|---|---|
+| 场景条目编号 `fx` | `fx-n001-01` | 场景数据里，用来定位「哪个场景的哪一条」 |
+| 特效基础编号 | `enter-01` / `light-07` | 代码文件里，`ENGINE_HTML/CSS/JS` 的键 |
+
+应用里通过 `fx → 去前缀 → lib.byId` 解析成基础编号。
+命令行工具直接用基础编号取代码。
+
+### 命令行工具
+
+```bash
+# 1) 找场景与条目（返回 fx）
+node skill/tools/find-motion.js <库目录> "商品列表" --device phone
+
+# 2) 按基础编号取三件套代码
+node skill/tools/extract-motion.js <库目录> enter-01
+
+# 3) 列全部基础编号（按族）
+node skill/tools/extract-motion.js <库目录> --list
+node skill/tools/extract-motion.js <库目录> --list light
+```
+
+### 特效族（共 500 条）
+
+| 族 | 数量 | 用途 |
+|---|---|---|
+| enter | 50 | 入场 |
+| exit | 32 | 退场 |
+| state | 53 | 状态切换 |
+| light | 43 | 光效、扫光 |
+| morph | 43 | 形变 |
+| space | 35 | 空间 / 3D 位移 |
+| particle | 35 | 粒子（有脚本） |
+| physics | 33 | 物理回弹（有脚本） |
+| accent | 30 | 强调、点缀 |
+| ambient | 25 | 环境氛围 |
+| type | 25 | 字体排版动效 |
+| swarm | 25 | 群体运动（有脚本） |
+| beam | 18 | 光束 |
+| text | 18 | 文字特效 |
+| data | 15 | 数据可视化 |
+| chart | 12 | 图表 |
+| noise | 4 | 噪波 |
+| svg | 4 | SVG 路径 |
+
 ## 三、三种接入方式
 
 ### 方式 A：直接复制（最省事）
