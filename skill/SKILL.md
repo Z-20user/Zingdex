@@ -22,7 +22,7 @@ node skill/tools/extract-motion.js --list
 - 第 2 条：按编号取码，输出 HTML / CSS（有脚本时附 JS）
 - 第 3 条：列出 500 个基础特效编号，按族分组
 
-库目录默认从 `skill/library-path.txt` 读取；换库时在命令后补路径。
+库目录：在命令后补路径；也可在本地建 `skill/library-path.txt` 写一行路径，或设环境变量 `FRAMEFOLIO_LIB`。
 
 ## 三、输入输出
 
