@@ -4,7 +4,7 @@
 
 | 版本 | 日期 | 产物 | 说明 |
 |---|---|---|---|
-| **3.0.0** | 2026-11-03 | `FrameFolio-3.0.0-android.apk` · `FrameFolio-3.0.0-windows.exe` | 命名与结构定稿：更名「帧册 / FrameFolio」，MIT 开源，只保留两个产物 |
+| **3.0.0** | 2026-11-03 | `FrameFolio-3.0.1-android.apk` · `FrameFolio-3.0.1-windows.exe` | 命名与结构定稿：更名「帧册 / FrameFolio」，MIT 开源，只保留两个产物 |
 
 ## 维护策略
 
