@@ -26,9 +26,10 @@ Open **Releases** and pick a version — each version is its own release.
 |---|---|---|
 | `transient-2.1.5-android.apk` | Android (latest) | 2.5 MB |
 | `transient-2.1.5-win-portable.zip` | Windows portable (latest) | 112 MB (≈293 MB unpacked) |
-| `TRANSIENT.v2.1.3.exe` | Windows installer (newest kept) | 112 MB |
+| `transient-2.1.5-win-installer.exe` | Windows installer (latest) | 112 MB |
+| `TRANSIENT.v2.1.3.exe` | Windows installer | 112 MB |
 
-> Since 2.1.4 the desktop build ships as a portable folder only. Installers are kept for the five most recent builds (2.0.0 – 2.1.3); the newest is **2.1.3**.
+> Since 2.1.4 the desktop build ships as a portable folder only. Installers are kept for five recent builds: **2.1.5, 2.1.3, 2.1.2, 2.1.1, 2.0.0** (2.1.4 was released without one).
 
 ## Install
 
@@ -113,9 +114,10 @@ kept only as an archive. See [LICENSING-LEGACY.md](LICENSING-LEGACY.md).
 |---|---|---|
 | `transient-2.1.5-android.apk` | 安卓（最新） | 2.5 MB |
 | `transient-2.1.5-win-portable.zip` | Windows 便携版（最新） | 112 MB（解压约 293 MB） |
-| `TRANSIENT.v2.1.3.exe` | Windows 安装版（保留的最新一版） | 112 MB |
+| `transient-2.1.5-win-installer.exe` | Windows 安装版（最新） | 112 MB |
+| `TRANSIENT.v2.1.3.exe` | Windows 安装版 | 112 MB |
 
-> 2.1.4 起桌面端只出便携版。仓库只保留最近 5 个版本的安装包（2.0.0 – 2.1.3），最新为 **2.1.3**。
+> 2.1.4 起桌面端只出便携版。仓库保留五个安装版：**2.1.5、2.1.3、2.1.2、2.1.1、2.0.0**（2.1.4 当时未出安装包）。
 
 ## 安装
 
