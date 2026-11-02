@@ -11,17 +11,18 @@ description: 从 TRANSIENT 瞬态动效库检索并取用动效代码（20,000 �
 
 ```bash
 # 1) 检索：拿到 fx 编号
-node skill/tools/find-motion.js <库目录> "商品列表" --device phone
+node skill/tools/find-motion.js "商品列表" --device phone
 
 # 2) 取码：直接贴 fx 编号
-node skill/tools/extract-motion.js <库目录> fx-n001-01
+node skill/tools/extract-motion.js fx-n001-01
 ```
 
+`<库目录>` 已写进 `library-path.txt`，不用每次手打；换库时才在命令后面补路径。
 输出就是 HTML + CSS（有脚本的会给 JS），复制即用。
 
 - 找不到时：换更短的词 → 去掉 `--device`/`--cat` → `--scenes` 看全部
-- 只看基础特效：`extract-motion.js <库目录> --list`
-- 首次使用：`node skill/tools/build-index.js <库目录>` 生成 `index.json`，之后检索读 1.9 MB JSON，不再解析 2 MB 源码
+- 只看基础特效：`extract-motion.js --list`
+- 首次使用：`node skill/tools/build-index.js` 生成 `index.json`，之后检索读 1.9 MB JSON，不再解析 2 MB 源码
 - `--device` 支持 11 类叫法（手机/平板/桌面/电视/车机/手表/终端…），工具映射到库里的 5 个分组，覆盖全部 201 个场景
 - `--cat` 可用常用叫法：进度→加载、转场→退场、出现→入场、反馈→状态
 
