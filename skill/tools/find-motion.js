@@ -1,120 +1,118 @@
 #!/usr/bin/env node
 /**
- * find-motion.js —— 在 TRANSIENT 动效库里检索场景与条目
+ * find-motion.js —— 找场景与条目，输出可直接取代码的 fx 编号
+ *
+ * 优先读 index.json（由 build-index.js 生成），没有再回退到解析源码。
  *
  * 用法：
  *   node find-motion.js <库目录> [关键词] [选项]
- *
  * 选项：
- *   --device phone|wide|vehicle|wear|terminal   只看该设备
- *   --cat 入场|列表|循环|进度|数值|文字|状态      只看该动效类别
- *   --max 600                                    时长上限（毫秒）
- *   --limit 5                                    每个场景最多列几条（默认 6）
- *   --scenes 3                                   最多列几个场景（默认 5）
- *   --json                                       输出 JSON
- *
- * 例：
- *   node find-motion.js ../../03_源代码/site "商品列表"
- *   node find-motion.js ../../03_源代码/site "进度" --cat 进度 --max 1500
+ *   --device phone|wide|vehicle|wear|terminal|tv|kiosk|car  只看该设备
+ *   --cat 入场|列表|循环|进度|数值|文字|状态                只看该类别
+ *   --max 600                                               时长上限（ms）
+ *   --limit 6                                               每场景最多几条
+ *   --scenes 5                                              最多几个场景
+ *   --json                                                  输出 JSON
  */
 "use strict";
-
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-function parseArgs(argv) {
+function parse(argv) {
   const lib = argv[2];
-  if (!lib) usage();
+  if (!lib) { console.log("用法: node find-motion.js <库目录> [关键词] [--device x] [--cat x] [--max ms]"); process.exit(1); }
+  const o = { keyword: "", device: "", cat: "", max: 0, limit: 6, scenes: 5, json: false };
   const rest = argv.slice(3);
-  const opt = { keyword: "", device: "", cat: "", max: 0, limit: 6, scenes: 5, json: false };
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i];
-    if (a === "--device") opt.device = rest[++i] || "";
-    else if (a === "--cat") opt.cat = rest[++i] || "";
-    else if (a === "--max") opt.max = Number(rest[++i]) || 0;
-    else if (a === "--limit") opt.limit = Number(rest[++i]) || 6;
-    else if (a === "--scenes") opt.scenes = Number(rest[++i]) || 5;
-    else if (a === "--json") opt.json = true;
-    else if (!a.startsWith("--")) opt.keyword = a;
+    if (a === "--device") o.device = rest[++i] || "";
+    else if (a === "--cat") o.cat = rest[++i] || "";
+    else if (a === "--max") o.max = Number(rest[++i]) || 0;
+    else if (a === "--limit") o.limit = Number(rest[++i]) || 6;
+    else if (a === "--scenes") o.scenes = Number(rest[++i]) || 5;
+    else if (a === "--json") o.json = true;
+    else if (!a.startsWith("--")) o.keyword = a;
   }
-  return { lib, opt };
+  return { lib, o };
 }
 
-function usage() {
-  console.log("用法: node find-motion.js <库目录> [关键词] [--device x] [--cat x] [--max ms] [--limit n] [--json]");
-  process.exit(1);
-}
-
-function loadScenes(lib) {
-  const sandbox = { window: {}, document: {}, console: console };
-  sandbox.window.document = sandbox.document;
-  sandbox.window.console = console;
-  vm.createContext(sandbox);
-  for (const f of ["data.js", "engine.js"]) {
-    const p = path.join(lib, "assets", f);
-    if (!fs.existsSync(p)) continue;
-    try {
-      vm.runInContext(fs.readFileSync(p, "utf8"), sandbox, { filename: p });
-    } catch (e) {
-      console.error("读取失败 " + f + "：" + e.message);
+function loadIndex(lib) {
+  const cands = [path.join(lib, "index.json"), path.join(__dirname, "..", "index.json")];
+  for (const p of cands) {
+    if (fs.existsSync(p)) {
+      try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { }
     }
   }
-  return sandbox.window.SCENES || [];
+  return null;
 }
 
-function pick(scenes, opt) {
-  const kw = (opt.keyword || "").toLowerCase();
-  const hits = [];
-  for (const sc of scenes) {
-    const hay = [sc.zh, sc.en, sc.desc, sc.domain, sc.g, sc.ctx].join(" ").toLowerCase();
+/* 11 类设备名 → 库里实际的 5 个表单分组（sc.f） */
+const DEVICE_ALIAS = {
+  phone: "phone", mobile: "phone", 手机: "phone",
+  tablet: "wide", laptop: "wide", desktop: "wide", "desktop-xl": "wide",
+  tv: "wide", kiosk: "wide", 平板: "wide", 桌面: "wide", 电视: "wide", 终端机: "wide",
+  car: "vehicle", vehicle: "vehicle", 车机: "vehicle",
+  watch: "wear", wear: "wear", 手表: "wear",
+  terminal: "terminal", 终端: "terminal",
+};
+
+/* 常用叫法 → 库里的 7 个条目类别（mc） */
+const CAT_ALIAS = { 进度: "加载", 转场: "退场", 出现: "入场", 消失: "退场", 反馈: "状态" };
+
+function loadFromSource(lib) {
+  const sb = { window: {}, document: {}, console };
+  vm.createContext(sb);
+  const A = path.join(lib, "assets");
+  for (const f of ["data.js", "engine.js"]) {
+    const p = path.join(A, f);
+    if (fs.existsSync(p)) { try { vm.runInContext(fs.readFileSync(p, "utf8"), sb, { filename: f }); } catch (e) { } }
+  }
+  return { s: (sb.window.SCENES || []).map((sc) => ({ id: sc.id, zh: sc.zh, en: sc.en || "", desc: sc.desc || "", domain: sc.domain || sc.g || "", f: sc.f || "", devices: sc.devices || [], cats: sc.cats || [] })) };
+}
+
+function pick(data, o) {
+  const kw = (o.keyword || "").toLowerCase();
+  const dev = DEVICE_ALIAS[o.device] || o.device;
+  const cat = CAT_ALIAS[o.cat] || o.cat;
+  const res = [];
+  for (const sc of data.s) {
+    const hay = [sc.zh, sc.en, sc.desc, sc.domain, sc.id].join(" ").toLowerCase();
     const catHit = (sc.cats || []).some((c) => (c.zh || "").toLowerCase().includes(kw));
     if (kw && !hay.includes(kw) && !catHit) continue;
-    if (opt.device && !(sc.devices || []).includes(opt.device)) continue;
-
+    // devices[] 只有 81/201 个场景有；其余用 sc.f（5 个表单分组）兜底，否则 --device 会漏掉 s/d 场景。
+    const devs = Array.isArray(sc.devices) && sc.devices.length ? sc.devices : (sc.f ? [sc.f] : null);
+    if (dev && devs && !devs.includes(dev)) continue;
     let cats = (sc.cats || []).slice();
-    if (opt.cat) cats = cats.filter((c) => (c.mc || "").includes(opt.cat));
-    if (opt.max) cats = cats.filter((c) => (c.ms || 0) <= opt.max);
+    if (cat) cats = cats.filter((c) => (c.mc || "").includes(cat));
+    if (o.max) cats = cats.filter((c) => (c.ms || 0) <= o.max);
     if (!cats.length) continue;
-
     cats.sort((a, b) => (b.fq || 0) - (a.fq || 0));
-    hits.push({
-      id: sc.id, zh: sc.zh, en: sc.en, desc: sc.desc,
-      domain: sc.domain, devices: sc.devices,
-      cats: cats.slice(0, opt.limit),
-      total: (sc.cats || []).length,
-    });
+    res.push({ id: sc.id, zh: sc.zh, desc: sc.desc, domain: sc.domain, f: sc.f, devices: devs || [], cats: cats.slice(0, o.limit), total: (sc.cats || []).length });
   }
-  hits.sort((a, b) => (b.cats[0] && b.cats[0].fq ? b.cats[0].fq : 0) - (a.cats[0] && a.cats[0].fq ? a.cats[0].fq : 0));
-  return hits.slice(0, opt.scenes);
+  res.sort((a, b) => ((b.cats[0] && b.cats[0].fq) || 0) - ((a.cats[0] && a.cats[0].fq) || 0));
+  return res.slice(0, o.scenes);
 }
 
 function main() {
-  const { lib, opt } = parseArgs(process.argv);
-  const scenes = loadScenes(lib);
-  if (!scenes.length) {
-    console.error("没读到场景数据，确认 <库目录> 下有 assets/data.js 或 assets/engine.js");
-    process.exit(2);
-  }
-  const res = pick(scenes, opt);
-  if (opt.json) {
-    console.log(JSON.stringify(res, null, 1));
-    return;
-  }
+  const { lib, o } = parse(process.argv);
+  const idx = loadIndex(lib);
+  const data = idx || loadFromSource(lib);
+  if (!data.s || !data.s.length) { console.error("没读到场景数据：确认 <库目录>/assets 存在，或先跑 build-index.js"); process.exit(2); }
+  const res = pick(data, o);
+  if (o.json) { console.log(JSON.stringify(res, null, 1)); return; }
   if (!res.length) {
-    console.log("没有匹配结果。换个关键词，或去掉 --device / --cat 限制。");
-    console.log("场景总数：" + scenes.length);
+    console.log("没有匹配。换个更短的词，或去掉 --device / --cat / --max；也可用 --list 看全部基础特效。");
     return;
   }
-  console.log("场景总数 " + scenes.length + "，命中 " + res.length + " 个：\n");
+  console.log("数据源 " + (idx ? "index.json" : "源码") + " · 场景 " + data.s.length + " 个 · 命中 " + res.length + "\n");
   for (const s of res) {
     console.log("● " + s.zh + "  [" + s.id + "]  " + (s.domain || "") + "  " + (s.devices || []).join("/"));
     if (s.desc) console.log("  " + s.desc);
-    for (const c of s.cats) {
-      console.log("   · " + (c.mc || "") + "  " + c.zh + "  " + c.ms + "ms  " + (c.ease || "") + "  " + c.fx);
-    }
+    for (const c of s.cats) console.log("   · " + (c.mc || "") + "  " + c.zh + "  " + c.ms + "ms  " + c.fx + (c.e ? "  → " + c.e : ""));
     console.log("");
   }
+  console.log("取代码：node extract-motion.js <库目录> " + (res[0].cats[0] ? res[0].cats[0].fx : "fx-…"));
 }
 
 main();
