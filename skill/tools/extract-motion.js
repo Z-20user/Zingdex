@@ -44,17 +44,32 @@ function load(lib) {
   };
 }
 
+/* 默认库目录：环境变量 TRANSIENT_LIB > skill/library-path.txt（安装后写死） */
+function defaultLib() {
+  if (process.env.TRANSIENT_LIB) return process.env.TRANSIENT_LIB;
+  const cfg = path.join(__dirname, "..", "library-path.txt");
+  try { if (fs.existsSync(cfg)) return fs.readFileSync(cfg, "utf8").trim(); } catch (e) { }
+  return "";
+}
+
 function main() {
   const argv = process.argv.slice(2);
-  const lib = argv[0];
+  let lib = "";
+  let args = argv;
+  if (argv[0] && !argv[0].startsWith("--") && fs.existsSync(argv[0])) {
+    lib = argv[0]; args = argv.slice(1);
+  } else {
+    lib = defaultLib();
+  }
   if (!lib) {
-    console.log("用法: node extract-motion.js <库目录> <fx-id|effect-id> [--json] | --list [族] | --scenes");
+    console.log("用法: node extract-motion.js [<库目录>] <fx-id|effect-id> [--json] | --list [族] | --scenes");
+    console.log("（省略 <库目录> 时读 skill/library-path.txt 或环境变量 TRANSIENT_LIB）");
     process.exit(1);
   }
   const L = load(lib);
 
-  if (argv.includes("--list")) {
-    const fam = argv[argv.indexOf("--list") + 1];
+  if (args.includes("--list")) {
+    const fam = args[args.indexOf("--list") + 1];
     const ids = Object.keys(L.html).filter((k) => !fam || fam.startsWith("--") || k.startsWith(fam + "-")).sort();
     const g = {};
     ids.forEach((k) => (g[k.split("-")[0]] = g[k.split("-")[0]] || []).push(k));
@@ -63,7 +78,7 @@ function main() {
     return;
   }
 
-  if (argv.includes("--scenes")) {
+  if (args.includes("--scenes")) {
     L.scenes.forEach((s) => {
       console.log("[" + s.id + "] " + s.zh + "  " + (s.devices || []).join("/") + "  共 " + (s.cats || []).length + " 条");
       (s.cats || []).slice(0, 4).forEach((c) => console.log("    · " + c.mc + " " + c.zh + " " + c.ms + "ms  " + c.fx));
@@ -72,7 +87,7 @@ function main() {
     return;
   }
 
-  const id = argv[1];
+  const id = args[0];
   if (!id) { console.log("缺少编号，例如 fx-s001-07 或 enter-01"); process.exit(1); }
 
   let out = null;
@@ -99,7 +114,7 @@ function main() {
     out = { id, source: "ENGINE", html: H || "", css: C || "", js: J ? J.toString() : "", note: "" };
   }
 
-  if (argv.includes("--json")) { console.log(JSON.stringify(out, null, 1)); return; }
+  if (args.includes("--json")) { console.log(JSON.stringify(out, null, 1)); return; }
 
   console.log("/* ===== " + out.id + " · HTML（来源 " + out.source + "） ===== */");
   console.log(out.html || "（无）");
