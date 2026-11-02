@@ -46,6 +46,19 @@ Windows 端依赖系统自带的 Edge / Chromium 内核（Win10、Win11 均有�
 | [docs/开发流程与防护体系报告.md](docs/开发流程与防护体系报告.md) | 构建流水线、工程决策、防护边界 |
 | [docs/开发数据/](docs/开发数据/) | 时间线、统计、现状快照、后续路线 |
 
+## AI 技能
+
+[`skill/SKILL.md`](skill/SKILL.md) —— 给 AI 用的取用说明：数据模型、三步检索、三种接入方式、
+设备适配约束、交付前自查。
+
+配套命令行工具：
+
+```bash
+node skill/tools/find-motion.js <库目录> "商品列表" --device phone
+```
+
+输出场景与 `fx` 编号，直接对应到 `engine_html.js` / `engine_css.js` / `engine_js.js` 里的代码。
+
 ## 密钥 App（已停用）
 
 `瞬态密钥` 是早期授权体系的一部分：手机上查看 / 领取激活码。
