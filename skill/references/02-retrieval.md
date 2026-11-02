@@ -64,7 +64,7 @@
 - `fx-s001-07` 是**条目编号**
 - 想取代码：直接把 `fx-s001-07` 交给 `extract-motion.js`
 
-> 取码：`node skill/tools/extract-motion.js <库目录> <fx 编号>`。
+> 取码：`node skill/tools/extract-motion.js <fx 编号>`（库目录已写入 `library-path.txt`）。
 > 16,000 条基底复用条目会显示 `→ state-51` 这样的箭头，结构与基础样式从 `ENGINE_*` 合并；
 > 4,000 条 `s`/`d` 场景特写条目没有箭头，HTML/CSS 直接来自 `LIB_PAY`。
 
