@@ -1,0 +1,30 @@
+name: Bug 报告 / Bug report
+description: 用哪条动效、哪个设备、出现什么问题
+labels: ["bug"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: 动效编号（fx-… 或 enter-01）
+      placeholder: fx-n001-01
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: 设备
+      options: [手机, 桌面大屏, 平板, 手表, 车机, 终端, 电视, 其他]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 发生了什么
+      placeholder: 期望 vs 实际，最好附截图或录屏
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      placeholder: 3.0.0
