@@ -1,0 +1,22 @@
+name: 场景请求 / Scene request
+description: 想要什么界面场景的动效
+labels: ["enhancement"]
+body:
+  - type: input
+    id: scene
+    attributes:
+      label: 场景名称
+      placeholder: 例如「表单校验失败提示」
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: 用在哪里 / 想达到什么效果
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: 主要设备
+      options: [手机, 桌面大屏, 平板, 手表, 车机, 终端, 电视]
