@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 /**
- * extract-motion.js —— 按特效 id 取出三件套代码（HTML / CSS / JS）
+ * extract-motion.js —— 按编号取动效代码
+ *
+ * 支持两种编号：
+ *   1) 条目编号  fx-s001-07   ← 场景数据里的 fx，从 LIB_PAY 取（推荐）
+ *   2) 特效编号  enter-01     ← 500 个基础特效，从 ENGINE_* 取
  *
  * 用法：
- *   node extract-motion.js <库目录> <特效id>           直接打印代码
- *   node extract-motion.js <库目录> <特效id> --json    输出 JSON
- *   node extract-motion.js <库目录> --list             列出全部特效 id（按族）
- *   node extract-motion.js <库目录> --list enter       只列某个族
- *
- * 特效 id 形如：enter-01 / exit-07 / state-12 / light-03 / particle-05
- * 族：enter exit state accent space ambient physics data type light morph swarm particle beam text chart noise svg
+ *   node extract-motion.js <库目录> fx-s001-07
+ *   node extract-motion.js <库目录> enter-01
+ *   node extract-motion.js <库目录> fx-s001-07 --json
+ *   node extract-motion.js <库目录> --list            列出基础特效（按族）
+ *   node extract-motion.js <库目录> --list light
+ *   node extract-motion.js <库目录> --scenes          列出场景与条目编号
  */
 "use strict";
 const fs = require("fs");
@@ -19,14 +22,25 @@ const vm = require("vm");
 function load(lib) {
   const sb = { window: {}, document: {}, console };
   vm.createContext(sb);
-  for (const f of ["engine_html.js", "engine_css.js", "engine_js.js"]) {
-    const p = path.join(lib, "assets", f);
-    if (fs.existsSync(p)) vm.runInContext(fs.readFileSync(p, "utf8"), sb, { filename: f });
+  const A = path.join(lib, "assets");
+  for (const f of ["data.js", "engine.js", "engine_html.js", "engine_css.js", "engine_js.js"]) {
+    const p = path.join(A, f);
+    if (fs.existsSync(p)) {
+      try { vm.runInContext(fs.readFileSync(p, "utf8"), sb, { filename: f }); } catch (e) { /* 单文件失败不致命 */ }
+    }
+  }
+  const libDir = path.join(A, "lib");
+  if (fs.existsSync(libDir)) {
+    for (const f of fs.readdirSync(libDir).filter((x) => x.endsWith(".js"))) {
+      try { vm.runInContext(fs.readFileSync(path.join(libDir, f), "utf8"), sb, { filename: f }); } catch (e) { }
+    }
   }
   return {
+    pay: sb.window.LIB_PAY || {},
     html: sb.window.ENGINE_HTML || {},
     css: sb.window.ENGINE_CSS || {},
     js: sb.window.ENGINE_JS || {},
+    scenes: sb.window.SCENES || [],
   };
 }
 
@@ -34,51 +48,67 @@ function main() {
   const argv = process.argv.slice(2);
   const lib = argv[0];
   if (!lib) {
-    console.log("用法: node extract-motion.js <库目录> <特效id> [--json] | --list [族]");
+    console.log("用法: node extract-motion.js <库目录> <fx-id|effect-id> [--json] | --list [族] | --scenes");
     process.exit(1);
   }
-  const { html, css, js } = load(lib);
+  const L = load(lib);
 
   if (argv.includes("--list")) {
-    const famArg = argv[argv.indexOf("--list") + 1];
-    const fam = famArg && !famArg.startsWith("--") ? famArg : "";
-    const ids = Object.keys(html).filter((k) => !fam || k.startsWith(fam + "-")).sort();
-    const groups = {};
-    ids.forEach((k) => {
-      const f = k.split("-")[0];
-      (groups[f] = groups[f] || []).push(k);
+    const fam = argv[argv.indexOf("--list") + 1];
+    const ids = Object.keys(L.html).filter((k) => !fam || fam.startsWith("--") || k.startsWith(fam + "-")).sort();
+    const g = {};
+    ids.forEach((k) => (g[k.split("-")[0]] = g[k.split("-")[0]] || []).push(k));
+    for (const f of Object.keys(g)) console.log(f + " (" + g[f].length + "): " + g[f].join(" "));
+    console.log("\n合计 " + ids.length + " 条基础特效");
+    return;
+  }
+
+  if (argv.includes("--scenes")) {
+    L.scenes.forEach((s) => {
+      console.log("[" + s.id + "] " + s.zh + "  " + (s.devices || []).join("/") + "  共 " + (s.cats || []).length + " 条");
+      (s.cats || []).slice(0, 4).forEach((c) => console.log("    · " + c.mc + " " + c.zh + " " + c.ms + "ms  " + c.fx));
     });
-    for (const f of Object.keys(groups)) {
-      console.log(f + " (" + groups[f].length + "): " + groups[f].join(" "));
-    }
-    console.log("\n合计 " + ids.length + " 条");
+    console.log("\n场景 " + L.scenes.length + " 个，条目 " + Object.keys(L.pay).length + " 条");
     return;
   }
 
   const id = argv[1];
-  if (!id) {
-    console.log("缺少特效 id，例如 enter-01");
-    process.exit(1);
+  if (!id) { console.log("缺少编号，例如 fx-s001-07 或 enter-01"); process.exit(1); }
+
+  let out = null;
+  if (id.startsWith("fx-")) {
+    const e = L.pay[id];
+    if (!e) { console.log("LIB_PAY 里没有 " + id + "。用 --scenes 看实际编号。"); process.exit(2); }
+    // n/r/t/v/w/z 类条目只存 e（基底特效编号）+ 覆盖式 CSS，
+    // 结构和基础样式在 ENGINE_HTML / ENGINE_CSS 里，必须按 library.js hydrate() 的规则合并。
+    const eid = e.e || "";
+    const baseHtml = eid ? (L.html[eid] || "") : "";
+    const baseCss = eid ? (L.css[eid] || "") : "";
+    const baseJs = eid && L.js[eid] ? L.js[eid].toString() : "";
+    out = {
+      id,
+      source: eid ? "LIB_PAY + ENGINE(" + eid + ")" : "LIB_PAY（特写条目）",
+      html: e.h || baseHtml,
+      css: (baseCss + (e.c || "")).trim(),
+      js: baseJs,
+      note: e.nt || "",
+    };
+  } else {
+    const H = L.html[id], C = L.css[id], J = L.js[id];
+    if (!H && !C) { console.log("找不到 " + id + "。用 --list 看基础特效编号。"); process.exit(2); }
+    out = { id, source: "ENGINE", html: H || "", css: C || "", js: J ? J.toString() : "", note: "" };
   }
-  const H = html[id];
-  const C = css[id];
-  const J = js[id];
-  if (!H && !C) {
-    console.log("找不到 " + id + "。用 --list 看看可用的 id。");
-    process.exit(2);
-  }
-  if (argv.includes("--json")) {
-    console.log(JSON.stringify({ id, html: H || "", css: C || "", js: J ? J.toString() : "" }, null, 1));
-    return;
-  }
-  console.log("/* ===== " + id + " · HTML ===== */");
-  console.log(H || "（无）");
-  console.log("\n/* ===== " + id + " · CSS ===== */");
-  console.log(C || "（无）");
-  console.log("\n/* ===== " + id + " · JS ===== */");
-  console.log(J ? J.toString() : "（纯 CSS，无需脚本）");
-  console.log("\n/* 提示：CSS 里用 var(--fx-dur)/var(--fx-ease) 控制时长与缓动；" +
-    "把这两个变量设在你自己的容器上即可改节奏。 */");
+
+  if (argv.includes("--json")) { console.log(JSON.stringify(out, null, 1)); return; }
+
+  console.log("/* ===== " + out.id + " · HTML（来源 " + out.source + "） ===== */");
+  console.log(out.html || "（无）");
+  console.log("\n/* ===== " + out.id + " · CSS ===== */");
+  console.log(out.css || "（无）");
+  console.log("\n/* ===== " + out.id + " · JS ===== */");
+  console.log(out.js ? out.js : "（纯 CSS，无需脚本）");
+  if (out.note) console.log("\n/* 备注：" + out.note + " */");
+  console.log("\n/* 改节奏：在容器上设 --fx-dur / --fx-ease，不要改关键帧 */");
 }
 
 main();
