@@ -13,8 +13,13 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const lib = process.argv[2];
-if (!lib) { console.log("用法: node build-index.js <库目录> [--out index.json]"); process.exit(1); }
+let lib = process.argv[2];
+if (!lib || lib.startsWith("--")) {
+  const cfg = path.join(__dirname, "..", "library-path.txt");
+  if (process.env.TRANSIENT_LIB) lib = process.env.TRANSIENT_LIB;
+  else if (fs.existsSync(cfg)) lib = fs.readFileSync(cfg, "utf8").trim();
+}
+if (!lib) { console.log("用法: node build-index.js [<库目录>] [--out index.json]"); process.exit(1); }
 const outIdx = process.argv.indexOf("--out");
 const out = outIdx > 0 ? process.argv[outIdx + 1] : path.join(__dirname, "..", "index.json");
 
