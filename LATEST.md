@@ -1,4 +1,4 @@
-# 最新版 / Latest · 帧册 FrameFolio 3.0.1
+# 最新版 / Latest · 帧册 FrameFolio 3.0.2
 
 | 项 | 值 |
 |---|---|
@@ -12,8 +12,8 @@
 
 ## 下载
 
-- `FrameFolio-3.0.1-android.apk` —— 安卓，直接安装
-- `FrameFolio-3.0.1-windows.exe` —— Windows，双击即用
+- `FrameFolio-3.0.2-android.apk` —— 安卓，直接安装
+- `FrameFolio-3.0.2-windows.exe` —— Windows，双击即用
 
 ## 使用手册
 
