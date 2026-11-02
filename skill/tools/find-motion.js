@@ -19,11 +19,25 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
+/* 默认库目录：环境变量 TRANSIENT_LIB > skill/library-path.txt（安装后写死） */
+function defaultLib() {
+  if (process.env.TRANSIENT_LIB) return process.env.TRANSIENT_LIB;
+  const cfg = path.join(__dirname, "..", "library-path.txt");
+  try { if (fs.existsSync(cfg)) return fs.readFileSync(cfg, "utf8").trim(); } catch (e) { }
+  return "";
+}
+
 function parse(argv) {
-  const lib = argv[2];
-  if (!lib) { console.log("用法: node find-motion.js <库目录> [关键词] [--device x] [--cat x] [--max ms]"); process.exit(1); }
+  const first = argv[2];
+  let lib = "", rest = argv.slice(2);
+  if (first && !first.startsWith("--") && fs.existsSync(first)) { lib = first; rest = argv.slice(3); }
+  else lib = defaultLib();
+  if (!lib) {
+    console.log("用法: node find-motion.js [<库目录>] [关键词] [--device x] [--cat x] [--max ms]");
+    console.log("（省略 <库目录> 时读 skill/library-path.txt 或环境变量 TRANSIENT_LIB）");
+    process.exit(1);
+  }
   const o = { keyword: "", device: "", cat: "", max: 0, limit: 6, scenes: 5, json: false };
-  const rest = argv.slice(3);
   for (let i = 0; i < rest.length; i++) {
     const a = rest[i];
     if (a === "--device") o.device = rest[++i] || "";
