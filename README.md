@@ -1,171 +1,129 @@
-# TRANSIENT · Motion Component Library
+# 帧册 / FrameFolio
 
-A searchable, previewable, copy-paste motion library: **20,000 scene-based components**,
-**500 base effects**, across **11 device classes**. Fully offline, no network access required.
+离线动效规格库：**20,000 条场景条目 · 500 个基础特效 · 11 类设备系数**。
+给 AI 编码助手和前端开发者用：检索 → 取码 → 适配，三步闭环。
 
-**Current version: 2.1.5** · 48 releases archived in [VERSIONS.md](VERSIONS.md)
-
----
-
-## What it is
-
-Every entry is a real interface plus a motion applied to it — not a shape renamed 25 times.
-
-- **20,000 components**: portrait 16,290 · large screen 1,039 · car 799 · watch 864 · kiosk 1,008
-- **500 base effects** in 18 families (enter, exit, state, light, morph, space, particle, physics,
-  accent, ambient, type, swarm, beam, text, data, chart, noise, svg)
-- **201 scenes** covering real product situations (e-commerce list, media player, dashboard…)
-- **11 device classes**: phone, tablet, laptop, desktop, kiosk, car, TV, watch, AR/VR, e-ink, industrial panel
-- **Offline by design** — no CDN, no web fonts, no telemetry, no network permission on Android
-
-## Download
-
-Open **Releases** and pick a version — each version is its own release.
-
-| File | Platform | Size |
-|---|---|---|
-| `transient-2.1.5-android.apk` | Android (latest) | 2.5 MB |
-| `transient-2.1.5-win-portable.zip` | Windows portable (latest) | 112 MB (≈293 MB unpacked) |
-| `transient-2.1.5-win-installer.exe` | Windows installer (latest) | 112 MB |
-| `TRANSIENT.v2.1.3.exe` | Windows installer | 112 MB |
-
-> Since 2.1.4 the desktop build ships as a portable folder only. Installers are kept for five recent builds: **2.1.5, 2.1.3, 2.1.2, 2.1.1, 2.0.0** (2.1.4 was released without one).
-
-## Install
-
-- **Android** — install the APK directly; allow "unknown sources" once if prompted. Requires Android 6.0+ (API 23).
-- **Windows portable** — unzip and run `TRANSIENT.exe` from inside the folder. Do **not** move the exe alone; the runtime files must stay next to it.
-- **Windows installer (1.12.43)** — run the exe, choose a path, a desktop shortcut is created; uninstall from the app's settings.
-
-The Windows build uses the system's built-in Edge / Chromium runtime (present on Windows 10 and 11).
-
-## Using an effect
-
-1. Search a scene ("product list", "loading", "card") in the app, or filter by device.
-2. Open an entry — it plays live in the detail page.
-3. Copy HTML + CSS (+ optional JS). All three parts are needed; CSS alone will not animate.
-4. Override the rhythm with CSS variables instead of editing keyframes:
-
-```css
-.my-card{
-  --fx-dur: 420ms;
-  --fx-ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-```
-
-Device scaling is not optional: watch ×0.62 / ×0.55, car ×0.75 / ×0.70,
-phone ×0.82 / ×0.72, desktop ×1.08 / ×1.18 (duration / distance).
-
-## Docs
-
-| File | For | Contents |
-|---|---|---|
-| [LATEST.md](LATEST.md) | human + AI | Latest build, asset names, four-step entry |
-| [VERSIONS.md](VERSIONS.md) | human | Full version history, newest first (48 releases) |
-| [skill/SKILL.md](skill/SKILL.md) | AI | Retrieval workflow, data model, delivery contract |
-| [skill/QUICKSTART.md](skill/QUICKSTART.md) | human | Five-minute quick start |
-| [skill/references/](skill/references/) | AI | Data model, retrieval, layout tokens, device rules, settings, build & release, integration |
-| [LICENSING-LEGACY.md](LICENSING-LEGACY.md) | human | Which builds still contain the old licensing UI, and how to remove it |
-| [AUTHORIZATION-RETROSPECTIVE.md](AUTHORIZATION-RETROSPECTIVE.md) | human | How the licensing system was designed, why it was abandoned |
-
-## AI skill
-
-The `skill/` folder is a self-contained skill for assistants:
-
-```bash
-node skill/tools/find-motion.js  <library-dir> "product list" --device phone
-node skill/tools/extract-motion.js <library-dir> enter-01
-node skill/tools/extract-motion.js <library-dir> --list
-```
-
-`find-motion` returns scenes and entries with `fx-…` ids; `extract-motion` returns the
-HTML / CSS / JS triple for a base effect id.
-
-## Licensing note
-
-All builds up to **2.1.5** still contain the early licensing UI (tiers, activation codes,
-admin tokens). That system is discontinued and the software is free to use; the key app is
-kept only as an archive. See [LICENSING-LEGACY.md](LICENSING-LEGACY.md).
+版本 **3.0.0** · 免费 · MIT（Skill 与文档）· 应用本体不提供源码
 
 ---
 
-# 瞬态 TRANSIENT · 动效组件库（中文）
+## 一、中文说明
 
-可搜索、可预览、可复制的动效库：**20,000 条场景化组件**、**500 个特效基底**，覆盖 **11 类设备**。
-完全离线，不申请网络权限。
+**是什么**
+一套能搜、能看、能复制的界面动效库。每条都是真实界面 + 作用其上的动效，不是色块换名字。
 
-**当前版本：2.1.5** · 已收录 48 个版本，见 [VERSIONS.md](VERSIONS.md)
-
-## 是什么
-
-每条都是「真实界面 + 作用其上的动效」，不是把同一个方块换 25 个名字。
-
-- **20,000 条组件**：竖屏 16,290 · 大屏 1,039 · 车机 799 · 手表 864 · 终端 1,008
-- **500 个特效基底**，18 个族（入场 / 退场 / 状态 / 光效 / 形变 / 空间 / 粒子 / 物理 /
-  强调 / 氛围 / 排版 / 群体 / 光束 / 文字 / 数据 / 图表 / 噪波 / SVG）
-- **201 个场景**，覆盖真实的界面情境
-- **11 类设备**：手机 / 平板 / 笔记本 / 桌面 / 终端 / 车机 / 电视 / 手表 / AR·VR / 墨水屏 / 工业屏
-
-## 下载
-
-到 **Releases** 页选版本，每个版本一个 Release。
-
+**下载**（Release 里只有这两个）
 | 文件 | 平台 | 体积 |
 |---|---|---|
-| `transient-2.1.5-android.apk` | 安卓（最新） | 2.5 MB |
-| `transient-2.1.5-win-portable.zip` | Windows 便携版（最新） | 112 MB（解压约 293 MB） |
-| `transient-2.1.5-win-installer.exe` | Windows 安装版（最新） | 112 MB |
-| `TRANSIENT.v2.1.3.exe` | Windows 安装版 | 112 MB |
+| `FrameFolio-3.0.0-android.apk` | 安卓，直接安装 | 2.4 MB |
+| `FrameFolio-3.0.0-windows.exe` | Windows，双击即用 | 112 MB |
 
-> 2.1.4 起桌面端只出便携版。仓库保留五个安装版：**2.1.5、2.1.3、2.1.2、2.1.1、2.0.0**（2.1.4 当时未出安装包）。
-
-## 安装
-
-- **安卓**：直接安装；提示「未知来源」时允许一次。最低 Android 6.0（API 23）。
-- **Windows 便携版**：解压后从文件夹里运行 `TRANSIENT.exe`，**不能只拷 exe**，运行库要与它同级。
-- **Windows 安装版（1.12.43）**：双击 → 选路径 → 桌面生成快捷方式，设置里可卸载。
-
-桌面端依赖系统自带的 Edge / Chromium 内核（Win10、Win11 均有）。
-
-## 用一条动效
-
-1. 在应用里搜索场景（「商品列表」「加载」「卡片」），或按设备筛选
-2. 打开条目，详情页会真的动起来
-3. 复制 HTML + CSS（有的还要 JS）——三件一起拿，只拿 CSS 不会动
-4. 用 CSS 变量改节奏，不要改关键帧：
-
-```css
-.my-card{
-  --fx-dur: 420ms;
-  --fx-ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-```
-
-设备换算不是可选项：手表 ×0.62/×0.55、车机 ×0.75/×0.70、手机 ×0.82/×0.72、桌面 ×1.08/×1.18（时长/位移）。
-
-## 文档
-
-| 文件 | 给谁 | 内容 |
-|---|---|---|
-| [LATEST.md](LATEST.md) | 人 + AI | 最新版说明、附件名、AI 四步入口 |
-| [VERSIONS.md](VERSIONS.md) | 人 | 全部 48 个版本（最新在最上面） |
-| [skill/SKILL.md](skill/SKILL.md) | AI | 检索流程、数据模型、交付契约 |
-| [skill/QUICKSTART.md](skill/QUICKSTART.md) | 人 | 五分钟上手 |
-| [skill/references/](skill/references/) | AI | 数据模型 / 检索 / 版面参数 / 设备规则 / 设置 / 构建发版 / 接入范式 |
-| [LICENSING-LEGACY.md](LICENSING-LEGACY.md) | 人 | 哪些版本还带授权界面、怎么去掉 |
-| [AUTHORIZATION-RETROSPECTIVE.md](AUTHORIZATION-RETROSPECTIVE.md) | 人 | 授权机制怎么设计、为什么放弃、重来怎么做 |
-
-## AI 技能
-
-`skill/` 是给助手用的完整技能：
-
+**三步用起来**
 ```bash
-node skill/tools/find-motion.js  <库目录> "商品列表" --device phone
-node skill/tools/extract-motion.js <库目录> enter-01
-node skill/tools/extract-motion.js <库目录> --list
+node skill/tools/find-motion.js "商品列表" --device phone   # 1 检索，得 fx 编号
+node skill/tools/extract-motion.js fx-n001-01               # 2 取码，得 HTML+CSS
+node skill/tools/extract-motion.js --list                   # 3 不确定时列全部特效
 ```
 
-## 授权说明
+**边界**
+- 三件套同取：只拿 CSS 不动，只拿 HTML 没效果
+- 换设备必须乘系数：手表 ×0.62/×0.55、车机 ×0.75/×0.70、手机 ×0.82/×0.72、桌面 ×1.08/×1.18
+- 改节奏用 `--fx-dur` / `--fx-ease`，不改关键帧名
 
-截至 **2.1.5**，所有版本仍保留早期授权界面（等级 / 激活码 / 管理员令牌）。
-该体系已停用，软件免费使用；密钥 App 仅作历史存档。详见 [LICENSING-LEGACY.md](LICENSING-LEGACY.md)。
+**文档**：[MANUAL.md](MANUAL.md) 使用手册 · [LATEST.md](LATEST.md) 最新版 · [VERSIONS.md](VERSIONS.md) 版本史 · [skill/SKILL.md](skill/SKILL.md) 技能总纲
+
+**开源范围**：应用本体免费使用、不提供源码；Skill 与文档 MIT。
+**维护节奏**：个人独立维护，每周最多更新一次（通常周末）；收费闭环、小程序、账号暂不启动。
+**联系**：技术交流邮箱 2083825368@qq.com
+
+---
+
+## 二、English
+
+**What**: an offline motion-spec library — 20,000 scene entries, 500 base effects, per-device scaling for 11 device classes. Built for AI coding assistants and front-end developers.
+
+**Download** (only two assets)
+| File | Platform | Size |
+|---|---|---|
+| `FrameFolio-3.0.0-android.apk` | Android | 2.4 MB |
+| `FrameFolio-3.0.0-windows.exe` | Windows (double-click) | 112 MB |
+
+**Three commands**
+```bash
+node skill/tools/find-motion.js "product list" --device phone
+node skill/tools/extract-motion.js fx-n001-01
+node skill/tools/extract-motion.js --list
+```
+
+**Boundaries**: always take HTML + CSS together; scale per device (watch ×0.62/×0.55, car ×0.75/×0.70, phone ×0.82/×0.72, desktop ×1.08/×1.18); tune rhythm with `--fx-dur` / `--fx-ease`, never rename keyframes.
+
+**Docs**: [MANUAL.md](MANUAL.md) · [LATEST.md](LATEST.md) · [VERSIONS.md](VERSIONS.md) · [skill/SKILL.md](skill/SKILL.md)
+
+**Scope**: app binaries free, source not published; Skill and docs are MIT.
+**Cadence**: solo-maintained, at most one update per week.
+**Contact**: 2083825368@qq.com
+
+---
+
+## 三、For AI agents
+
+```yaml
+project: FrameFolio
+version: 3.0.0
+license:
+  app_binaries: free-use, source not published
+  skill_and_docs: MIT
+entrypoint: skill/SKILL.md
+
+assets:
+  - name: FrameFolio-3.0.0-android.apk
+    platform: android
+    min_sdk: 23
+    size_mb: 2.4
+  - name: FrameFolio-3.0.0-windows.exe
+    platform: windows
+    runtime: system edge/chromium
+    size_mb: 112
+
+commands:
+  search:
+    run: node skill/tools/find-motion.js "<keyword>" [--device <dev>] [--cat <cat>] [--max <ms>] [--json]
+    returns: scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}
+  extract:
+    run: node skill/tools/extract-motion.js <fx-id|effect-id> [--json]
+    returns: {html, css, js, note}
+  list:
+    run: node skill/tools/extract-motion.js --list [family]
+    returns: effect ids grouped by family
+
+data_model:
+  scenes: 201            # SCENES[] in assets/data.js + engine.js
+  entries: 20000         # cats[].fx
+  effects: 500           # ENGINE_HTML/CSS/JS
+  entry_to_code: "SCENES[].cats[].fx -> LIB_PAY[fx] -> {h,c} (100% resolve)"
+
+device_scaling:            # duration / distance
+  phone:      [0.82, 0.72]
+  phone_lg:   [0.88, 0.80]
+  desktop_xl: [1.08, 1.18]
+  tablet:     [1.00, 1.00]
+  watch:      [0.62, 0.55]
+  car:        [0.75, 0.70]
+  kiosk:      [1.00, 1.10]
+
+invariants:
+  - html and css must be taken together
+  - never rename keyframes without updating references
+  - entrance plays once; do not use infinite
+  - max 2 concurrent loops per screen
+  - honor prefers-reduced-motion (jump to end state)
+  - stop frame loops when element is removed
+
+fallbacks:
+  - shorten keyword
+  - drop --device / --cat / --max
+  - run --list to inspect actual ids
+  - never invent ids from memory
+```
+
+**Read next**: [skill/SKILL.md](skill/SKILL.md) → [skill/references/02-retrieval.md](skill/references/02-retrieval.md) → [skill/references/04-device-rules.md](skill/references/04-device-rules.md)
