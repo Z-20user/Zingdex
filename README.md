@@ -3,7 +3,7 @@
 离线动效规格库：**20,000 条场景条目 · 500 个基础特效 · 11 类设备系数**。
 给 AI 编码助手和前端开发者用：检索 → 取码 → 适配，三步闭环。
 
-版本 **3.0.1** · 免费 · MIT（Skill 与文档）· 应用本体不提供源码
+版本 **3.0.2** · 免费 · MIT（Skill 与文档）· 应用本体不提供源码
 
 ---
 
@@ -15,8 +15,8 @@
 **下载**（Release 里只有这两个）
 | 文件 | 平台 | 体积 |
 |---|---|---|
-| `FrameFolio-3.0.1-android.apk` | 安卓，直接安装 | 2.4 MB |
-| `FrameFolio-3.0.1-windows.exe` | Windows，双击即用 | 112 MB |
+| `FrameFolio-3.0.2-android.apk` | 安卓，直接安装 | 2.4 MB |
+| `FrameFolio-3.0.2-windows.exe` | Windows，双击即用 | 112 MB |
 
 **三步用起来**
 ```bash
@@ -45,8 +45,8 @@ node skill/tools/extract-motion.js --list                   # 3 不确定时列�
 **Download** (only two assets)
 | File | Platform | Size |
 |---|---|---|
-| `FrameFolio-3.0.1-android.apk` | Android | 2.4 MB |
-| `FrameFolio-3.0.1-windows.exe` | Windows (double-click) | 112 MB |
+| `FrameFolio-3.0.2-android.apk` | Android | 2.4 MB |
+| `FrameFolio-3.0.2-windows.exe` | Windows (double-click) | 112 MB |
 
 **Three commands**
 ```bash
@@ -69,18 +69,18 @@ node skill/tools/extract-motion.js --list
 
 ```yaml
 project: FrameFolio
-version: 3.0.1
+version: 3.0.2
 license:
   app_binaries: free-use, source not published
   skill_and_docs: MIT
 entrypoint: skill/SKILL.md
 
 assets:
-  - name: FrameFolio-3.0.1-android.apk
+  - name: FrameFolio-3.0.2-android.apk
     platform: android
     min_sdk: 23
     size_mb: 2.4
-  - name: FrameFolio-3.0.1-windows.exe
+  - name: FrameFolio-3.0.2-windows.exe
     platform: windows
     runtime: system edge/chromium
     size_mb: 112
