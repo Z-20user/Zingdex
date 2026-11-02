@@ -15,6 +15,10 @@
 - `FrameFolio-3.0.0-android.apk` —— 安卓，直接安装
 - `FrameFolio-3.0.0-windows.exe` —— Windows，双击即用
 
+## 使用手册
+
+[MANUAL.md](MANUAL.md) —— 安装、找动效、取代码、换设备、常见问题。
+
 ## 给 AI 的四步
 
 1. `skill/SKILL.md` —— 技能总纲（四个部分）
