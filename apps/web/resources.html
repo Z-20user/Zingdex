@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>插件与资源 — Zingdex · 跃索</title>
+<meta name="description" content="代码片段、设计令牌、AI 提示词模板，以及把组件搬进项目的几种方式。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="doc">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <header class="page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>插件与资源</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(32px,4.2vw,54px)">插件与资源</h1>
+        <p class="lede" style="margin-top:14px">
+          可以直接粘走用的东西：设计令牌、代码片段、AI 提示词模板。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-actions">
+    <button class="btn btn--ghost btn--sm" type="button" data-pdf="插件与资源">下载 PDF</button>
+    <span class="pdf-stamp" data-pdf-stamp></span>
+  </div>
+
+
+  <div class="doc">
+    <nav class="doc__toc" aria-label="目录">
+      <a href="#tokens">设计令牌</a>
+      <a href="#snippet">VS Code 片段</a>
+      <a href="#prompts">AI 提示词模板</a>
+      <a href="#cursor">Cursor / Windsurf 规则</a>
+      <a href="#figma">Figma 对齐规范</a>
+      <a href="#assets">图标与截图</a>
+      <a href="#export">导出单文件</a>
+      <a href="#batch">批量取代码</a>
+      <a href="#pitfalls">常见坑</a>
+      <a href="#roadmap">还没做的</a>
+    </nav>
+
+    <div class="doc__body">
+
+      <section class="doc__sec" id="tokens">
+        <h2>一、设计令牌</h2>
+        <p>整个组件库共用这一套颜色、时长与曲线。照抄进你的项目，组件放进去就不会违和。</p>
+        <pre><code>:root {
+  /* 颜色 */
+  --tz-acc: #C6F24C;        /* 主色 */
+  --tz-acc-deep: #4F6B00;   /* 主色深字 */
+  --tz-line: #E7E4DA;       /* 描边 */
+  --tz-surface: #FFFFFF;    /* 卡面 */
+  --tz-soft: #F4F3EE;       /* 浅底 */
+  --tz-ink: #14160F;        /* 主字 */
+  --tz-ink-2: #7B8072;      /* 次字 */
+  --tz-danger: #E5484D;
+
+  /* 时长 */
+  --tz-dur-instant: 120ms;
+  --tz-dur-fast: 160ms;
+  --tz-dur-base: 240ms;
+  --tz-dur-standard: 320ms;
+  --tz-dur-emphasis: 480ms;
+
+  /* 曲线 */
+  --tz-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --tz-ease-outc: cubic-bezier(.33, 1, .68, 1);
+  --tz-ease-inout: cubic-bezier(.76, 0, .24, 1);
+  --tz-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --tz-stagger: 70ms;
+}</code></pre>
+        <div class="doc__note">组件的 CSS 不依赖这些变量——它们只是给你对齐用的。组件内部用的是自带的 <code>--fx-*</code>。</div>
+      </section>
+
+      <section class="doc__sec" id="snippet">
+        <h2>二、VS Code 代码片段</h2>
+        <p>复制下面这段，存成 <code>zingdex.code-snippets</code>，放进 VS Code 的
+          <code>文件 → 首选项 → 配置用户代码片段</code>。之后在 CSS 文件里敲 <code>tz-</code> 就能补全。</p>
+        <pre><code>{
+  "Zingdex 上滑入场": {
+    "prefix": "tz-slide-up",
+    "body": [
+      "@keyframes tz-slide-up{from{opacity:0;transform:translate3d(0,26px,0)}to{opacity:1;transform:translate3d(0,0,0)}}",
+      ".tz-slide-up{animation:tz-slide-up var(--tz-dur-standard) var(--tz-ease-out) both}"
+    ],
+    "description": "元素自下方 26px 上移进场"
+  },
+  "Zingdex 逐项错峰": {
+    "prefix": "tz-stagger",
+    "body": [
+      "@keyframes tz-rise{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:translate3d(0,0,0)}}",
+      ".tz-stagger > *{animation:tz-rise var(--tz-dur-emphasis) var(--tz-ease-out) both}"
+    ],
+    "description": "子项依次浮入，配合 nth-child 加延迟"
+  },
+  "Zingdex 按压反馈": {
+    "prefix": "tz-press",
+    "body": [
+      ".tz-press{transition:transform var(--tz-dur-fast) var(--tz-ease-out)}",
+      ".tz-press:active{transform:scale(.965)}"
+    ],
+    "description": "按下缩到 0.965"
+  },
+  "Zingdex 无障碍降级": {
+    "prefix": "tz-a11y",
+    "body": [
+      "@media (prefers-reduced-motion: reduce) {",
+      "  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }",
+      "}"
+    ],
+    "description": "尊重系统的减少动态效果"
+  }
+}</code></pre>
+      </section>
+
+      <section class="doc__sec" id="prompts">
+        <h2>三、AI 提示词模板</h2>
+        <p>三种常用场景，直接复制给任意 AI。想要某个具体组件的完整版本，去组件详情页点「复制 AI 提示词」，那份更细。</p>
+
+        <h3>模板 A · 复刻一个组件</h3>
+        <pre><code>你是资深前端动效工程师。请实现一个「商品列表逐项错峰入场」组件。
+
+【结构】三行商品卡：左侧 30px 方形缩略图 + 中间标题/副标题 + 右侧价格。
+【动效】子项依次上浮 18px 进入，每项延迟 70ms，时长 420ms，
+        缓动 cubic-bezier(.16,1,.3,1)。
+【约束】
+1. 只用 HTML/CSS，不引框架与外部资源；
+2. 只动 transform 与 opacity；
+3. 根类名 .tz-list，样式不污染全局；
+4. 加 @media (prefers-reduced-motion: reduce) 降级为透明度过渡。
+【输出】只输出一个 html 代码块，不要解释。</code></pre>
+
+        <h3>模板 B · 给现有页面加入场</h3>
+        <pre><code>下面是我的现有组件结构（贴代码）。请在不改动结构的前提下，
+给它加一个「自下而上 24px、透明度 0→1、360ms、ease-out-expo」的入场动效，
+并要求：只动 transform/opacity；进入后不再重播；
+列表子项按 60ms 错峰；尊重 prefers-reduced-motion。</code></pre>
+
+        <h3>模板 C · 把写死的动效改成可配置</h3>
+        <pre><code>把下面这段 CSS 动效改成用 CSS 变量驱动：
+--fx-dur（时长）、--fx-ease（缓动）、--fx-amp（幅度倍率）。
+位移、缩放、模糊半径都要乘 --fx-amp；关键帧里用 calc() 表达。
+保持默认值与现在一致，输出改造后的完整 CSS。</code></pre>
+      </section>
+
+      <section class="doc__sec" id="cursor">
+        <h2>四、Cursor / Windsurf 规则</h2>
+        <p>把下面这段存成项目根目录的 <code>.cursorrules</code>（Windsurf 存成 <code>.windsurfrules</code>），
+          AI 写界面时会自动遵守这套动效规则。</p>
+        <pre><code># 动效规范（Zingdex）
+- 只动画 transform / opacity / filter；禁止动画 width、height、top、left、margin。
+- 时长：微反馈 120–200ms，常规进场 240–320ms，页面转场 360–480ms，回弹 600ms+。
+- 缓动优先 cubic-bezier(0.16, 1, 0.3, 1)；对称动作用 cubic-bezier(0.76, 0, 0.24, 1)。
+- 列表错峰 60–80ms，超过 6 项截断延迟。
+- 同一屏最多 3 处动效同时跑。
+- 必须加 @media (prefers-reduced-motion: reduce)：位移与缩放降级为透明度过渡，循环类停止。
+- 组件根类名统一前缀，样式不污染全局。</code></pre>
+        <div class="doc__note">这几条和「使用规范 → 动效规范」是同一套，改了那边记得同步这边。</div>
+      </section>
+
+      <section class="doc__sec" id="figma">
+        <h2>五、Figma 对齐规范</h2>
+        <p>目前没有 Figma 插件，但在 Figma 里手动对齐这套数值，做出来的原型和代码就是一致的。</p>
+        <table class="doc__table">
+          <thead><tr><th>用途</th><th>时长</th><th>曲线</th></tr></thead>
+          <tbody>
+            <tr><td>按压 / hover</td><td>160ms</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td></tr>
+            <tr><td>常规进场</td><td>280ms</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td></tr>
+            <tr><td>列表错峰</td><td>420ms / 间隔 70ms</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td></tr>
+            <tr><td>页面转场</td><td>420ms</td><td>cubic-bezier(0.76, 0, 0.24, 1)</td></tr>
+            <tr><td>回弹</td><td>620ms</td><td>cubic-bezier(0.34, 1.56, 0.64, 1)</td></tr>
+            <tr><td>循环呼吸</td><td>2000ms</td><td>ease-in-out</td></tr>
+          </tbody>
+        </table>
+        <h3>位移基准</h3>
+        <ul>
+          <li>自下而上入场：26px</li>
+          <li>左右滑入：34px</li>
+          <li>列表项错峰：18px</li>
+          <li>放大入场：0.86 → 1</li>
+        </ul>
+        <p style="margin-top:12px">在组件详情页调好参数后，点「复制 AI 提示词」，里面写的就是你调过的具体数值。</p>
+      </section>
+
+      <section class="doc__sec" id="assets">
+        <h2>六、图标与截图</h2>
+        <p>交付包的 <code>03_预览图/</code> 里是本次构建的整套视觉素材，可直接用于文档、商店页、汇报。</p>
+        <div class="doc__grid">
+          <div class="doc__card"><b>01-图标-1024.png</b><span>1024×1024 主图标，圆角版，用于商店与宣传。</span></div>
+          <div class="doc__card"><b>02-启动画面.png</b><span>1080×1920 启动页预览，深色底 + 居中图标。</span></div>
+          <div class="doc__card"><b>04–10 界面截图</b><span>首页、组件库、详情、设置、调参数、参数对比、接入台。</span></div>
+        </div>
+        <p style="margin-top:12px">源码里的图标由 <code>make_icon.py</code> 生成，改配色只改文件顶部的四个常量。</p>
+      </section>
+
+      <section class="doc__sec" id="export">
+        <h2>七、导出单文件</h2>
+        <p>详情页点「下载单文件」，会得到一个 <code>.html</code>，双击就能在浏览器里看效果，代码全部内联，没有任何外部依赖。</p>
+        <ul>
+          <li>适合快速验证、发给同事看、存成素材。</li>
+          <li>桌面版会弹保存对话框；安卓版保存到下载目录。</li>
+          <li>文件里同时包含你当前调好的参数。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="batch">
+        <h2>八、批量取代码</h2>
+        <p>组件库的完整数据在交付包的 <code>04_源代码/…/04_动效代码库/spec/catalog.json</code>，每条都带成品 HTML 与 CSS：</p>
+        <pre><code>{
+  "id": "s001-09",
+  "name": "逐项错峰",
+  "group": "列表与卡片",
+  "dur": 420,
+  "easeValue": "cubic-bezier(0.16,1,0.3,1)",
+  "params": [ { "k": "dur", "v": 420, "min": 120, "max": 2600 } ],
+  "code": { "html": "&lt;div class=\"fx-s001-09\"&gt;…&lt;/div&gt;", "css": "@keyframes …" }
+}</code></pre>
+        <p>用脚本按 <code>group</code> 或 <code>shell</code> 过滤，就能一次性导出某一类的全部组件。</p>
+      </section>
+
+      <section class="doc__sec" id="pitfalls">
+        <h2>九、常见坑</h2>
+        <h3>复制过去不动</h3>
+        <p>三个原因：一是把循环改成了单次却忘了 <code>both</code>；二是外层容器 <code>overflow: hidden</code> 把位移裁掉了；
+          三是组件依赖 JS 初始化（比如磁吸按钮），你只贴了 HTML 和 CSS。详情页的 JS 页签会告诉你要不要贴。</p>
+        <h3>类名冲突</h3>
+        <p>组件根类名形如 <code>fx-s001-01</code>，内部选择器全部挂在它下面，一般不会冲突。
+          如果你的项目也有 <code>.ui</code> 这种通用类，把组件的选择器一起改名即可。</p>
+        <h3>字体看着不一样</h3>
+        <p>组件用的是系统字体栈，不含任何内置字体。你项目里如果全局指定了别的字体，组件会跟着变——这是故意的，方便融入。</p>
+        <h3>动画在 Safari 上不跑</h3>
+        <p>检查是否用了 <code>backdrop-filter</code>（玻璃面板），Safari 需要 <code>-webkit-</code> 前缀，组件里已经带上了。</p>
+      </section>
+
+      <section class="doc__sec" id="roadmap">
+        <h2>十、还没做的</h2>
+        <ul>
+          <li><b>Figma 插件</b>——规划中，还没发布。目前可以在 Figma 里手动对齐上文的时长与曲线。</li>
+          <li><b>React / Vue 组件包</b>——暂时只给代码片段，没有 npm 包。</li>
+          <li><b>动效录制导出</b>——没有内置录屏，需要的话用系统录屏。</li>
+        </ul>
+        <div class="doc__note">这些都在清单上，但没做完之前不写在「功能」里。看到的才是真的。</div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

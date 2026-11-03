@@ -1,0 +1,30 @@
+{
+  "name": "zingdex",
+  "version": "3.1.1",
+  "private": true,
+  "description": "Zingdex · 跃索 —— 离线界面动效库（20,000 条条目 / 500 基础特效 / 201 场景）",
+  "license": "Apache-2.0 AND CC-BY-4.0",
+  "workspaces": [
+    "packages/*",
+    "apps/web",
+    "apps/desktop"
+  ],
+  "scripts": {
+    "cli": "node packages/cli/bin/zingdex.js",
+    "stats": "node packages/cli/bin/zingdex.js stats",
+    "check:data": "node tools/check-data.js",
+    "check:secrets": "node tools/check-secrets.js",
+    "test": "npm run check:data && npm run check:secrets"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Z-20user/frame-folio.git"
+  },
+  "homepage": "https://github.com/Z-20user/frame-folio#readme",
+  "bugs": {
+    "url": "https://github.com/Z-20user/frame-folio/issues"
+  }
+}

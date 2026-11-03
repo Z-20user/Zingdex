@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI 接入 — Zingdex · 跃索</title>
+<meta name="description" content="把 Zingdex 的动效规格直接交给 AI：一键复制提示词、选择常用站点、自定义任何 AI、保存工程约束模板。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="ai">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <header class="page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>AI 接入</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(32px,4.2vw,54px)">AI 接入</h1>
+        <p class="lede" style="margin-top:14px">
+          把这条动效的规格、结构与样式直接交给 AI：选一个站点，提示词会先复制到剪贴板，再打开对应页面。
+          下面这几个演示用的就是组件库自己的动效。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="ai-steps">
+    <div class="ai-step">
+      <b>1 · 选组件</b>
+      <span>在组件库里点开任意一条，看到的就是可运行的真实界面。</span>
+    </div>
+    <div class="ai-step">
+      <b>2 · 调参数</b>
+      <span>时长、缓动、幅度改完，CSS 与提示词同步更新。</span>
+    </div>
+    <div class="ai-step">
+      <b>3 · 交给 AI</b>
+      <span>在这里或详情页点一个 AI，复制提示词并打开站点，粘贴即可。</span>
+    </div>
+  </section>
+
+  <section class="ai-demo" data-ai-demo aria-label="组件库自己的动效演示">
+    <div class="ai-demo__item">
+      <div class="pv-live" data-demo="向上推入"></div>
+      <span class="ai-demo__cap">向上推入 · 入场</span>
+    </div>
+    <div class="ai-demo__item">
+      <div class="pv-live" data-demo="光扫揭幕"></div>
+      <span class="ai-demo__cap">光扫揭幕 · 旗舰</span>
+    </div>
+    <div class="ai-demo__item">
+      <div class="pv-live" data-demo="呼吸强调"></div>
+      <span class="ai-demo__cap">呼吸强调 · 循环</span>
+    </div>
+  </section>
+
+  <section class="panel ai-manager-panel">
+    <div class="panel__title"><div><h2>AI 名单</h2><p>内置常用站点，也可以自己加；自定义项只存在本机。</p></div></div>
+    <div class="ai-manager" data-ai-manager></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel__title"><div><h2>提示词里包含什么</h2><p>复制出去的不是一段空话，是可以直接落地的规格。</p></div></div>
+    <div class="ai-what">
+      <div class="ai-what__c"><b>动效本身</b><span>节奏、缓动、幅度、错峰，以及这个动效该在哪里出现。</span></div>
+      <div class="ai-what__c"><b>完整实现</b><span>HTML 结构与 CSS，变量用 --fx-* 暴露，方便你改。</span></div>
+      <div class="ai-what__c"><b>你的约束</b><span>交付形态、样式方案、浏览器下限——模板里填一次，之后每次自动带上。</span></div>
+    </div>
+    <p class="ai-hint" style="margin-top:12px">开源版：代码 Apache-2.0、数据 CC BY 4.0，不设激活码与次数限制。发送前请自行确认提示词中不含你的隐私信息。</p>
+  </section>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/data.js?v=3.21.5"></script>
+<script src="assets/engine_css.js?v=3.21.5"></script>
+<script src="assets/engine_html.js?v=3.21.5"></script>
+<script src="assets/engine_js.js?v=3.21.5"></script>
+<script src="assets/engine.js?v=3.21.5"></script>
+<script src="assets/effects.js?v=3.21.5"></script>
+<script src="assets/lib-gl.js?v=3.21.5"></script>
+<script src="assets/library.js?v=3.21.5"></script>
+<script src="assets/paths.js?v=3.21.5"></script>
+<script src="assets/ai.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

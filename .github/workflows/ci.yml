@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: 自检
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 数据完整性
+        run: node tools/check-data.js
+
+      - name: 密钥与隐私扫描
+        run: node tools/check-secrets.js
+
+      - name: Schema 与数据一致性
+        run: node tools/check-schema.js
+
+  gitleaks:
+    name: 密钥泄漏扫描
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  skills:
+    name: 技能工具可用性
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 检索与取码冒烟测试
+        run: |
+          node skill/tools/find-motion.js "商品列表" --device phone | head -5
+          node skill/tools/extract-motion.js fx-s001-01 | head -5
+          node skill/tools/extract-motion.js --list light | head -1
+          node packages/cli/bin/zingdex.js stats

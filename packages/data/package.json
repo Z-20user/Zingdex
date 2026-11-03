@@ -1,0 +1,26 @@
+{
+  "name": "@zingdex/data",
+  "version": "3.1.1",
+  "description": "Zingdex 动效数据的 Node 读取接口：20,000 条条目、500 个基础特效、201 个场景",
+  "license": "CC-BY-4.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "motion",
+    "animation",
+    "ui",
+    "design-tokens",
+    "zingdex"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Z-20user/frame-folio.git",
+    "directory": "packages/data"
+  }
+}

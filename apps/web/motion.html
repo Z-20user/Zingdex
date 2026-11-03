@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>动效规范 · Motion Tokens — Zingdex · 跃索</title>
+<meta name="description" content="缓动曲线、时长阶梯、编排原则与无障碍要求：一套可被工程直接消费的动效令牌。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="motion">
+
+<div data-nav></div>
+
+<main>
+  <header class="wrap page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>动效规范</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(34px,4.6vw,60px)">动效规范</h1>
+        <p class="lede" style="margin-top:16px">这一页不是灵感集，是可供工程直接消费的令牌：曲线、时长、编排与降级策略。</p>
+      </div>
+      <div class="page-head__act">
+        <div style="text-align:right">
+          <div class="stat__v">v2.6</div>
+          <div class="stat__l">令牌版本</div>
+        </div>
+        <button class="btn btn--ghost btn--sm" type="button" data-pdf="动效规范">下载 PDF（完整内容 · 可离线打印）</button>
+        <span class="pdf-stamp" data-pdf-stamp></span>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="wrap spec">
+
+    <!-- 曲线 -->
+    <section class="spec-block">
+      <div class="spec-head">
+        <h2>缓动曲线</h2>
+        <p>四条曲线覆盖 90% 的场景。除非有明确理由，不要引入第五条。</p>
+      </div>
+      <div class="curves">
+        <div class="curve">
+          <div class="curve__plot">
+            <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+              <path class="ln" d="M8 92C37.4 8 63.2 8 192 8"/>
+              <circle class="dot" cx="8" cy="92" r="3"/>
+              <circle class="dot" cx="192" cy="8" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="curve__name">Expo · 强调</div>
+            <div class="curve__val">cubic-bezier(0.16, 1, 0.3, 1)</div>
+          </div>
+        </div>
+
+        <div class="curve">
+          <div class="curve__plot">
+            <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+              <path class="ln" d="M8 92C68.7 8 133.1 8 192 8"/>
+              <circle class="dot" cx="8" cy="92" r="3"/>
+              <circle class="dot" cx="192" cy="8" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="curve__name">Cubic · 标准</div>
+            <div class="curve__val">cubic-bezier(0.33, 1, 0.68, 1)</div>
+          </div>
+        </div>
+
+        <div class="curve">
+          <div class="curve__plot">
+            <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+              <path class="ln" d="M8 92C147.8 92 52.2 8 192 8"/>
+              <circle class="dot" cx="8" cy="92" r="3"/>
+              <circle class="dot" cx="192" cy="8" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="curve__name">In-Out Quart · 位移</div>
+            <div class="curve__val">cubic-bezier(0.76, 0, 0.24, 1)</div>
+          </div>
+        </div>
+
+        <div class="curve">
+          <div class="curve__plot">
+            <svg viewBox="-6 -30 212 132" preserveAspectRatio="none">
+              <path class="ln" d="M8 92C70.6 -17 125.8 8 192 8"/>
+              <circle class="dot" cx="8" cy="92" r="3"/>
+              <circle class="dot" cx="192" cy="8" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="curve__name">Spring · 弹性</div>
+            <div class="curve__val">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 时长 -->
+    <section class="spec-block">
+      <div class="spec-head">
+        <h2>时长阶梯</h2>
+        <p>时长由「位移距离」和「信息权重」共同决定。同一个组件不要出现两个档位。</p>
+      </div>
+      <div class="durations">
+        <div class="dur-row">
+          <span class="dur-row__name">即时反馈</span>
+          <span class="dur-row__bar"><i style="width:10%"></i></span>
+          <span class="dur-row__v">120ms</span>
+        </div>
+        <div class="dur-row">
+          <span class="dur-row__name">微交互</span>
+          <span class="dur-row__bar"><i style="width:17%"></i></span>
+          <span class="dur-row__v">200ms</span>
+        </div>
+        <div class="dur-row">
+          <span class="dur-row__name">标准过渡</span>
+          <span class="dur-row__bar"><i style="width:27%"></i></span>
+          <span class="dur-row__v">320ms</span>
+        </div>
+        <div class="dur-row">
+          <span class="dur-row__name">强调动作</span>
+          <span class="dur-row__bar"><i style="width:40%"></i></span>
+          <span class="dur-row__v">480ms</span>
+        </div>
+        <div class="dur-row">
+          <span class="dur-row__name">循环 / 环境</span>
+          <span class="dur-row__bar"><i style="width:100%"></i></span>
+          <span class="dur-row__v">1200ms+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 原则 -->
+    <section class="spec-block">
+      <div class="spec-head">
+        <h2>编排原则</h2>
+        <p>三条规则解决了大部分「动效很花但很low」的问题。</p>
+      </div>
+      <div class="principles">
+        <div class="principle">
+          <span class="principle__n">01</span>
+          <h3>先方向，后速度</h3>
+          <p>位移方向必须与心智模型一致：进入从触发点来，退出回触发点去。方向错了，曲线再对也别扭。</p>
+          <div class="demo-dots"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="principle">
+          <span class="principle__n">02</span>
+          <h3>一次只讲一件事</h3>
+          <p>同一屏内只允许一段主导动效。次要元素用 60ms 错峰跟随，不与之争夺注意力。</p>
+          <div class="demo-dots" style="animation-delay:.4s"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="principle">
+          <span class="principle__n">03</span>
+          <h3>让等待可预期</h3>
+          <p>循环动效的周期决定了焦躁程度。超过 1.2s 的等待，必须有进度信息，而不只是一个转圈。</p>
+          <div class="demo-dots"><i style="animation-duration:3.4s"></i><i style="animation-duration:3.4s"></i><i style="animation-duration:3.4s"></i><i style="animation-duration:3.4s"></i><i style="animation-duration:3.4s"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 令牌表 -->
+    <section class="spec-block">
+      <div class="spec-head">
+        <h2>令牌对照表</h2>
+        <p>直接对应 CSS 自定义属性，可直接复制进项目。</p>
+      </div>
+      <table class="token-table">
+        <thead>
+          <tr><th>Token</th><th>值</th><th>适用</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>--ease-standard</td><td>cubic-bezier(0.33, 1, 0.68, 1)</td><td>大多数进出场</td></tr>
+          <tr><td>--ease-emphasis</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>首屏、关键动作</td></tr>
+          <tr><td>--ease-shift</td><td>cubic-bezier(0.76, 0, 0.24, 1)</td><td>位置交换、路由转场</td></tr>
+          <tr><td>--ease-spring</td><td>cubic-bezier(0.34, 1.56, 0.64, 1)</td><td>可回弹的物理反馈</td></tr>
+          <tr><td>--dur-fast</td><td>160ms</td><td>悬停、聚焦、开关</td></tr>
+          <tr><td>--dur-base</td><td>240ms</td><td>标签切换、轻提示</td></tr>
+          <tr><td>--dur-slow</td><td>480ms</td><td>面板展开、转场</td></tr>
+          <tr><td>--stagger</td><td>60ms</td><td>列表与网格错峰</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 无障碍 -->
+    <section class="spec-block">
+      <div class="spec-head">
+        <h2>无障碍与降级</h2>
+        <p>动效永远不是唯一的信息载体。</p>
+      </div>
+      <div class="principles">
+        <div class="principle">
+          <span class="principle__n">A11Y 01</span>
+          <h3>尊重 reduced-motion</h3>
+          <p>所有组件默认响应 prefers-reduced-motion。触发降级时，位移与循环归零，仅保留透明度过渡。</p>
+        </div>
+        <div class="principle">
+          <span class="principle__n">A11Y 02</span>
+          <h3>闪烁频率上限</h3>
+          <p>任何闪烁不得超过每秒 3 次。超过此阈值的动效必须被移除，而非调低对比度。</p>
+        </div>
+        <div class="principle">
+          <span class="principle__n">A11Y 03</span>
+          <h3>不承载唯一信息</h3>
+          <p>状态变化必须同时有文本或图标表达。动效只负责强化，不负责说明。</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/data.js?v=3.21.5"></script>
+<script src="assets/engine_css.js?v=3.21.5"></script>
+<script src="assets/engine_html.js?v=3.21.5"></script>
+<script src="assets/engine_js.js?v=3.21.5"></script>
+<script src="assets/engine.js?v=3.21.5"></script>
+<script src="assets/effects.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

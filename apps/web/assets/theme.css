@@ -1,0 +1,602 @@
+/* ==========================================================================
+   Zingdex — 主题层与动效增强
+   在 style.css 之后加载
+   ========================================================================== */
+
+/* ==========================================================================
+   1. 主题切换器
+   ========================================================================== */
+
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 60px;
+  height: 32px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  flex-shrink: 0;
+  transition: background-color 0.35s, border-color 0.35s;
+}
+
+.theme-toggle svg {
+  position: relative;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  transition: color 0.35s;
+  color: var(--ink-4);
+}
+
+.theme-toggle .i-moon { margin-left: 4px; }
+.theme-toggle .i-sun { margin-left: auto; margin-right: 4px; }
+
+.theme-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--acc);
+  z-index: 1;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+[data-theme="dark"] .theme-toggle .i-moon { color: #0A0B0D; }
+[data-theme="light"] .theme-toggle .i-sun { color: #0A0B0D; }
+[data-theme="light"] .theme-toggle__knob { transform: translateX(28px); }
+
+/* ==========================================================================
+   2. 浅色主题
+   ========================================================================== */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg:       #F4F3EE;
+  --bg-1:     #EFEEE7;
+  --bg-2:     #FFFFFF;
+  --bg-3:     #F8F7F2;
+  --line:     #E1DED3;
+  --line-2:   #E9E6DC;
+  --ink:      #14160F;
+  --ink-2:    #4C5145;
+  --ink-3:    #5F6457;
+  --ink-4:    #787D6F;
+  --acc-text: #567300;
+  --acc-dim:  rgba(110, 150, 0, 0.13);
+  --acc-line: rgba(110, 150, 0, 0.34);
+}
+
+[data-theme="light"] .nav { background: rgba(244, 243, 238, 0.82); }
+
+[data-theme="light"] .btn--ghost { border-color: #D6D2C4; }
+[data-theme="light"] .btn--ghost:hover { border-color: #BDB8A6; background: #FFFFFF; }
+
+[data-theme="light"] .hero::before {
+  width: 86vw;
+  height: 86vw;
+  top: -56%;
+  left: -32%;
+  background: radial-gradient(circle at 50% 50%, rgba(198, 242, 76, 0.17), transparent 66%);
+}
+
+/* 浅色下粒子点改为深绿，保证在浅底可见（仅针对浅底的普通瓦片） */
+[data-theme="light"] .tile.pv--particles {
+  background-image:
+    radial-gradient(circle at 22% 28%, #5F7D00 0 2.5px, transparent 3px),
+    radial-gradient(circle at 46% 18%, rgba(95, 125, 0, 0.6) 0 1.6px, transparent 2px),
+    radial-gradient(circle at 70% 32%, rgba(95, 125, 0, 0.9) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 34% 54%, rgba(95, 125, 0, 0.5) 0 1.6px, transparent 2px),
+    radial-gradient(circle at 62% 62%, #5F7D00 0 2.4px, transparent 3px),
+    radial-gradient(circle at 82% 74%, rgba(95, 125, 0, 0.4) 0 1.6px, transparent 2px),
+    radial-gradient(circle at 18% 76%, rgba(95, 125, 0, 0.75) 0 2px, transparent 2.5px);
+}
+
+[data-theme="light"] .stage {
+  background: linear-gradient(180deg, #FFFFFF, #F6F5EF);
+  box-shadow: 0 40px 80px -56px rgba(40, 40, 25, 0.45);
+}
+
+[data-theme="light"] .tile { background: #F1EFE6; border-color: #E1DED3; }
+[data-theme="light"] .tile--glow {
+  background: radial-gradient(120% 120% at 35% 45%, #E6FF9B 0%, #A8CF6F 46%, #F2F8E2 100%);
+}
+[data-theme="light"] .tile__cap { color: rgba(20, 22, 15, 0.5); }
+[data-theme="light"] .tile--glow .tile__cap { color: rgba(20, 22, 15, 0.55); }
+[data-theme="light"] .track { background: #E4E1D6; }
+
+[data-theme="light"] .scene-tile:hover { border-color: #C9C4B4; background: #FFFFFF; }
+[data-theme="light"] .card:hover,
+[data-theme="light"] .lib-card:hover { border-color: #C9C4B4; }
+
+[data-theme="light"] .ticks i { background: #D9D5C9; }
+[data-theme="light"] .ticks i.on { background: #7FA21A; }
+[data-theme="light"] .scene-tile:hover .ticks i { background: var(--acc-line); }
+[data-theme="light"] .scene-tile:hover .ticks i.on { background: #7FA21A; }
+
+[data-theme="light"] .search-pill { background: #FFFFFF; }
+[data-theme="light"] .search-pill:hover { border-color: #C9C4B4; }
+
+[data-theme="light"] .cat,
+[data-theme="light"] .badge { background: #F7F6F0; border-color: #E5E2D8; }
+[data-theme="light"] .cat:hover,
+[data-theme="light"] .chip.is-on { background: var(--acc); border-color: var(--acc); }
+[data-theme="light"] .cat:hover { color: #0A0B0D; }
+
+[data-theme="light"] .seg { background: #F4F2EA; border-color: #E5E2D8; }
+[data-theme="light"] .seg button.is-on { background: var(--acc); color: #0A0B0D; }
+
+[data-theme="light"] .thumb { background: #F7F6F0; }
+
+[data-theme="light"] .code { background: #F8F7F2; border-color: #E5E2D8; color: #3D4238; }
+[data-theme="light"] .code .s { color: #0E6FA8; }
+[data-theme="light"] .code .k { color: #567300; }
+[data-theme="light"] .code .c { color: #9AA08F; }
+[data-theme="light"] .copy-btn { background: #FFFFFF; border-color: #E1DED3; }
+
+[data-theme="light"] .curve__plot {
+  background:
+    linear-gradient(#EBE8DE 1px, transparent 1px) 0 0 / 100% 29px,
+    linear-gradient(90deg, #EBE8DE 1px, transparent 1px) 0 0 / 29px 100%,
+    #FBFAF5;
+  border-color: #E5E2D8;
+}
+
+[data-theme="light"] input[type="range"] { background: #E4E1D6; }
+
+[data-theme="light"] .footer { background: #EDEBE1; }
+[data-theme="light"] .footer__word { color: #E3E0D3; }
+[data-theme="light"] .footer__col a:hover { color: var(--acc-text); }
+
+[data-theme="light"] .marquee { border-color: #0A0B0D; }
+
+/* 预览母版始终落在彩色预览面板上，文字保持浅色 */
+[data-theme="light"] .pv--ring s,
+[data-theme="light"] .pv--mask b { color: #F3F2ED; }
+
+/* 主题切换瞬间的过渡（仅切换时生效，不干扰常规交互动效） */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: background-color 0.42s ease, border-color 0.42s ease,
+              color 0.42s ease, fill 0.42s ease, stroke 0.42s ease !important;
+}
+
+/* ==========================================================================
+   3. MOTION LAB — 首页实时动效演示带
+   ========================================================================== */
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.lab-cell {
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  background: var(--bg-2);
+  overflow: hidden;
+  transition: border-color 0.35s;
+}
+.lab-cell:hover { border-color: #3A404A; }
+
+.lab-demo.is-live {
+  display: grid;
+  place-items: center;
+}
+
+.lab-demo {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  background: var(--bg-3);
+}
+
+.lab-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-top: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.lab-meta b { color: var(--acc-text); font-weight: 500; }
+
+/* A · 弹簧 */
+.demo-spring i {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 54px;
+  height: 54px;
+  margin-top: -27px;
+  border-radius: 13px;
+  background: var(--acc);
+  animation: springX 2.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+.demo-spring i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(10, 11, 13, 0.18);
+}
+
+/* 运动轨迹参考线 */
+.demo-spring::before {
+  content: "";
+  position: absolute;
+  left: calc(10% + 27px);
+  top: 50%;
+  width: 170px;
+  height: 0;
+  border-top: 1px dashed var(--line);
+}
+
+@keyframes springX {
+  0%, 8%   { transform: translateX(0) scale(1, 1); }
+  38%      { transform: translateX(170px) scale(1.16, 0.84); }
+  46%      { transform: translateX(170px) scale(0.87, 1.13); }
+  62%      { transform: translateX(170px) scale(1.04, 0.96); }
+  72%, 86% { transform: translateX(170px) scale(1, 1); }
+  100%     { transform: translateX(0) scale(1, 1); }
+}
+
+/* B · 字符解码 */
+.demo-decode { display: grid; place-items: center; }
+.demo-decode b {
+  font-family: var(--mono);
+  font-size: clamp(22px, 2.1vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.demo-decode b i { color: var(--acc-text); font-style: normal; }
+
+/* C · 液态形变 */
+.demo-morph { display: grid; place-items: center; }
+.demo-morph i {
+  width: 116px;
+  height: 116px;
+  background: linear-gradient(150deg, var(--acc), rgba(198, 242, 76, 0.35));
+  animation: blob 6s ease-in-out infinite, spinSlow 14s linear infinite;
+}
+
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   4. 动效增强
+   ========================================================================== */
+
+/* 悬停时预览加速 —— 交互即反馈 */
+.lib-card:hover .pv *,
+.card:hover .pv *,
+.lab-cell:hover .lab-demo * { animation-duration: 0.9s !important; }
+
+.lib-card:hover .pv--mask b,
+.card:hover .pv--mask b { animation-duration: 1.2s !important; }
+
+/* 场景瓦片刻度依次点亮 */
+.scene-tile .ticks i { transition: background-color 0.3s ease, transform 0.4s var(--ease-out-expo); }
+.scene-tile:hover .ticks i:nth-child(1) { transition-delay: 0s; }
+.scene-tile:hover .ticks i:nth-child(2) { transition-delay: 0.03s; }
+.scene-tile:hover .ticks i:nth-child(3) { transition-delay: 0.06s; }
+.scene-tile:hover .ticks i:nth-child(4) { transition-delay: 0.09s; }
+.scene-tile:hover .ticks i:nth-child(5) { transition-delay: 0.12s; }
+.scene-tile:hover .ticks i:nth-child(6) { transition-delay: 0.15s; }
+.scene-tile:hover .ticks i:nth-child(7) { transition-delay: 0.18s; }
+.scene-tile:hover .ticks i:nth-child(8) { transition-delay: 0.21s; }
+.scene-tile:hover .ticks i:nth-child(9) { transition-delay: 0.24s; }
+.scene-tile:hover .ticks i:nth-child(10) { transition-delay: 0.27s; }
+
+/* 卡片指针跟随高光 */
+.card::after,
+.lib-card::after,
+.scene-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 3;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(198, 242, 76, 0.18),
+    transparent 62%
+  );
+}
+.card:hover::after,
+.lib-card:hover::after,
+.scene-tile:hover::after { opacity: 1; }
+
+@media (max-width: 960px) {
+  .lab-grid { grid-template-columns: 1fr; }
+  .lab-demo.is-live {
+  display: grid;
+  place-items: center;
+}
+
+.lab-demo { height: 150px; }
+  .demo-spring::before { width: 96px; }
+  .demo-spring i { width: 44px; height: 44px; margin-top: -22px; border-radius: 11px; }
+  .demo-morph i { width: 88px; height: 88px; }
+  @keyframes springX {
+    0%, 8% { transform: translateX(0) scale(1, 1); }
+    38% { transform: translateX(96px) scale(1.16, 0.84); }
+    46% { transform: translateX(96px) scale(0.87, 1.13); }
+    62% { transform: translateX(96px) scale(1.04, 0.96); }
+    72%, 86% { transform: translateX(96px) scale(1, 1); }
+    100% { transform: translateX(0) scale(1, 1); }
+  }
+  .theme-toggle { width: 54px; height: 30px; }
+  .theme-toggle__knob { width: 24px; height: 24px; }
+  [data-theme="light"] .theme-toggle__knob { transform: translateX(22px); }
+}
+
+/* 大舞台中的曲线母版需要内缩 */
+.detail__stage .pv--curve { padding: 46px; }
+
+
+/* 组件预览画布：无论深浅色主题都保持深色底，
+   因为组件本身是按深色界面调的颜色，放在浅底会失真 */
+[data-theme="light"] .stage,
+[data-theme="light"] .detail__stage {
+  background: linear-gradient(180deg, #0D1014, #0A0C10);
+  border-color: #1E222A;
+}
+[data-theme="light"] .stage__bar { border-bottom-color: #1E222A; }
+[data-theme="light"] .stage__live { color: #C6F24C; }
+[data-theme="light"] .stage__fps,
+[data-theme="light"] .stage__tc { color: #6C7280; }
+[data-theme="light"] .track { background: #232830; }
+[data-theme="light"] .stage__bar .stage__live i { background: #C6F24C; }
+
+[data-theme="light"] .stage-hud__tag {
+  color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================================================
+   特色皮肤（在浅色 / 深色 / 跟随之上叠加）
+   原则：只加背景装饰与层次感，不改文字颜色，不压低正文对比度。
+
+   做法：底色留在 html 上，body 让成透明，皮肤画在 body::before 这层固定画布上。
+   这样既能叠多层、又能做极慢的漂移，也不会被 body 自己的底色盖住。
+   ========================================================================== */
+
+:root            { --surface: #141821; }
+[data-theme="light"] { --surface: #FFFFFF; }
+
+html[data-skin] { background-color: var(--bg); }
+html[data-skin] body { background: transparent; }
+
+html[data-skin] body::before {
+  content: "";
+  position: fixed;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* 1 极光：三道不同角度的光带，很慢地一起漂 */
+html[data-skin="aurora"] body::before {
+  background-image:
+    linear-gradient(100deg, transparent 24%, rgba(198, 242, 76, 0.26) 43%,
+                    rgba(186, 255, 214, 0.14) 52%, transparent 69%),
+    linear-gradient(94deg,  transparent 32%, rgba(96, 216, 200, 0.18) 48%, transparent 65%),
+    linear-gradient(113deg, transparent 38%, rgba(128, 170, 255, 0.14) 55%, transparent 73%),
+    radial-gradient(64% 46% at 52% -6%, rgba(198, 242, 76, 0.12), transparent 72%);
+  background-size: 140% 120%, 150% 130%, 165% 140%, cover;
+  background-position: 0% 0%, 10% 20%, 20% 40%, 0 0;
+  animation: skin-aurora 54s linear infinite alternate;
+}
+@keyframes skin-aurora {
+  from { transform: translate3d(-3%, 0, 0) scale(1.04); }
+  to   { transform: translate3d(3%, -1.5%, 0) scale(1.10); }
+}
+[data-theme="dark"][data-skin="aurora"] body::before {
+  background-image:
+    linear-gradient(100deg, transparent 24%, rgba(198, 242, 76, 0.17) 43%,
+                    rgba(150, 255, 200, 0.10) 52%, transparent 69%),
+    linear-gradient(94deg,  transparent 32%, rgba(80, 200, 190, 0.14) 48%, transparent 65%),
+    linear-gradient(113deg, transparent 38%, rgba(96, 132, 240, 0.17) 55%, transparent 73%),
+    radial-gradient(64% 46% at 52% -6%, rgba(198, 242, 76, 0.09), transparent 72%);
+}
+
+/* 2 星野（北极星辰）：两层星点 + 三颗带光晕的亮星 + 一层星云 */
+html[data-skin="star"] body::before {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27320%27%20height%3D%27320%27%3E%0A%3Cg%20fill%3D%27%233E5A14%27%3E%0A%3Ccircle%20cx%3D%2724%27%20cy%3D%2736%27%20r%3D%271.1%27%20opacity%3D%27.55%27%2F%3E%0A%3Ccircle%20cx%3D%2778%27%20cy%3D%2792%27%20r%3D%27.8%27%20%20opacity%3D%27.30%27%2F%3E%0A%3Ccircle%20cx%3D%27140%27%20cy%3D%2728%27%20r%3D%271.3%27%20opacity%3D%27.48%27%2F%3E%0A%3Ccircle%20cx%3D%27206%27%20cy%3D%2766%27%20r%3D%27.9%27%20%20opacity%3D%27.34%27%2F%3E%0A%3Ccircle%20cx%3D%27286%27%20cy%3D%2744%27%20r%3D%271.0%27%20opacity%3D%27.42%27%2F%3E%0A%3Ccircle%20cx%3D%2744%27%20cy%3D%27150%27%20r%3D%27.7%27%20%20opacity%3D%27.26%27%2F%3E%0A%3Ccircle%20cx%3D%27112%27%20cy%3D%27186%27%20r%3D%271.2%27%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27182%27%20cy%3D%27140%27%20r%3D%27.8%27%20%20opacity%3D%27.28%27%2F%3E%0A%3Ccircle%20cx%3D%27252%27%20cy%3D%27178%27%20r%3D%271.1%27%20opacity%3D%27.44%27%2F%3E%0A%3Ccircle%20cx%3D%27310%27%20cy%3D%27124%27%20r%3D%27.7%27%20%20opacity%3D%27.24%27%2F%3E%0A%3Ccircle%20cx%3D%2766%27%20cy%3D%27252%27%20r%3D%271.0%27%20opacity%3D%27.40%27%2F%3E%0A%3Ccircle%20cx%3D%27150%27%20cy%3D%27276%27%20r%3D%27.8%27%20%20opacity%3D%27.28%27%2F%3E%0A%3Ccircle%20cx%3D%27224%27%20cy%3D%27240%27%20r%3D%271.3%27%20opacity%3D%27.46%27%2F%3E%0A%3Ccircle%20cx%3D%27296%27%20cy%3D%27288%27%20r%3D%27.9%27%20%20opacity%3D%27.34%27%2F%3E%0A%3Ccircle%20cx%3D%2718%27%20cy%3D%27300%27%20r%3D%271.1%27%20opacity%3D%27.38%27%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27640%27%20height%3D%27640%27%3E%0A%3Cg%3E%0A%3Ccircle%20cx%3D%27120%27%20cy%3D%2796%27%20r%3D%272.4%27%20fill%3D%27%235B7A2A%27%20opacity%3D%27.55%27%2F%3E%0A%3Ccircle%20cx%3D%27120%27%20cy%3D%2796%27%20r%3D%279%27%20%20%20fill%3D%27%237FA21A%27%20opacity%3D%27.10%27%2F%3E%0A%3Ccircle%20cx%3D%27470%27%20cy%3D%27300%27%20r%3D%272.0%27%20fill%3D%27%237FA21A%27%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27470%27%20cy%3D%27300%27%20r%3D%278%27%20%20%20fill%3D%27%237FA21A%27%20opacity%3D%27.09%27%2F%3E%0A%3Ccircle%20cx%3D%27300%27%20cy%3D%27520%27%20r%3D%271.8%27%20fill%3D%27%235B7A2A%27%20opacity%3D%27.42%27%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    radial-gradient(58% 40% at 68% 4%, rgba(120, 150, 210, 0.20), transparent 72%),
+    radial-gradient(52% 38% at 22% 96%, rgba(150, 175, 220, 0.16), transparent 74%);
+  background-size: 320px 320px, 640px 640px, cover, cover;
+  background-repeat: repeat, repeat, no-repeat, no-repeat;
+  animation: skin-star 96s linear infinite alternate;
+}
+@keyframes skin-star {
+  from { transform: translate3d(0, 0, 0) scale(1.02); }
+  to   { transform: translate3d(-1.6%, -1.2%, 0) scale(1.05); }
+}
+[data-theme="dark"][data-skin="star"] body::before {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27320%27%20height%3D%27320%27%3E%0A%3Cg%20fill%3D%27%23FFFFFF%27%3E%0A%3Ccircle%20cx%3D%2724%27%20cy%3D%2736%27%20r%3D%271.1%27%20opacity%3D%27.90%27%2F%3E%0A%3Ccircle%20cx%3D%2778%27%20cy%3D%2792%27%20r%3D%27.8%27%20%20opacity%3D%27.55%27%2F%3E%0A%3Ccircle%20cx%3D%27140%27%20cy%3D%2728%27%20r%3D%271.3%27%20opacity%3D%27.80%27%2F%3E%0A%3Ccircle%20cx%3D%27206%27%20cy%3D%2766%27%20r%3D%27.9%27%20%20opacity%3D%27.60%27%2F%3E%0A%3Ccircle%20cx%3D%27286%27%20cy%3D%2744%27%20r%3D%271.0%27%20opacity%3D%27.70%27%2F%3E%0A%3Ccircle%20cx%3D%2744%27%20cy%3D%27150%27%20r%3D%27.7%27%20%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27112%27%20cy%3D%27186%27%20r%3D%271.2%27%20opacity%3D%27.85%27%2F%3E%0A%3Ccircle%20cx%3D%27182%27%20cy%3D%27140%27%20r%3D%27.8%27%20%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27252%27%20cy%3D%27178%27%20r%3D%271.1%27%20opacity%3D%27.75%27%2F%3E%0A%3Ccircle%20cx%3D%27310%27%20cy%3D%27124%27%20r%3D%27.7%27%20%20opacity%3D%27.45%27%2F%3E%0A%3Ccircle%20cx%3D%2766%27%20cy%3D%27252%27%20r%3D%271.0%27%20opacity%3D%27.70%27%2F%3E%0A%3Ccircle%20cx%3D%27150%27%20cy%3D%27276%27%20r%3D%27.8%27%20%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27224%27%20cy%3D%27240%27%20r%3D%271.3%27%20opacity%3D%27.80%27%2F%3E%0A%3Ccircle%20cx%3D%27296%27%20cy%3D%27288%27%20r%3D%27.9%27%20%20opacity%3D%27.60%27%2F%3E%0A%3Ccircle%20cx%3D%2718%27%20cy%3D%27300%27%20r%3D%271.1%27%20opacity%3D%27.65%27%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27640%27%20height%3D%27640%27%3E%0A%3Cg%3E%0A%3Ccircle%20cx%3D%27120%27%20cy%3D%2796%27%20r%3D%272.4%27%20fill%3D%27%23DCEBFF%27%20opacity%3D%27.95%27%2F%3E%0A%3Ccircle%20cx%3D%27120%27%20cy%3D%2796%27%20r%3D%279%27%20%20%20fill%3D%27%239FC4FF%27%20opacity%3D%27.16%27%2F%3E%0A%3Ccircle%20cx%3D%27470%27%20cy%3D%27300%27%20r%3D%272.0%27%20fill%3D%27%23EAF7D0%27%20opacity%3D%27.90%27%2F%3E%0A%3Ccircle%20cx%3D%27470%27%20cy%3D%27300%27%20r%3D%278%27%20%20%20fill%3D%27%23C6F24C%27%20opacity%3D%27.14%27%2F%3E%0A%3Ccircle%20cx%3D%27300%27%20cy%3D%27520%27%20r%3D%271.8%27%20fill%3D%27%23DCEBFF%27%20opacity%3D%27.80%27%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    radial-gradient(58% 40% at 68% 4%, rgba(70, 100, 190, 0.30), transparent 72%),
+    radial-gradient(52% 38% at 22% 96%, rgba(60, 90, 160, 0.24), transparent 74%);
+}
+
+/* 3 玻璃：底子上铺一层颜色，卡片改成磨砂，模糊才有东西可糊 */
+html[data-skin="glass"] body::before {
+  background-image:
+    radial-gradient(56% 44% at 14% 4%, rgba(198, 242, 76, 0.26), transparent 70%),
+    radial-gradient(52% 44% at 88% 90%, rgba(140, 190, 255, 0.24), transparent 72%),
+    radial-gradient(46% 42% at 62% 38%, rgba(255, 255, 255, 0.32), transparent 70%);
+}
+[data-theme="dark"][data-skin="glass"] body::before {
+  background-image:
+    radial-gradient(56% 44% at 14% 4%, rgba(198, 242, 76, 0.16), transparent 70%),
+    radial-gradient(52% 44% at 88% 90%, rgba(90, 140, 230, 0.22), transparent 72%),
+    radial-gradient(46% 42% at 62% 38%, rgba(255, 255, 255, 0.07), transparent 70%);
+}
+html[data-skin="glass"] .lib-card,
+html[data-skin="glass"] .panel,
+html[data-skin="glass"] .setgroup,
+html[data-skin="glass"] .detail__code,
+html[data-skin="glass"] .scene-tile,
+html[data-skin="glass"] .spec-block,
+html[data-skin="glass"] .set-panel,
+html[data-skin="glass"] .set-toc a,
+html[data-skin="glass"] .skin {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  border-color: color-mix(in srgb, var(--line) 62%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26),
+              0 12px 32px rgba(20, 22, 15, 0.07);
+}
+[data-theme="dark"][data-skin="glass"] .lib-card,
+[data-theme="dark"][data-skin="glass"] .panel,
+[data-theme="dark"][data-skin="glass"] .setgroup,
+[data-theme="dark"][data-skin="glass"] .detail__code,
+[data-theme="dark"][data-skin="glass"] .scene-tile,
+[data-theme="dark"][data-skin="glass"] .spec-block,
+[data-theme="dark"][data-skin="glass"] .set-panel,
+[data-theme="dark"][data-skin="glass"] .set-toc a,
+[data-theme="dark"][data-skin="glass"] .skin {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12),
+              0 12px 32px rgba(0, 0, 0, 0.30);
+}
+
+/* 4 纸感：纤维噪点 + 极细的横向纸纹 + 顶部一点暖光 */
+html[data-skin="paper"] body::before {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%0A%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%0A%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.42%27%2F%3E%0A%3C%2Fsvg%3E"),
+    repeating-linear-gradient(0deg, rgba(120, 110, 88, 0.035) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(214, 200, 168, 0.20), rgba(214, 200, 168, 0) 58%);
+  background-size: 220px 220px, 100% 4px, cover;
+  background-repeat: repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, normal;
+}
+[data-theme="dark"][data-skin="paper"] body::before {
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%0A%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%0A%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.42%27%2F%3E%0A%3C%2Fsvg%3E"),
+    repeating-linear-gradient(0deg, rgba(230, 223, 201, 0.030) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(90, 84, 66, 0.24), rgba(90, 84, 66, 0) 58%);
+  background-blend-mode: screen, normal, normal;
+}
+html[data-skin="paper"] .panel,
+html[data-skin="paper"] .lib-card,
+html[data-skin="paper"] .set-panel,
+html[data-skin="paper"] .scene-tile {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset,
+              0 6px 18px rgba(120, 108, 82, 0.07);
+}
+
+/* 5 晨雾：几条很宽的雾带贴着地面走，顶部再压一层薄霭 */
+html[data-skin="mist"] body::before {
+  background-image:
+    radial-gradient(74% 20% at 30% 80%, rgba(180, 205, 235, 0.32), transparent 70%),
+    radial-gradient(66% 18% at 78% 90%, rgba(170, 195, 225, 0.28), transparent 72%),
+    radial-gradient(84% 24% at 50% 102%, rgba(190, 210, 238, 0.36), transparent 74%),
+    radial-gradient(66% 38% at 50% -8%, rgba(150, 180, 215, 0.26), transparent 72%);
+  background-size: cover, cover, cover, cover;
+  animation: skin-mist 72s linear infinite alternate;
+}
+@keyframes skin-mist {
+  from { transform: translate3d(-2.5%, 0, 0) scale(1.03); }
+  to   { transform: translate3d(2.5%, 1%, 0) scale(1.06); }
+}
+[data-theme="dark"][data-skin="mist"] body::before {
+  background-image:
+    radial-gradient(74% 20% at 30% 80%, rgba(80, 105, 145, 0.34), transparent 70%),
+    radial-gradient(66% 18% at 78% 90%, rgba(70, 92, 130, 0.30), transparent 72%),
+    radial-gradient(84% 24% at 50% 102%, rgba(78, 100, 140, 0.38), transparent 74%),
+    radial-gradient(66% 38% at 50% -8%, rgba(76, 100, 140, 0.26), transparent 72%);
+}
+
+/* 关掉动效时，皮肤的漂移也一起停 */
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin] body::before { animation: none !important; }
+}
+html[data-motion-pref="reduced"][data-skin] body::before { animation: none !important; }
+
+/* ---------- 皮肤选择器 ---------- */
+.skins {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+}
+.skin {
+  display: grid;
+  gap: 7px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--ink-2);
+  transition: border-color 0.2s, transform 0.2s var(--ease-out-expo);
+}
+.skin:hover { transform: translateY(-1px); }
+.skin.is-on { border-color: var(--acc); box-shadow: inset 0 0 0 1px var(--acc); color: var(--ink); }
+.skin__sw {
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background-color: var(--bg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.skin__n { font-size: 12px; font-weight: 600; }
+
+.skin__sw--none { background: var(--bg); }
+.skin__sw--aurora {
+  background-image:
+    linear-gradient(100deg, transparent 22%, rgba(198, 242, 76, 0.55) 44%, transparent 70%),
+    linear-gradient(94deg, transparent 34%, rgba(96, 216, 200, 0.45) 52%, transparent 74%),
+    linear-gradient(113deg, transparent 40%, rgba(128, 170, 255, 0.38) 58%, transparent 78%);
+}
+.skin__sw--star {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27320%27%20height%3D%27320%27%3E%0A%3Cg%20fill%3D%27%233E5A14%27%3E%0A%3Ccircle%20cx%3D%2724%27%20cy%3D%2736%27%20r%3D%271.1%27%20opacity%3D%27.55%27%2F%3E%0A%3Ccircle%20cx%3D%2778%27%20cy%3D%2792%27%20r%3D%27.8%27%20%20opacity%3D%27.30%27%2F%3E%0A%3Ccircle%20cx%3D%27140%27%20cy%3D%2728%27%20r%3D%271.3%27%20opacity%3D%27.48%27%2F%3E%0A%3Ccircle%20cx%3D%27206%27%20cy%3D%2766%27%20r%3D%27.9%27%20%20opacity%3D%27.34%27%2F%3E%0A%3Ccircle%20cx%3D%27286%27%20cy%3D%2744%27%20r%3D%271.0%27%20opacity%3D%27.42%27%2F%3E%0A%3Ccircle%20cx%3D%2744%27%20cy%3D%27150%27%20r%3D%27.7%27%20%20opacity%3D%27.26%27%2F%3E%0A%3Ccircle%20cx%3D%27112%27%20cy%3D%27186%27%20r%3D%271.2%27%20opacity%3D%27.50%27%2F%3E%0A%3Ccircle%20cx%3D%27182%27%20cy%3D%27140%27%20r%3D%27.8%27%20%20opacity%3D%27.28%27%2F%3E%0A%3Ccircle%20cx%3D%27252%27%20cy%3D%27178%27%20r%3D%271.1%27%20opacity%3D%27.44%27%2F%3E%0A%3Ccircle%20cx%3D%27310%27%20cy%3D%27124%27%20r%3D%27.7%27%20%20opacity%3D%27.24%27%2F%3E%0A%3Ccircle%20cx%3D%2766%27%20cy%3D%27252%27%20r%3D%271.0%27%20opacity%3D%27.40%27%2F%3E%0A%3Ccircle%20cx%3D%27150%27%20cy%3D%27276%27%20r%3D%27.8%27%20%20opacity%3D%27.28%27%2F%3E%0A%3Ccircle%20cx%3D%27224%27%20cy%3D%27240%27%20r%3D%271.3%27%20opacity%3D%27.46%27%2F%3E%0A%3Ccircle%20cx%3D%27296%27%20cy%3D%27288%27%20r%3D%27.9%27%20%20opacity%3D%27.34%27%2F%3E%0A%3Ccircle%20cx%3D%2718%27%20cy%3D%27300%27%20r%3D%271.1%27%20opacity%3D%27.38%27%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    radial-gradient(58% 40% at 68% 4%, rgba(120, 150, 210, 0.30), transparent 72%);
+  background-size: 110px 110px, cover;
+  background-repeat: repeat, no-repeat;
+}
+.skin__sw--glass {
+  background-image:
+    radial-gradient(56% 44% at 14% 4%, rgba(198, 242, 76, 0.55), transparent 70%),
+    radial-gradient(52% 44% at 88% 90%, rgba(140, 190, 255, 0.50), transparent 72%);
+}
+.skin__sw--paper {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%0A%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%0A%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.42%27%2F%3E%0A%3C%2Fsvg%3E"),
+    linear-gradient(180deg, rgba(214, 200, 168, 0.55), rgba(214, 200, 168, 0.08));
+  background-size: 220px 220px, cover;
+  background-repeat: repeat, no-repeat;
+  background-blend-mode: multiply, normal;
+}
+.skin__sw--mist {
+  background-image:
+    radial-gradient(74% 20% at 30% 80%, rgba(180, 205, 235, 0.60), transparent 70%),
+    radial-gradient(84% 24% at 50% 102%, rgba(190, 210, 238, 0.65), transparent 74%),
+    radial-gradient(66% 38% at 50% -8%, rgba(150, 180, 215, 0.50), transparent 72%);
+}

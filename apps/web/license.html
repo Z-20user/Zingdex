@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>开源许可与免责声明 — Zingdex · 跃索</title>
+<meta name="description" content="Zingdex 动效组件库以 Apache-2.0（代码）与 CC BY 4.0（数据）开源：允许商用、修改与再分发，需保留版权与署名。本页同时说明免责声明、责任限制与隐私政策。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="doc">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <header class="page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>开源许可与免责声明</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(32px,4.2vw,54px)">开源许可与免责声明</h1>
+        <p class="lede" style="margin-top:14px">
+          代码 Apache-2.0、数据与文档 CC BY 4.0。不设激活码、不设席位、不限时间与次数，也不限制商用。下面是完整说明与免责条款。
+        </p>
+      </div>
+    </div>
+
+  <div class="page-actions">
+    <button class="btn btn--ghost btn--sm" type="button" data-pdf="开源许可与免责声明">下载 PDF</button>
+    <span class="pdf-stamp" data-pdf-stamp></span>
+  </div>
+  </header>
+
+  <div class="doc">
+    <nav class="doc__toc" aria-label="目录">
+      <a href="#summary">摘要（非条款）</a>
+      <a href="#c1">第一条 许可证</a>
+      <a href="#c2">第二条 你可以做什么</a>
+      <a href="#c3">第三条 你需要做什么</a>
+      <a href="#c4">第四条 免责声明</a>
+      <a href="#c5">第五条 责任限制</a>
+      <a href="#c6">第六条 无担保</a>
+      <a href="#c7">第七条 内容与示例数据</a>
+      <a href="#c8">第八条 隐私与数据</a>
+      <a href="#c9">第九条 第三方组件</a>
+      <a href="#c10">第十条 适用法律与争议</a>
+      <a href="#c11">第十一条 变更</a>
+      <a href="#terms">术语表</a>
+    </nav>
+
+    <div class="doc__body">
+
+      <section class="doc__sec" id="summary">
+        <h2>摘要（非条款，仅供快速理解）</h2>
+        <p><b>开始使用之前，先把下面四句看完。</b>它们不是法律条款，只是把后面的条款压成人话；
+          与条款冲突时，以条款为准。</p>
+        <div class="doc__grid">
+          <div class="doc__card"><b>能商用</b><span>放进你的产品、客户的项目、收费的软件里，都不用付钱、不用申请。</span></div>
+          <div class="doc__card"><b>能改</b><span>改类名、改配色、改曲线、拆开只用其中一段，都可以。</span></div>
+          <div class="doc__card"><b>要留声明</b><span>再分发代码时保留版权声明与 Apache-2.0 文本；使用动效数据时按 CC BY 4.0 署名。</span></div>
+          <div class="doc__card"><b>不担保</b><span>软件按「现状」提供，出问题由使用者自行承担，作者不承担赔偿责任。</span></div>
+        </div>
+      </section>
+
+      <section class="doc__sec" id="c1">
+        <h2>第一条 许可证</h2>
+        <p>本项目分两类内容，许可证不同：</p>
+        <ul>
+          <li><b>源代码</b>（网页版、桌面版、安卓版、命令行工具、核心引擎、数据结构定义）
+            按 <b>Apache License 2.0</b> 授权；</li>
+          <li><b>动效数据与文档</b>（20,000 条条目的数据文件、使用手册、说明文档）
+            按 <b>知识共享 署名 4.0 国际（CC BY 4.0）</b>授权。</li>
+        </ul>
+        <p>两种许可证都允许商用、修改与再分发，也都不提供担保。区别在义务：
+          Apache-2.0 要求保留版权声明与许可文本，并附带专利授权；
+          CC BY 4.0 要求在使用处署名。</p>
+        <p>「Zingdex」「跃索」名称与图标不在这两种许可证的授权范围内，详见仓库中的
+          <code>TRADEMARK.md</code>。</p>
+        <p>许可证全文随源码仓库提供：代码见 <code>LICENSE</code>（Apache-2.0），
+          数据与文档见 <code>LICENSE-DATA</code>（CC BY 4.0）。如有歧义，以这两份英文原文为准。</p>
+      </section>
+
+      <section class="doc__sec" id="c2">
+        <h2>第二条 你可以做什么</h2>
+        <ol>
+          <li>自由使用：个人项目、商业项目、内部系统、客户交付，均无需付费或申请；</li>
+          <li>自由修改：改名、改配色、改节奏、拆开只用其中一段，均不受限制；</li>
+          <li>自由分发：随你的产品发布、单独分享、放进公司设计规范，均被允许；</li>
+          <li>自由再许可：可以把修改后的版本以你自己的许可发布；</li>
+          <li>不限时间、不限次数、不限设备数量，也不要求联网校验或激活。</li>
+        </ol>
+      </section>
+
+      <section class="doc__sec" id="c3">
+        <h2>第三条 你需要做什么</h2>
+        <ul>
+          <li>再分发代码时，<b>保留版权声明、Apache-2.0 许可文本与 <code>NOTICE</code> 文件</b>；</li>
+          <li>使用动效数据时，按 CC BY 4.0 在文档或关于页<b>注明来源</b>（写明「基于 Zingdex 跃索」并附仓库地址即可）；</li>
+          <li>不得移除源码中的版权声明后宣称由你原创；</li>
+          <li>不得以作者名义为你的衍生作品背书。</li>
+        </ul>
+        <div class="doc__note">用代码要留声明，用数据要署名。这两条是唯一的硬性要求。</div>
+      </section>
+
+      <section class="doc__sec" id="c4">
+        <h2>第四条 免责声明</h2>
+        <p><b>本软件按「现状」（AS IS）提供。</b>作者不作任何明示或默示的保证，包括但不限于：</p>
+        <ul>
+          <li>适销性、特定用途适用性；</li>
+          <li>不侵权；</li>
+          <li>无错误、无中断、可连续运行；</li>
+          <li>与你的设备、浏览器、框架、构建工具兼容；</li>
+          <li>动效在任何具体设备上的性能、流畅度或视觉效果符合你的预期。</li>
+        </ul>
+        <p>你理解并同意：是否使用本软件、如何在你的产品中使用、使用后对用户体验与业务造成的影响，
+          均由你自行判断并承担全部责任。作者不参与你的产品决策，也不对你的产品作出任何承诺。</p>
+        <p>本软件包含的动效与界面示例仅用于演示技术实现，<b>不构成任何行业、法律或商业建议</b>。
+          示例中出现的商品名、价格、用户名、地点等均为虚构内容，与任何真实主体无关。</p>
+      </section>
+
+      <section class="doc__sec" id="c5">
+        <h2>第五条 责任限制</h2>
+        <p>在任何情况下，作者或版权持有人均不对以下损失承担责任，无论基于合同、侵权或其他理由，
+          也无论是否已被告知此类损失的可能性：</p>
+        <ul>
+          <li>直接或间接的经济损失、利润损失、商誉损失；</li>
+          <li>数据丢失、设备损坏、业务中断；</li>
+          <li>因使用或无法使用本软件而产生的任何其他损害。</li>
+        </ul>
+        <p>由于本软件免费提供，作者承担的累计责任总额以你为使用本软件实际支付的金额为上限（即零元）。</p>
+      </section>
+
+      <section class="doc__sec" id="c6">
+        <h2>第六条 无担保</h2>
+        <p>本软件不附带任何形式的支持承诺。作者可能随时修改、暂停或停止维护，且无需事先通知。
+          你不应把本软件作为业务连续性中的唯一依赖。</p>
+      </section>
+
+      <section class="doc__sec" id="c7">
+        <h2>第七条 内容与示例数据</h2>
+        <p>组件库中的文案、金额、姓名、门店与地点均为演示用的虚构数据，已做脱敏处理，
+          不对应任何真实机构或个人。若你认为某段示例内容侵犯了你的权益，可通过下方联系方式提出，
+          作者会在核实后修改或移除。</p>
+      </section>
+
+      <section class="doc__sec" id="c8">
+        <h2>第八条 隐私与数据</h2>
+        <ul>
+          <li>本软件<b>完全离线运行</b>，不向任何服务器上传数据，不做账号体系，不做行为统计；</li>
+          <li>偏好设置保存在本机（桌面版为安装目录下的 <code>data</code> 文件夹，手机版为应用私有目录）；</li>
+          <li>不采集通讯录、位置、相册、设备标识等个人信息；</li>
+          <li>卸载或删除程序目录后，本机数据随之清除。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="c9">
+        <h2>第九条 第三方组件</h2>
+        <p>桌面版使用 Electron 运行，随之附带的 Chromium 等组件遵循其各自的开源许可，
+          许可文本随安装包内的 <code>LICENSES.chromium.html</code> 一并提供。
+          手机版基于 Android WebView 运行，遵循系统组件的相应许可。</p>
+      </section>
+
+      <section class="doc__sec" id="c10">
+        <h2>第十条 适用法律与争议</h2>
+        <p>本声明适用中华人民共和国法律。因本软件产生的争议，双方应先友好协商；
+          协商不成的，可向作者所在地有管辖权的人民法院提起诉讼。</p>
+      </section>
+
+      <section class="doc__sec" id="c11">
+        <h2>第十一条 变更</h2>
+        <p>作者可能随版本更新调整本声明。变更后的文本随新版本发布，你继续使用即视为接受。
+          已按旧版本取得授权的使用行为不受影响——MIT 许可证一经授予不可撤销。</p>
+      </section>
+
+      <section class="doc__sec" id="terms">
+        <h2>术语表</h2>
+        <dl class="doc__dl">
+          <div><dt>本软件</dt><dd>Zingdex · 动效组件库，包括组件代码、数据文件、文档与安装包。</dd></div>
+          <div><dt>组件</dt><dd>一段可独立运行的界面动效实现，由 HTML、CSS 与可选的 JavaScript 组成。</dd></div>
+          <div><dt>衍生作品</dt><dd>以全部或部分组件为基础，经修改、组合或再设计形成的成果。</dd></div>
+          <div><dt>分发</dt><dd>以任何形式向第三方提供本软件或其衍生作品。</dd></div>
+          <div><dt>作者</dt><dd>Zingdex · Motion Lab。</dd></div>
+        </dl>
+        <p style="margin-top:18px">联系方式：QQ 2083825368@qq.com</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "@zingdex/cli",
+  "version": "3.1.1",
+  "description": "Zingdex 动效库命令行：检索、取码、按设备缩放",
+  "license": "Apache-2.0",
+  "bin": {
+    "zingdex": "bin/zingdex.js"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "dependencies": {
+    "@zingdex/core": "3.1.1",
+    "@zingdex/data": "3.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Z-20user/frame-folio.git",
+    "directory": "packages/cli"
+  }
+}

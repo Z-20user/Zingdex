@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>组件详情 — Zingdex · 跃索</title>
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="detail">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <div style="padding-top:26px">
+    <span class="crumb" data-crumb></span>
+  </div>
+
+  <div class="detail" data-detail>
+    <div class="detail__stage-wrap">
+      <div class="stage-shell">
+        <div class="detail__stage" data-stage data-loop></div>
+        <div class="stage-hud">
+          <span class="stage-hud__tag" data-hud-tag>—</span>
+          <span class="stage-hud__tag" data-hud>—</span>
+        </div>
+      </div>
+      <p class="detail__hint">改参数会实时重建预览，右边代码同步更新；你看到的就是你复制到的。</p>
+    </div>
+
+    <aside class="panel">
+      <div class="panel__title">
+        <h1 data-title>—</h1>
+        <span class="mono" data-sub style="font-size: 9.5px;letter-spacing:.16em;color:var(--ink-4)"></span>
+      </div>
+      <div class="panel__badges" data-badges></div>
+      <p class="panel__desc" data-desc></p>
+
+      <div class="detail__ctrls" data-ctrls></div>
+
+    </aside>
+  </div>
+
+  <!-- 代码区单独占一整行：右边栏只放"选参数"，代码放下面，左右高度才拉平 -->
+  <section class="detail__code">
+    <div class="detail__code-h">
+      <span class="mono">Code</span>
+      <h2 class="h2" style="font-size:22px;margin-top:6px">代码与参数同步</h2>
+      <p class="lede" style="margin-top:8px;font-size:14px">上面调过的时长、缓动、幅度，下面这份代码里已经是调好的值。</p>
+    </div>
+    <div class="codetabs" data-tabs></div>
+    <pre class="codebox" data-code>正在加载组件…</pre>
+
+    <div class="detail__actions">
+      <button class="btn btn--solid btn--sm" type="button" data-copy-code>复制当前代码</button>
+      <button class="btn btn--ghost btn--sm" type="button" data-download>下载单文件</button>
+      <button class="btn btn--ghost btn--sm" type="button" data-copy-prompt>复制 AI 提示词</button>
+    </div>
+    <p class="detail__note">
+      复制出的代码不依赖本应用，可直接放进 HTML / React / Vue / 小程序项目。
+      不熟悉怎么接？看 <a href="guide.html">接入指南</a>。
+    </p>
+  </section>
+
+  <section class="related">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="sec-head__l">
+        <span class="mono">Related</span>
+        <h2 class="h2" style="font-size: 24px">其他可以直接用的组件</h2>
+      </div>
+      <div class="sec-head__r">
+        <a class="link-arrow" href="library.html">全部组件 <span>→</span></a>
+      </div>
+    </div>
+    <div class="related__grid" data-related></div>
+  </section>
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/data.js?v=3.21.5"></script>
+<script src="assets/engine_css.js?v=3.21.5"></script>
+<script src="assets/engine_html.js?v=3.21.5"></script>
+<script src="assets/engine_js.js?v=3.21.5"></script>
+<script src="assets/engine.js?v=3.21.5"></script>
+<script src="assets/effects.js?v=3.21.5"></script>
+<script src="assets/lib-gl.js?v=3.21.5"></script>
+<script src="assets/library.js?v=3.21.5"></script>
+<script src="assets/paths.js?v=3.21.5"></script>
+<script src="assets/ai.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

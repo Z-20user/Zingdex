@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Z-20user/frame-folio/packages/schema/scene.schema.json",
+  "title": "Zingdex Scene",
+  "description": "一个场景及其下属动效条目。场景编号形如 s001 / n001 / d001。",
+  "type": "object",
+  "required": [
+    "id",
+    "zh",
+    "cats"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][0-9]{2,3}$",
+      "description": "场景编号，字母前缀 + 2–3 位数字（如 s001、z01、d201）"
+    },
+    "idx": {
+      "type": "string",
+      "pattern": "^[0-9]{2,3}$",
+      "description": "三位序号，用于排序与展示"
+    },
+    "zh": {
+      "type": "string",
+      "description": "中文场景名"
+    },
+    "en": {
+      "type": "string",
+      "description": "英文场景名"
+    },
+    "domain": {
+      "type": "string",
+      "description": "所属领域，如 电商零售"
+    },
+    "ctx": {
+      "type": "string",
+      "description": "场景上下文标识，如 list / detail"
+    },
+    "desc": {
+      "type": "string",
+      "description": "一句话说明这个场景该怎么用动效"
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "适用的设备类别"
+    },
+    "cats": {
+      "type": "array",
+      "description": "该场景下的动效条目",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "zh",
+        "fx"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "zh": {
+          "type": "string",
+          "description": "条目中文名"
+        },
+        "ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "建议时长（毫秒）"
+        },
+        "mc": {
+          "type": "string",
+          "description": "类别，如 入场 / 列表 / 加载"
+        },
+        "fx": {
+          "type": "string",
+          "pattern": "^fx-[a-z][0-9]{2,3}-[0-9]{2,3}$",
+          "description": "指向 LIB_PAY 的编号"
+        }
+      }
+    }
+  }
+}

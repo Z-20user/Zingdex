@@ -44,11 +44,18 @@ function load(lib) {
   };
 }
 
-/* 默认库目录：环境变量 TRANSIENT_LIB > skill/library-path.txt（安装后写死） */
+/* 库目录解析顺序：
+     1. 环境变量 ZINGDEX_LIB（旧名 TRANSIENT_LIB 仍兼容）
+     2. skill/library-path.txt（安装后写入的固定路径）
+     3. 仓库内 apps/web（源码树直接可用）
+   仓库根目录下无需任何配置即可运行。 */
 function defaultLib() {
-  if (process.env.TRANSIENT_LIB) return process.env.TRANSIENT_LIB;
+  const env = process.env.ZINGDEX_LIB || process.env.TRANSIENT_LIB;
+  if (env) return env;
   const cfg = path.join(__dirname, "..", "library-path.txt");
   try { if (fs.existsSync(cfg)) return fs.readFileSync(cfg, "utf8").trim(); } catch (e) { }
+  const repo = path.resolve(__dirname, "..", "..", "apps", "web");
+  if (fs.existsSync(path.join(repo, "assets"))) return repo;
   return "";
 }
 

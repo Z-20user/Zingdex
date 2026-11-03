@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>使用规范 — Zingdex · 跃索</title>
+<meta name="description" content="怎么找组件、怎么调参数、怎么把代码接进项目，以及动效本身的使用规范。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="doc">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <header class="page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>使用规范</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(32px,4.2vw,54px)">使用规范</h1>
+        <p class="lede" style="margin-top:14px">
+          从「找」到「调」到「拿走」，四步。后面是动效本身该怎么用。
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-actions">
+    <button class="btn btn--ghost btn--sm" type="button" data-pdf="使用规范">下载 PDF</button>
+    <span class="pdf-stamp" data-pdf-stamp></span>
+  </div>
+
+
+  <div class="doc">
+    <nav class="doc__toc" aria-label="目录">
+      <a href="#find">找组件</a>
+      <a href="#tune">调参数</a>
+      <a href="#export">拿走代码</a>
+      <a href="#ai">转到 AI</a>
+      <a href="#rules">动效规范</a>
+      <a href="#a11y">无障碍</a>
+      <a href="#keys">快捷键</a>
+      <a href="#offline">离线说明</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+
+    <div class="doc__body">
+
+      <section class="doc__sec" id="find">
+        <h2>一、找组件</h2>
+        <p>组件库按「界面类型」分 10 类，不按技术实现分。先想你要的是哪一种界面，再进那一类挑动效。</p>
+        <div class="doc__grid">
+          <div class="doc__card"><b>按分类</b><span>列表与卡片 / 表单与输入 / 反馈与提示 / 数据与进度 / 媒体与展示 / 控件与切换 / 地图与空间 / 消息与社交 / 个人与设置 / 设备与流程</span></div>
+          <div class="doc__card"><b>按设备</b><span>手机 / 平板 / 笔记本 / 桌面 / 自助机 / 车机 / 电视 / 手表 / AR·VR / 墨水屏 / 工业屏</span></div>
+          <div class="doc__card"><b>按关键词</b><span>组件名、场景名、动效名都能搜。例如「购物车」「逐项错峰」「手表」。</span></div>
+        </div>
+        <div class="doc__note">
+          卡片墙相邻两张一定换界面也换动效。看到两张长得一样，说明你筛得太细或搜索词太宽。
+        </div>
+      </section>
+
+      <section class="doc__sec" id="tune">
+        <h2>二、调参数</h2>
+        <p>详情页的三个按钮：<b>重播 / 调参数 / 对比默认</b>。</p>
+        <ul>
+          <li><b>调参数</b>：时长、缓动、幅度；「逐项错峰」还多一个错峰间隔。拖滑杆画面立刻变，不用刷新。</li>
+          <li><b>对比默认</b>：舞台一分为二，左边出厂参数、右边你调过的，同一时刻起播，差多少一眼看得出来。</li>
+          <li><b>重播</b>：按当前参数把动画拉回第 0 帧重放。</li>
+        </ul>
+        <h3>幅度怎么理解</h3>
+        <p>幅度是「基准量的倍数」。1.00× 是默认；1.5× 位移、缩放、模糊半径、光晕、抖动都会放大到 1.5 倍。想让动效说得更重就往上推，想更克制就往下压到 0.6–0.8。</p>
+        <h3>缓动怎么选</h3>
+        <ul>
+          <li><b>减速</b>——元素进场、弹层出现。默认选它。</li>
+          <li><b>缓减速</b>——距离长的位移，收尾更软。</li>
+          <li><b>对称</b>——遮罩揭开、翻页这类「拉开」的动作。</li>
+          <li><b>回弹</b>——强调、轻量反馈。高频列表不要用。</li>
+          <li><b>匀速</b>——进度条、跑马、循环类。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="license">
+        <h2>许可速查</h2>
+        <p>组件代码可以免费用于个人项目与商业项目，不强制署名。只有一种情况不允许：把整个库打包成你自己的组件库去卖或公开发布。</p>
+        <div class="doc__grid">
+          <div class="doc__card"><b>可以</b><span>放进产品、客户项目、收费软件；改类名改配色改曲线；团队内部共享与二次封装。</span></div>
+          <div class="doc__card"><b>不建议</b><span>移除文件里的著作权声明；以本库名义发布衍生应用。</span></div>
+          <div class="doc__card"><b>不可以</b><span>把整库（或超过一半）原样打包成独立组件库出售或公开分发。</span></div>
+        </div>
+        <p style="margin-top:12px">完整条款见 <a href="license.html" style="color:var(--acc-text)">开源许可</a>（十一条 + 摘要 + 术语表）。</p>
+      </section>
+
+      <section class="doc__sec" id="export">
+        <h2>三、拿走代码</h2>
+        <p>详情页右侧有四个代码页签：HTML / CSS / JS / AI 提示词，以及两个按钮：「复制当前代码」「下载单文件」。想一次看十种开发路径的写法，点组件卡片左上角的「↓」，会跳到接入指南的接入台。</p>
+        <ul>
+          <li>CSS 已经排版成可读格式，一条规则一个块，复制进样式表就能用。</li>
+          <li>根节点 class 形如 <code>fx-s001-01</code>，样式全部限定在它下面，不会污染你的全局。</li>
+          <li>动效数值走 CSS 变量：<code>--fx-dur</code> / <code>--fx-ease</code> / <code>--fx-amp</code> / <code>--fx-gap</code>。改变量就能改行为。</li>
+          <li>默认是循环演示。接进项目时改成单次播放：把 <code>animation</code> 写成 <code>… both</code> 并删掉 <code>animation-delay</code>，CSS 里有注释写明。</li>
+        </ul>
+        <pre><code>/* 演示用：循环 */
+animation: kfx-s001-01 calc(var(--fx-dur) * 8.33) var(--fx-ease) infinite;
+
+/* 接入项目：播一次 */
+animation: kfx-s001-01 var(--fx-dur) var(--fx-ease) both;</code></pre>
+      </section>
+
+      <section class="doc__sec" id="ai">
+        <h2>四、转到 AI</h2>
+        <p>「AI 提示词」页签里给出的是一段一条龙的提示词：结构、时长、缓动、幅度、禁止事项、验收清单、完整参考实现全在里面。</p>
+        <ul>
+          <li>点「复制 AI 提示词」，提示词连同你调好的参数一起进剪贴板。</li>
+          <li>点「复制并打开 ChatGPT / Claude / DeepSeek / Kimi」，会先把提示词复制好，再用系统默认浏览器打开对应站点，粘贴即可。</li>
+          <li>桌面版的网络请求只有这一种：打开浏览器。应用本身不联网。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="rules">
+        <h2>五、动效规范</h2>
+        <h3>时长</h3>
+        <div class="doc__grid">
+          <div class="doc__card"><b>120–200ms</b><span>微反馈：按压、hover、图标切换</span></div>
+          <div class="doc__card"><b>240–320ms</b><span>常规进场：卡片、行、气泡</span></div>
+          <div class="doc__card"><b>360–480ms</b><span>页面级转场、大面板</span></div>
+          <div class="doc__card"><b>600ms+</b><span>只用于有物理感的回弹、弹簧</span></div>
+        </div>
+        <h3>按场景选动效</h3>
+        <ul>
+          <li><b>入场</b>：上滑 / 放大 / 遮罩揭开。一屏最多两种入场，别每个元素都动。</li>
+          <li><b>列表</b>：逐项错峰，间隔 60–80ms，超过 6 项就截断延迟。</li>
+          <li><b>加载</b>：骨架呼吸或微光扫过二选一。加载完必须撤掉。</li>
+          <li><b>循环</b>：呼吸、外发光、悬浮抬升。幅度要小，否则抢注意力。</li>
+          <li><b>交互</b>：涟漪、按压、抖动。抖动必须配文字说明，不能只靠抖动传达失败。</li>
+          <li><b>状态</b>：边框流光、进度填充。只在状态真的变化时播。</li>
+          <li><b>退场</b>：退出缩放。删除、关闭、超时的标准收尾。</li>
+        </ul>
+        <h3>硬规则</h3>
+        <ul>
+          <li>只动 <code>transform</code> / <code>opacity</code> / <code>filter</code>，不要动 <code>width</code> / <code>height</code> / <code>top</code> / <code>left</code>。</li>
+          <li>同一时刻不要有超过 3 处动效在跑。</li>
+          <li>无限循环的动效必须能被关掉（本应用在「设置 → 卡片里播放动效」）。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="a11y">
+        <h2>六、无障碍</h2>
+        <ul>
+          <li>每个组件都应响应 <code>prefers-reduced-motion</code>：位移与缩放降级为透明度过渡，循环类直接停止。</li>
+          <li>本应用默认开启动效（内容是动效库），但「设置 → 减少动效」可以一键关掉页面转场与循环动画。</li>
+          <li>动效不能是唯一的信息载体：错误要有文字，状态变化要有可读标签。</li>
+          <li>键盘能完成同样的操作，焦点要可见。</li>
+        </ul>
+      </section>
+
+      <section class="doc__sec" id="keys">
+        <h2>七、快捷键（桌面版）</h2>
+        <ul>
+          <li><kbd>Esc</kbd> 全屏时退出全屏</li>
+          <li><kbd>F11</kbd> 切换全屏</li>
+          <li>鼠标右键 全屏时退出全屏</li>
+          <li>详情页：<b>重播</b> / <b>调参数</b> / <b>对比默认</b> 三个按钮</li>
+        </ul>
+        <div class="doc__note">安卓版没有全屏快捷键；界面本身已是全面屏。所有按钮都有可点区域，单手握持也够用。</div>
+      </section>
+
+      <section class="doc__sec" id="offline">
+        <h2>八、离线说明</h2>
+        <p>应用本身完全离线：字体是本地 woff2 子集，没有任何 CDN、外链图片或统计脚本；安卓版不申请 INTERNET 权限。</p>
+        <p>唯一的网络行为是<b>桌面版点击外部链接</b>时调用系统默认浏览器打开。打不打开、用哪个浏览器，由你的系统设置决定，应用不做任何预置。</p>
+      </section>
+
+      <section class="doc__sec" id="faq">
+        <h2>九、常见问题</h2>
+        <h3>为什么卡片里有的组件是空的？</h3>
+        <p>两种可能：一是它本身是「骨架屏 / 加载态」组件，占位块就是内容；二是动画正好停在不可见的那一帧，等一下或点重播。</p>
+        <h3>复制出来的代码运行后不动？</h3>
+        <p>大概率是把循环改成了单次却没加 <code>both</code>，或者外层容器给了 <code>overflow: hidden</code> 把位移裁掉了。CSS 注释里写了接入写法。</p>
+        <h3>调好的参数会丢吗？</h3>
+        <p>详情页的参数只作用于当前这一条；关掉页面就回到默认。想留住就把它复制走——CSS 变量块和 AI 提示词里都会写成你调过的值。</p>
+        <h3>能搜索英文吗？</h3>
+        <p>能。组件名、场景英文名、动效英文名都参与搜索。</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

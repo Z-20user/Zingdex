@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>使用说明与免责声明 — Zingdex · 跃索</title>
+<link rel="stylesheet" href="assets/fonts.css?v=3.17.1">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "auto";
+      if (t === "auto") {
+        // WebView 的 prefers-color-scheme 跟的是应用主题，安卓上不可靠，优先问原生
+        var sysDark = null;
+        try {
+          if (window.ZingdexHost && ZingdexHost.systemDark) sysDark = ZingdexHost.systemDark();
+        } catch (e) {}
+        if (sysDark === null) sysDark = matchMedia("(prefers-color-scheme: dark)").matches;
+        t = sysDark ? "dark" : "light";
+      }
+      document.documentElement.dataset.theme = t;
+      if (s.fs) document.documentElement.dataset.fs = s.fs;
+      if (s.lh) document.documentElement.dataset.lh = s.lh;
+    } catch (e) { document.documentElement.dataset.theme = "light"; }
+  })();
+</script>
+<style>
+  :root {
+    --bg: #F7F6F2; --surface: #FFFFFF; --line: #E3E0D5;
+    --ink: #14160F; --ink-2: #5C6154; --ink-3: #8B9080;
+    --acc: #C6F24C; --acc-deep: #4F6B00;
+    --fs-base: 15px; --lh-base: 1.85;
+  }
+  [data-theme="dark"] {
+    --bg: #0A0B0D; --surface: #14171C; --line: #24282F;
+    --ink: #F3F2ED; --ink-2: #A6ACB6; --ink-3: #6C7280;
+    --acc-deep: #C6F24C;
+  }
+  [data-fs="s"] { --fs-base: 14px; }
+  [data-fs="l"] { --fs-base: 17px; }
+  [data-lh="tight"] { --lh-base: 1.6; }
+  [data-lh="loose"] { --lh-base: 2.05; }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: var(--fs-base); line-height: var(--lh-base);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 30px);
+  }
+
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: calc(env(safe-area-inset-top) + 12px) 18px 12px;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar b { font-size: 14px; letter-spacing: 0.02em; }
+  .bar .acts { display: flex; gap: 8px; }
+  .btn {
+    padding: 9px 15px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+    font-family: inherit;
+  }
+  .btn--solid { background: var(--acc); border-color: var(--acc); color: #10130A; }
+  [data-theme="dark"] .btn--solid { background: var(--acc); border-color: var(--acc); color: #10130A; }
+
+  .doc {
+    max-width: 760px; margin: 0 auto;
+    padding: 24px 20px 40px;
+  }
+  .doc h1 { font-size: 24px; margin: 0 0 10px; letter-spacing: -0.015em; line-height: 1.35; }
+  .doc h2 {
+    font-size: 17px; margin: 30px 0 10px; padding-left: 10px;
+    border-left: 3.5px solid var(--acc); line-height: 1.45;
+  }
+  .doc h3 { font-size: 15px; margin: 20px 0 6px; color: var(--ink); }
+  .doc h4 { font-size: 14px; margin: 16px 0 6px; color: var(--ink-2); }
+  .doc p { margin: 0 0 12px; }
+  .doc ul, .doc ol { margin: 0 0 14px; padding-left: 20px; }
+  .doc li { margin-bottom: 6px; }
+  .doc blockquote {
+    margin: 0 0 14px; padding: 12px 14px; border-radius: 10px;
+    background: color-mix(in srgb, var(--acc) 10%, transparent);
+    border-left: 3px solid var(--acc); color: var(--ink-2);
+  }
+  .doc blockquote p { margin: 0 0 6px; }
+  .doc blockquote p:last-child { margin-bottom: 0; }
+  .doc table {
+    width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 13.5px;
+    display: block; overflow-x: auto;
+  }
+  .doc th { background: color-mix(in srgb, var(--acc) 14%, transparent); text-align: left; }
+  .doc th, .doc td { border: 1px solid var(--line); padding: 8px 10px; vertical-align: top; }
+  .doc code {
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px;
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+    padding: 1px 5px; border-radius: 4px;
+  }
+  .doc pre {
+    background: color-mix(in srgb, var(--ink) 5%, transparent);
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px; overflow-x: auto; font-size: 12.5px; line-height: 1.7;
+  }
+  .doc hr { border: 0; border-top: 1px solid var(--line); margin: 26px 0; }
+  .doc a { color: var(--acc-deep); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .doc img { display: block; width: 190px; max-width: 70%; height: auto; margin: 12px auto; border-radius: 10px; background: #fff; padding: 8px; border: 1px solid var(--line); }
+  .doc strong { font-weight: 700; }
+
+  .tip {
+    max-width: 760px; margin: 0 auto; padding: 0 20px 8px;
+    font-size: 12.5px; color: var(--ink-3); line-height: 1.8;
+  }
+  .toast {
+    position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 26px);
+    transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+    background: var(--acc); color: #10130A; font-weight: 600; font-size: 13.5px;
+    padding: 11px 20px; border-radius: 999px; z-index: 20; transition: opacity .18s, transform .18s;
+    max-width: 86vw; text-align: center;
+  }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+</style>
+</head>
+<body>
+
+<main class="doc">
+  <div class="doc__wrap">
+
+    <header class="doc__head">
+      <div class="doc__crumb"><a href="index.html">首页</a><span>/</span><span>使用说明与免责声明</span></div>
+      <h1>使用说明与免责声明</h1>
+      <p class="doc__lede">适用于 Windows 版与 Android 版。本项目代码以 Apache-2.0、数据与文档以 CC BY 4.0 开源，不设激活码、不设席位、不限时间与次数。</p>
+    </header>
+
+    <hr>
+    <h2>声明</h2>
+    <p>本作品由 <strong>Zingdex · Motion Lab</strong> 独立开发并持续维护，以 <strong>Apache-2.0（代码）与 CC BY 4.0（数据）</strong>开源发布。</p>
+    <p>本声明适用于本作品的<strong>全部发布形态</strong>：Windows 版、Android 版，以及随包分发的静态站点、文档、素材与构建工具。</p>
+    <p><strong>使用本作品的任何部分，即视为使用人已完整阅读、理解并接受本声明的全部内容。如不接受，请立即停止使用并删除全部副本。</strong></p>
+    <p>完整许可条款见<a href="license.html">《开源许可与免责声明》</a>（含 Apache-2.0 与 CC BY 4.0 说明）。本页如与许可文本冲突，以许可文本为准。</p>
+
+    <hr>
+    <h1>第一部分　使用说明</h1>
+
+    <h2>一、产品性质</h2>
+    <p>Zingdex是一套<strong>动效组件库</strong>。它的作用不是提供可直接运行的成品软件，而是提供一套可被阅读、拆解、复制与二次使用的动效规格：每一条组件都包含动画参数、HTML 结构、CSS 代码与一段可供 AI 理解的自然语言提示词。</p>
+    <p>产品的核心价值在于<strong>规格的准确与可复现</strong>：使用者看到的效果、拿到的代码、填进 AI 的提示词，三者描述的是同一件事。</p>
+    <p>本作品完全免费：不销售使用权，不开通订阅，不设置付费墙，不设激活码与席位，不限制使用时间与次数。</p>
+
+    <h2>二、内容规模</h2>
+    <p>表中数字由构建脚本从数据源实时统计，与程序内显示一致。</p>
+    <table><thead><tr><th>项目</th><th>数量</th><th>说明</th></tr></thead><tbody>
+    <tr><td>动效组件</td><td>20,000 条</td><td>竖屏 16,290 · 大屏 1,039 · 车机 799 · 手表 864 · 终端 1,008</td></tr>
+    <tr><td>特效基底</td><td>500 个</td><td>入场 / 退场 / 状态 / 空间 / 形变 / 光效 / 粒子 / 物理等 18 个族</td></tr>
+    <tr><td>设备形态</td><td>5 种</td><td>竖屏、大屏、车机、手表、终端</td></tr>
+    <tr><td>接入路径</td><td>10 条</td><td>覆盖主流前端框架与原生方案</td></tr>
+    <tr><td>许可方式</td><td>Apache-2.0 / CC BY 4.0</td><td>代码与数据均可商用、可修改、可再分发；代码保留声明，数据保留署名</td></tr>
+    </tbody></table>
+
+    <h2>三、系统要求</h2>
+    <table><thead><tr><th>形态</th><th>最低要求</th><th>说明</th></tr></thead><tbody>
+    <tr><td>Windows 版</td><td>Windows 10 1809 或更高，64 位</td><td>双击即用，不写注册表、不建快捷方式</td></tr>
+    <tr><td>Android 版</td><td>Android 6.0（API 23）或更高</td><td>不申请联网权限</td></tr>
+    </tbody></table>
+    <p>全部形态均为<strong>纯离线软件</strong>。Windows 版不发起任何网络请求；Android 版在清单中不声明 <code>INTERNET</code> 权限，系统层面即无法联网。</p>
+
+    <h2>四、Windows 版</h2>
+    <h3>4.1 启动</h3>
+    <p>双击 <code>Zingdex.exe</code> 即可运行，无需安装。首次启动稍慢（需解包运行库），之后为秒开。</p>
+    <p>若旧版本仍在运行，请先退出再启动新版本，避免文件占用。</p>
+    <h3>4.2 数据位置</h3>
+    <p>所有数据——设置、缓存、最近使用——保存在<strong>安装目录下的 <code>data</code> 文件夹</strong>内，不写入 <code>%APPDATA%</code>。卸载时一并清除。</p>
+    <h3>4.3 启动与关闭</h3>
+    <p>关闭窗口不等于退出程序：程序会收进系统托盘继续驻留，双击托盘图标可唤回窗口。真正退出请使用「设置 → 退出应用」或托盘菜单的退出项。</p>
+    <h3>4.4 全屏与快捷键</h3>
+    <p><code>Esc</code> 键在任何情况下都能退出全屏；<code>F11</code> 切换全屏。可在「设置 → 快捷键」录制自定义退出全屏组合键，录制时会检测系统冲突。</p>
+    <h3>4.5 清除数据</h3>
+    <p>「设置 → 数据与卸载」提供一键清除入口，需二次确认：清除设置、缓存与开机启动项；程序文件夹本身不删除，需要时自行删掉即可。</p>
+
+    <h2>五、Android 版</h2>
+    <p>安装 APK 后打开即可使用。应用不申请联网权限，全部数据保存在应用私有目录，卸载即清除。</p>
+    <p>为保证流畅度，<strong>粒子、蜂群、物理、噪波与 Canvas / 3D 等重特效在手机上不渲染</strong>，卡片会显示「复杂动效 · 请到电脑端查看」。这是有意的性能取舍，不是缺失。</p>
+    <p>返回键行为：先关弹窗 → 退出详情 → 回到组件列表 → 滚回顶部 → 提示已在首页，不会误退出应用。</p>
+
+    <h2>六、开源许可</h2>
+    <p>代码以 <strong>Apache-2.0</strong>、数据以 <strong>CC BY 4.0</strong> 发布：可以自由使用、修改、合并、发布、再许可与销售；再分发代码时保留版权声明与许可文本，使用数据时注明来源。完整条款见<a href="license.html">《开源许可与免责声明》</a>。</p>
+
+    <h2>七、免责声明</h2>
+    <p><strong>本软件按「现状」（AS IS）提供，不附带任何明示或默示的担保。</strong>作者不对适销性、特定用途适用性、不侵权、无错误运行作出任何承诺。</p>
+    <p>是否使用本软件、如何在产品中使用、使用后对用户体验与业务的影响，均由使用者自行判断并承担全部责任。作者不参与使用者的产品决策，也不对其产品作出任何承诺。</p>
+    <p>本软件中的文案、金额、姓名、门店与地点均为演示用虚构数据，不对应任何真实机构或个人。若认为某段示例内容侵犯权益，可通过下方联系方式提出，作者会核实后修改或移除。</p>
+    <p>在任何情况下，作者或版权持有人均不对直接或间接的经济损失、利润损失、数据丢失、业务中断承担责任，无论基于合同、侵权或其他理由。由于本软件免费提供，作者承担的累计责任以使用者实际支付的金额为上限。</p>
+
+    <h2>九、隐私与数据</h2>
+    <ul>
+      <li>完全离线运行，不向任何服务器上传数据，不做账号体系，不做行为统计；</li>
+      <li>不采集通讯录、位置、相册、设备标识等个人信息；</li>
+      <li>偏好设置仅保存在本机，卸载或删除程序目录后随之清除。</li>
+    </ul>
+
+    <h2>十、联系方式</h2>
+    <p>问题反馈、侵权投诉与内容更正：QQ 2083825368@qq.com。</p>
+
+  </div>
+</main>
+
+
+<script>
+(function () {
+  "use strict";
+  const $ = (s) => document.querySelector(s);
+
+  let toastTimer = 0;
+  function toast(msg) {
+    const el = $("[data-toast]");
+    el.textContent = msg;
+    el.classList.add("on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("on"), 1800);
+  }
+
+  document.addEventListener("click", async (e) => {
+    if (e.target.closest("[data-back]")) {
+      if (history.length > 1) history.back();
+      else location.href = "library.html";
+      return;
+    }
+
+    if (e.target.closest("[data-export]")) {
+      // 桌面：主进程复制内置 PDF
+      if (window.zingdex && typeof window.zingdex.saveDoc === "function") {
+        try {
+          const r = await window.zingdex.saveDoc();
+          if (r && r.ok) toast("已保存到 " + r.filePath);
+          else if (r && !r.cancelled) toast("保存失败");
+        } catch (err) { toast("保存失败"); }
+        return;
+      }
+      // 手机：原生把内置 PDF 交给系统分享
+      if (window.ZingdexHost && typeof window.ZingdexHost.shareDoc === "function") {
+        try { window.ZingdexHost.shareDoc(); } catch (err) { /* noop */ }
+        return;
+      }
+      // 纯网页：直接下载
+      const a = document.createElement("a");
+      a.href = "assets/terms.pdf";
+      a.download = "Zingdex-使用说明与免责声明.pdf";
+      a.click();
+      toast("已开始下载");
+    }
+  });
+})();
+</script>
+</body>
+</html>

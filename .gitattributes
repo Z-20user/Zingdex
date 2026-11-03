@@ -1,0 +1,28 @@
+# 统一换行，避免脚本在 Linux 上因 CRLF 报错
+* text=auto eol=lf
+
+*.sh    text eol=lf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# 二进制，不做换行转换
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.pdf   binary
+*.apk   binary
+*.exe   binary
+*.zip   binary
+*.jks   binary
+
+# 生成产物：diff 时折叠
+apps/web/assets/lib/*.js  linguist-generated=true
+apps/web/assets/engine*.js linguist-generated=true
+apps/web/assets/lib-gl.js linguist-generated=true

@@ -1,0 +1,18 @@
+{
+  "name": "zingdex-motion",
+  "productName": "Zingdex",
+  "version": "3.1.1",
+  "description": "Zingdex 跃索 · 动效组件库",
+  "main": "main.js",
+  "author": "跃索相关团队",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^33.2.0"
+  },
+  "dependencies": {
+    "resedit": "^3.1.0"
+  }
+}

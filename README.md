@@ -1,78 +1,141 @@
-# Zingdex / 跃索
+# Zingdex · 跃索
 
-离线动效规格库：**20,000 条场景条目 · 500 个基础特效 · 11 类设备适配系数**。
-给 AI 编码助手和前端开发者用：检索 → 取码 → 适配。
+**离线界面动效库：20,000 条场景条目 · 500 个基础特效 · 11 类设备适配系数。**
+给前端开发者和 AI 编码助手用：检索 → 取码 → 适配，三步闭环。
 
-版本 **3.1.0** · 完全免费 · MIT（Skill 与文档）· 应用本体不提供源码
+版本 **3.1.1** · 代码 [Apache-2.0](LICENSE) · 数据与文档 [CC BY 4.0](LICENSE-DATA) · 完全开源
 
-> 国外有 GSAP Skills、Transitions.dev，国内还没有离线、大规模、带多端系数的 AI 动效规格库——所以做了这个。
+[下载](#下载) · [快速开始](#三步用起来) · [仓库结构](#仓库结构) · [构建](#从源码构建) · [数据来源](docs/DATA-PROVENANCE.md) · [商标](TRADEMARK.md)
 
 ---
 
-## 一、中文
+## 一、中文说明
 
-**下载**（Release 只有两个文件）
+### 是什么
+
+一套能搜、能看、能复制的界面动效库。每条都是**真实界面 + 作用其上的动效**，
+不是色块换名字。全部离线，不联网、不申请权限、不收集任何数据。
+
+### 下载
+
 | 文件 | 平台 | 体积 |
 |---|---|---|
-| `Zingdex-3.1.0-android.apk` | 安卓，直接安装 | 2.5 MB |
-| `Zingdex-3.1.0-windows-portable.zip` | Windows 便携版，解压即用、免安装 | 112 MB |
+| [`Zingdex-3.1.1-android.apk`](https://github.com/Z-20user/frame-folio/releases/latest) | 安卓 6.0+，直接安装 | 2.5 MB |
+| [`Zingdex-3.1.1-windows-portable.zip`](https://github.com/Z-20user/frame-folio/releases/latest) | Windows 10+，解压运行 `Zingdex.exe` | 112 MB |
 
-**三步用起来**
+也可以在浏览器里直接用：`apps/web/index.html`（无需服务器）。
+
+### 三步用起来
+
 ```bash
-node skill/tools/find-motion.js "商品列表" --device phone   # 检索 → fx 编号
-node skill/tools/extract-motion.js fx-n001-01               # 取码 → HTML + CSS
-node skill/tools/extract-motion.js --list                   # 列全部基础特效
+node skill/tools/find-motion.js "商品列表" --device phone   # 1 检索，得 fx 编号
+node skill/tools/extract-motion.js fx-s001-07               # 2 取码，得 HTML+CSS
+node skill/tools/extract-motion.js --list                   # 3 不确定时列全部特效
 ```
 
-**边界**：HTML+CSS 同取；换设备乘系数（手表 0.62/0.55、车机 0.75/0.70、手机 0.82/0.72、桌面 1.08/1.18）；改节奏用 `--fx-dur`/`--fx-ease`，不改关键帧名。
+克隆仓库后无需任何配置，工具会自动读取 `apps/web/assets/`。
 
-**文档**：[MANUAL.md](MANUAL.md) 手册 · [LATEST.md](LATEST.md) 最新版 · [VERSIONS.md](VERSIONS.md) 版本史 · [skill/SKILL.md](skill/SKILL.md) 技能总纲
+### 边界（这几条是硬约束）
 
-**开源范围**：应用本体免费使用、不提供源码；Skill 与文档 MIT。
-**反馈**：优先 GitHub Issues；邮箱 `hello@zingdex.com`（待域名启用）。
+- **HTML 与 CSS 必须同取**：只拿 CSS 不会动，只拿 HTML 是块静止的界面
+- **换设备必须乘系数**：手表 ×0.62/×0.55、车机 ×0.75/×0.70、手机 ×0.82/×0.72、桌面 ×1.08/×1.18
+- **改节奏用参数**：`--fx-dur` / `--fx-ease`，不要改关键帧名
+- **入场只播一次**：同屏循环 ≤2；元素移除即停帧循环；尊重 `prefers-reduced-motion`
+- **查不到就降级**：换词 → 去筛选 → `--list` 看实际编号，**不要凭记忆编 id**
+
+### 仓库结构
+
+```
+apps/web/         网页版（HTML + CSS + 资源，纯静态）
+apps/desktop/     Windows 版（Electron 主进程 + 打包脚本）
+apps/android/     安卓版（免 Gradle 手工构建链）
+packages/data/    动效数据（20,000 条，CC BY 4.0）
+packages/core/    动效运行时引擎
+packages/schema/  数据结构的 JSON Schema
+packages/cli/     命令行工具
+tools/            生成与打包脚本
+skill/            给 AI 助手用的技能说明（6 个文件）
+docs/             手册、版本史、数据来源审计
+```
+
+### 从源码构建
+
+```bash
+# 网页版：直接用浏览器打开 apps/web/index.html，无构建步骤
+
+# 安卓版（需要 Android SDK build-tools + JDK，并自备签名密钥）
+cd apps/android && ./prepare_toolchain.sh && ./build_apk.sh
+
+# Windows 版（需要 Node.js 18+）
+cd apps/desktop && npm install && npm run dist
+```
+
+签名密钥**不在仓库里**。构建前请设置 `KS_PATH`（.jks 路径）与
+`KS_PASS_FILE`（只含口令的单行文本），详见 `apps/android/build_apk.sh` 头部注释。
 
 ### 维护节奏
 
-个人独立维护（在校学生），**每周最多更新一次，通常周末**；紧急 Bug 除外。
-功能请求按周排期，不承诺即时响应；收费闭环、小程序、账号系统暂不启动。
+个人独立维护，每周最多更新一次（通常周末）；紧急 Bug 除外。
+收费闭环、小程序、账号体系暂不启动。
 
-### 基础设施 / Infrastructure
+### 联系
 
-| 项 | 规划 | 状态 |
-|---|---|---|
-| 主域名 | `zingdex.com` / `zingdex.dev` | 待注册确认 |
-| 中文域名 | 不建议 `yuesuo` 系列（有同名公司）；备选 `zingdex.cn` | 建议放弃中文域名 |
-| 文档站 | `docs.zingdex.com` | 暂不部署 |
-| 下载站 | 优先 GitHub Releases；备选 `dl.zingdex.com` | 使用 GitHub |
-| npm 包 | `zingdex` | 检索未占用，可发布；备选 `@zingdex/cli` |
-| GitHub 组织 | `zingdex` | 大概率可用；备选 `zingdex-labs` |
-| 邮箱 | `hello@zingdex.com` | 待主域名确认后启用 |
-| 社交占位 | `@zingdex`（X / GitHub / V2EX / 即刻） | 建议先占位 |
-| 商标 | 第 9 类软件、第 42 类软件设计开发 | 商业化前再查；当前不注册 |
-| 中文品牌 | 跃索 | 仅作品牌称呼，不用于域名 |
+技术交流邮箱：2083825368@qq.com
+问题与建议请走 [Issues](https://github.com/Z-20user/frame-folio/issues)。
 
 ---
 
 ## 二、English
 
-**What**: an offline motion-spec library — 20,000 scene entries, 500 base effects, per-device scaling for 11 device classes.
+**What.** An offline motion-spec library — 20,000 scene entries, 500 base effects,
+per-device scaling for 11 device classes. Every entry is a real interface with real
+motion applied to it, not a recoloured block. Fully offline: no network calls, no
+permissions, no telemetry.
 
-**Download**
-| File | Platform | Size |
-|---|---|---|
-| `Zingdex-3.1.0-android.apk` | Android | 2.5 MB |
-| `Zingdex-3.1.0-windows-portable.zip` | Windows portable (no install) | 112 MB |
+**Download.** Android APK (2.5 MB, Android 6.0+) and a portable Windows zip
+(112 MB, Windows 10+) from [Releases](https://github.com/Z-20user/frame-folio/releases/latest).
+The web build runs straight from `apps/web/index.html` — no server needed.
 
-**Commands**
+**Three commands** (no configuration after cloning):
+
 ```bash
 node skill/tools/find-motion.js "product list" --device phone
-node skill/tools/extract-motion.js fx-n001-01
+node skill/tools/extract-motion.js fx-s001-07
 node skill/tools/extract-motion.js --list
 ```
 
-**Scope**: app binaries free, source not published; skill and docs MIT.
-**Cadence**: solo-maintained, at most one update per week.
-**Contact**: GitHub Issues first; `hello@zingdex.com` once the domain is live.
+**Boundaries.**
+Always take HTML + CSS together — CSS alone does not animate, HTML alone is a still frame.
+Scale per device before shipping: watch ×0.62/×0.55, car ×0.75/×0.70,
+phone ×0.82/×0.72, desktop ×1.08/×1.18. Tune rhythm with `--fx-dur` / `--fx-ease`,
+never rename keyframes. Entrance animations play once; at most two concurrent loops
+per screen; stop frame loops when the element is removed; honour `prefers-reduced-motion`.
+If a lookup misses, shorten the keyword, drop filters, then run `--list` — never
+invent an id from memory.
+
+**Repository layout.**
+
+```
+apps/web/         static web build
+apps/desktop/     Electron shell + packaging
+apps/android/     manual build chain (no Gradle)
+packages/data/    the dataset (CC BY 4.0)
+packages/core/    motion runtime
+packages/schema/  JSON Schema for the data
+packages/cli/     command-line tools
+tools/            generators and packaging scripts
+skill/            AI-assistant skill (6 files)
+docs/             manual, version history, provenance audit
+```
+
+**Build.** Web needs no build. Android needs Android build-tools + a JDK and your own
+signing key (`KS_PATH`, `KS_PASS_FILE`). Desktop needs Node.js 18+.
+
+**Licensing.** Source code is Apache-2.0. Data and documentation are CC BY 4.0 —
+commercial use is fine, attribution is required. Names and logos are not licensed;
+see [TRADEMARK.md](TRADEMARK.md).
+
+**Cadence.** Solo-maintained, at most one update per week.
 
 ---
 
@@ -80,48 +143,98 @@ node skill/tools/extract-motion.js --list
 
 ```yaml
 project: Zingdex
-project_zh: 跃索
-version: 3.1.0
-license: {app_binaries: free-use-no-source, skill_and_docs: MIT}
+aliases: ["跃索", "Zingdex 跃索"]
+version: 3.1.1
+license:
+  code: Apache-2.0          # apps/, packages/{core,cli,schema}, tools/
+  data_and_docs: CC-BY-4.0  # packages/data/, docs/, skill/, README
+  trademark: reserved       # names and logos, see TRADEMARK.md
 entrypoint: skill/SKILL.md
+repo_layout:
+  web: apps/web
+  desktop: apps/desktop
+  android: apps/android
+  data: packages/data
+  core: packages/core
+  cli: packages/cli
+  skill: skill
 
 assets:
-  - {name: Zingdex-3.1.0-android.apk, platform: android, min_sdk: 23, size_mb: 2.5}
-  - {name: Zingdex-3.1.0-windows-portable.zip, platform: windows, install: none, size_mb: 112}
+  - name: Zingdex-3.1.1-android.apk
+    platform: android
+    min_sdk: 23
+    size_mb: 2.5
+  - name: Zingdex-3.1.1-windows-portable.zip
+    platform: windows
+    runtime: system Edge/Chromium (WebView2)
+    size_mb: 112
 
 commands:
-  search:  {run: 'node skill/tools/find-motion.js "<kw>" [--device d] [--cat c] [--max ms] [--json]', returns: 'scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}'}
-  extract: {run: 'node skill/tools/extract-motion.js <fx-id|effect-id> [--json]', returns: '{html, css, js, note}'}
-  list:    {run: 'node skill/tools/extract-motion.js --list [family]', returns: 'effect ids by family'}
+  search:
+    run: node skill/tools/find-motion.js "<keyword>" [--device <dev>] [--cat <cat>] [--max <ms>] [--json]
+    returns: scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}
+  extract:
+    run: node skill/tools/extract-motion.js <fx-id|effect-id> [--json]
+    returns: {html, css, js, note}
+  list:
+    run: node skill/tools/extract-motion.js --list [family]
+    returns: effect ids grouped by family
+
+lib_resolution:            # 按顺序
+  - env ZINGDEX_LIB
+  - skill/library-path.txt
+  - <repo>/apps/web       # 克隆仓库后即可用，无需配置
 
 data_model:
-  scenes: 201
-  entries: 20000
-  effects: 500
-  chain: "SCENES[].cats[].fx -> LIB_PAY[fx] -> {h,c} (100% resolve)"
+  scenes: 201              # apps/web/assets/lib/d001..d201.js
+  entries: 20000           # LIB_PAY keys, verified 2026-11-03
+  effects: 500             # apps/web/assets/effects.js
+  canvas_effects: 24       # apps/web/assets/lib-gl.js
+  entry_to_code: "LIB_PAY[fx] -> {h, c} (100% resolve, 0 missing)"
 
-device_scaling:
-  phone: [0.82, 0.72]
-  phone_lg: [0.88, 0.80]
+device_scaling:            # duration / distance
+  phone:      [0.82, 0.72]
+  phone_lg:   [0.88, 0.80]
   desktop_xl: [1.08, 1.18]
-  tablet: [1.00, 1.00]
-  watch: [0.62, 0.55]
-  car: [0.75, 0.70]
-  kiosk: [1.00, 1.10]
+  tablet:     [1.00, 1.00]
+  watch:      [0.62, 0.55]
+  car:        [0.75, 0.70]
+  kiosk:      [1.00, 1.10]
 
 invariants:
-  - take html and css together
+  - html and css must be taken together
   - never rename keyframes without updating references
-  - entrance plays once; no infinite
+  - entrance plays once; do not use infinite
   - max 2 concurrent loops per screen
   - honor prefers-reduced-motion (jump to end state)
   - stop frame loops when element is removed
+  - do not invent fx ids; run --list when a lookup misses
 
-fallbacks: [shorten keyword, drop filters, run --list, never invent ids]
+fallbacks:
+  - shorten keyword
+  - drop --device / --cat / --max
+  - run --list to inspect actual ids
+  - never invent ids from memory
 
-infra:
-  domain: zingdex.com (pending)
-  npm: zingdex
-  github_org: zingdex
-  email: hello@zingdex.com (pending)
+do_not:
+  - copy the name "Zingdex" / "跃索" into a derived product's name or logo
+  - reuse the package id com.transientlab.motion in a fork
+  - strip the attribution when redistributing data
 ```
+
+**Read next**: [`skill/SKILL.md`](skill/SKILL.md) → [`skill/references/02-retrieval.md`](skill/references/02-retrieval.md)
+→ [`skill/references/04-device-rules.md`](skill/references/04-device-rules.md) →
+[`docs/DATA-PROVENANCE.md`](docs/DATA-PROVENANCE.md)
+
+---
+
+## 许可
+
+| 内容 | 许可证 |
+|---|---|
+| 源代码（`apps/`、`packages/core`、`packages/cli`、`packages/schema`、`tools/`） | [Apache-2.0](LICENSE) |
+| 动效数据（`packages/data/`、`apps/web/assets/`） | [CC BY 4.0](LICENSE-DATA) |
+| 文档与技能说明（`docs/`、`skill/`） | [CC BY 4.0](LICENSE-DATA) |
+| 名称与图标 | 保留权利，见 [TRADEMARK.md](TRADEMARK.md) |
+
+第三方组件见 [NOTICE](NOTICE)。数据来源审计见 [docs/DATA-PROVENANCE.md](docs/DATA-PROVENANCE.md)。

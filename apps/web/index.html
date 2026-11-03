@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zingdex · 跃索 — 动效组件库</title>
+<meta name="description" content="可直接运行、直接复制的动效组件库：每个组件都是一块真实界面 + 一个动效，适配竖屏 / 大屏 / 车机 / 手表 / 终端五种形态，附 HTML / CSS / JS 与一条龙 AI 提示词，完全离线。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="home">
+
+<div data-nav></div>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="wrap hero">
+    <div class="hero__copy">
+      <span class="eyebrow">Motion Component Library</span>
+      <h1 class="h1">每一帧，<br>都有<span class="acc">出处</span>。</h1>
+      <p class="lede"><span data-count="total">20000</span> 个可以直接运行、直接复制的动效组件，分 <span data-count="cats">10</span> 类、适配竖屏 / 大屏 / 车机 / 手表 / 终端五种形态。每个都是先把界面做出来，再让动效作用上去；HTML / CSS / JS 与 AI 提示词全给，复制走就能用。</p>
+      <div class="hero__ctas">
+        <a class="btn btn--solid" href="library.html">浏览组件库</a>
+        <a class="btn btn--ghost" href="motion.html">查看动效规范</a>
+      </div>
+      <span class="hero__meta">无需注册 &nbsp;·&nbsp; 完全离线 &nbsp;·&nbsp; HTML / React / Vue / 小程序</span>
+    </div>
+
+    <div class="stage">
+      <div class="stage__bar">
+        <span class="stage__live"><i></i>实时预览</span>
+        <span class="stage__fps" data-hero-name>—</span>
+      </div>
+      <div class="stage__live-box" data-hero-live></div>
+      <div class="stage__foot">
+        <button class="play" aria-label="播放预览">
+          <svg viewBox="0 0 10 12" fill="none"><path d="M1.5 1.2L8.6 6L1.5 10.8V1.2Z" fill="#0A0B0D"/></svg>
+        </button>
+        <div class="track"><div class="track__fill"></div></div>
+        <span class="stage__tc stage__tc--link">每 5 秒换一个 · 点开看代码 →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="wrap">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__v" data-count="total">20000</div>
+        <div class="stat__l">个动效组件</div>
+      </div>
+      <div class="stat">
+        <div class="stat__v" data-count="cats">10</div>
+        <div class="stat__l">个分类</div>
+      </div>
+      <div class="stat">
+        <div class="stat__v is-acc">11</div>
+        <div class="stat__l">类设备</div>
+      </div>
+      <div class="stat">
+        <div class="stat__v">0</div>
+        <div class="stat__l">网络请求 / 完全离线</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOTION LAB ============ -->
+  <section class="section section--alt lab">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__l">
+          <span class="mono">02 — Motion Lab</span>
+          <h2 class="h2">这些不是效果图</h2>
+        </div>
+        <div class="sec-head__r">
+          <p>下面三块正在实时运行。组件库里的 <span data-count="total">20000</span> 个组件也是这样：卡片里就是真代码在跑，不是截图。</p>
+        </div>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-cell">
+          <div class="lab-demo is-live" data-mount="spec:fx-s001-09" style="--fxd:-120ms"></div>
+          <div class="lab-meta"><span>商品列表 / 逐项错峰</span><b>420ms</b></div>
+        </div>
+        <div class="lab-cell">
+          <div class="lab-demo is-live" data-mount="spec:fx-s030-11" style="--fxd:-900ms"></div>
+          <div class="lab-meta"><span>播控中心 / 呼吸强调</span><b>2.0s · loop</b></div>
+        </div>
+        <div class="lab-cell">
+          <div class="lab-demo is-live" data-mount="spec:fx-s044-19" style="--fxd:-400ms"></div>
+          <div class="lab-meta"><span>充电进度 / 进度填充</span><b>1.6s · loop</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENES ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__l">
+          <span class="mono">03 — Categories</span>
+          <h2 class="h2">十个分类，四千个组件</h2>
+        </div>
+        <div class="sec-head__r">
+          <p>按界面类型分：列表与卡片、表单与输入、反馈与提示、数据与进度、媒体与展示、控件与切换、地图与空间、消息与社交、个人与设置、设备与流程。每个组件都是一块真界面 + 一个动效，不重复。</p>
+        </div>
+      </div>
+      <div class="scene-grid" data-scene-grid></div>
+      <div class="scene-grid__foot">
+        <a class="link-arrow" href="library.html">进入组件库 <span style="display:inline-block">→</span></a>
+        <span class="mono" data-scene-count></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED ============ -->
+  <section class="section section--alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-head__l">
+          <span class="mono">04 — Featured</span>
+          <h2 class="h2">每个分类里最先看的那一个</h2>
+        </div>
+        <div class="sec-head__r">
+          <a class="link-arrow" href="library.html">全部组件 <span style="display:inline-block">→</span></a>
+        </div>
+      </div>
+      <div class="card-grid" data-featured></div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/data.js?v=3.21.5"></script>
+<script src="assets/engine_css.js?v=3.21.5"></script>
+<script src="assets/engine_html.js?v=3.21.5"></script>
+<script src="assets/engine_js.js?v=3.21.5"></script>
+<script src="assets/engine.js?v=3.21.5"></script>
+<script src="assets/effects.js?v=3.21.5"></script>
+<script src="assets/library.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

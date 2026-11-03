@@ -1,0 +1,53 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+build-work/
+apps/desktop/dist/
+apps/android/dist/
+apps/android/work/
+apps/desktop/site/
+apps/android/app/assets/
+apps/web/*.zip
+
+# 工具链（自行安装，不入库）
+apps/android/jdk/
+apps/android/build-tools/
+apps/android/platform/
+apps/android/.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- 密钥与签名材料：永远不入库 ----
+**/keystore/
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.token
+ks.pass
+**/seats.json
+.env
+.env.*
+secrets.*
+local.properties
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 本地临时
+_scratch/
+_tmp/
+*.log

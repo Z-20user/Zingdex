@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>设置 — Zingdex · 跃索</title>
+<meta name="description" content="显示、动效、组件库与桌面窗口的偏好设置，全部保存在本机。">
+<link rel="stylesheet" href="assets/fonts.css?v=3.21.5">
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("tr-settings") || "{}");
+      var t = s.theme || "light";
+      if (t === "auto") t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      var h = document.documentElement;
+      h.dataset.theme = t;
+      if (s.density) h.dataset.density = s.density;
+      if (s.fs) h.dataset.fs = s.fs;
+      if (s.lh) h.dataset.lh = s.lh;
+      if (s.motion) h.dataset.motionPref = s.motion;
+      if (s.cardAnim) h.dataset.cardAnim = s.cardAnim;
+      if (s.cardSize) h.dataset.cardSize = s.cardSize;
+      if (s.codeFont) h.dataset.codeFont = s.codeFont;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css?v=3.21.5">
+<link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+</head>
+<body data-page="settings">
+
+<div data-nav></div>
+
+<main class="wrap">
+  <header class="page-head">
+    <span class="crumb"><a href="index.html">首页</a><span class="sep">/</span><span>设置</span></span>
+    <div class="page-head__row">
+      <div>
+        <h1 class="h1" style="font-size:clamp(32px,4.2vw,54px)">设置</h1>
+        <p class="lede" style="margin-top:14px">
+          全部保存在这台机器上，不联网、不上传。改完立刻生效，下次打开还记得。
+        </p>
+        <div class="self-motion">
+          <span class="self-motion__lb">本页动效来自组件库</span>
+          <a href="library.html?q=逐项错峰">逐项错峰 · 面板依次浮入</a>
+          <a href="library.html?q=遮罩揭开">遮罩揭开 · 标题显示</a>
+          <a href="library.html?q=按压缩放">按压缩放 · 分段控件</a>
+          <a href="library.html?q=底边展开">底边展开 · 参数面板</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="set-layout">
+    <nav class="set-toc" aria-label="设置分区">
+      <a href="#sec-display">显示</a>
+      <a href="#sec-motion">动效</a>
+      <a href="#sec-library">组件库</a>
+      <a href="#sec-window" data-desktop-only>桌面窗口</a>
+      <a href="#sec-ai">AI 接入</a>
+      <a href="#sec-license">开源与使用</a>
+      <a href="terms.html">使用说明与免责声明</a>
+      <a href="#sec-data">数据与关于</a>
+      <a href="#sec-contact">联系作者</a>
+    </nav>
+
+    <div class="set-body">
+
+<section class="panel set-panel" id="sec-display">
+        <div class="panel__title"><div><h2>显示</h2><p>影响整个应用的观感。</p></div></div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>主题</b>
+            <span>浅色适合长时间看；跟随系统会随操作系统的深色模式切换。</span>
+          </div>
+          <div class="seg" data-set="theme">
+            <button data-v="light">浅色</button>
+            <button data-v="dark">深色</button>
+            <button data-v="auto">跟随系统</button>
+          </div>
+        </div>
+
+        <div class="set-row set-row--block">
+          <div class="set-row__t">
+            <b>特色皮肤</b>
+            <span>在浅色 / 深色之上叠一层氛围。只加背景装饰，不改文字颜色，不影响阅读。</span>
+          </div>
+          <div class="skins" data-set="skin">
+            <button class="skin" data-v="none"><span class="skin__sw skin__sw--none"></span><span class="skin__n">默认</span></button>
+            <button class="skin" data-v="aurora"><span class="skin__sw skin__sw--aurora"></span><span class="skin__n">极光</span></button>
+            <button class="skin" data-v="star"><span class="skin__sw skin__sw--star"></span><span class="skin__n">星野</span></button>
+            <button class="skin" data-v="glass"><span class="skin__sw skin__sw--glass"></span><span class="skin__n">玻璃</span></button>
+            <button class="skin" data-v="paper"><span class="skin__sw skin__sw--paper"></span><span class="skin__n">纸感</span></button>
+            <button class="skin" data-v="mist"><span class="skin__sw skin__sw--mist"></span><span class="skin__n">晨雾</span></button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>界面密度</b>
+            <span>紧凑会缩小内边距和间距，一屏能多放一档内容。</span>
+          </div>
+          <div class="seg" data-set="density">
+            <button data-v="comfort">舒适</button>
+            <button data-v="compact">紧凑</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>界面字号</b>
+            <span>整体缩放整个界面，组件预览会跟着一起缩放。看不清就调大一档。</span>
+          </div>
+          <div class="seg" data-set="fs">
+            <button data-v="xs">极小</button>
+            <button data-v="s">小</button>
+            <button data-v="m">标准</button>
+            <button data-v="l">大</button>
+            <button data-v="xl">特大</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>卡片尺寸</b>
+            <span>组件库卡片里预览区的高度。大一点看得清，小一点一屏能多放一行。</span>
+          </div>
+          <div class="seg" data-set="cardSize">
+            <button data-v="s">小</button>
+            <button data-v="m">标准</button>
+            <button data-v="l">大</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>代码字号</b>
+            <span>详情页与接入台里代码块的字号，跟界面字号分开调。</span>
+          </div>
+          <div class="seg" data-set="codeFont">
+            <button data-v="s">小</button>
+            <button data-v="m">标准</button>
+            <button data-v="l">大</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>行距</b>
+            <span>文字密度的另一半。宽松适合长时间阅读，紧凑一屏能多放几行。</span>
+          </div>
+          <div class="seg" data-set="lh">
+            <button data-v="tight">紧凑</button>
+            <button data-v="normal">标准</button>
+            <button data-v="loose">宽松</button>
+          </div>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-motion">
+        <div class="panel__title"><div><h2>动效</h2><p>本应用的内容本身就是动效，这里控制它播不播。</p></div></div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>卡片里播放动效</b>
+            <span>关掉后组件库的卡片只显示落定状态，滚动更省电，适合低配机器。</span>
+          </div>
+          <div class="seg" data-set="cardAnim">
+            <button data-v="on">播放</button>
+            <button data-v="off">静止</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>减少动效</b>
+            <span>关闭页面转场与循环动画，等同系统的「减少动态效果」。</span>
+          </div>
+          <div class="seg" data-set="motion">
+            <button data-v="full">正常</button>
+            <button data-v="reduced">减少</button>
+          </div>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-library">
+        <div class="panel__title"><div><h2>组件库</h2><p>打开组件库时的默认状态。</p></div></div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>默认页签</b>
+            <span>进入组件库时先看哪一类。</span>
+          </div>
+          <div class="seg" data-set="libGroup">
+            <button data-v="specs">组件</button>
+            <button data-v="gl">特效</button>
+            <button data-v="base">基础</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>默认设备</b>
+            <span>只保留在这类设备上能用的动效。</span>
+          </div>
+          <div class="set-row__c">
+            <select class="set-select" data-set="libDevice">
+              <option value="all">全部设备</option>
+              <option value="phone">手机</option>
+              <option value="tablet">平板</option>
+              <option value="laptop">笔记本</option>
+              <option value="desktop">桌面大屏</option>
+              <option value="watch">手表</option>
+              <option value="tv">电视大屏</option>
+              <option value="kiosk">自助终端</option>
+              <option value="car">车机</option>
+              <option value="ar">AR / VR</option>
+              <option value="eink">墨水屏</option>
+              <option value="hmi">工业屏</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>默认排序</b>
+            <span>推荐排序按动效与界面的契合度排；名称按拼音/字母；时长从短到长。</span>
+          </div>
+          <div class="seg" data-set="libSort">
+            <button data-v="default">推荐</button>
+            <button data-v="name">名称</button>
+            <button data-v="dur">时长</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>每次加载</b>
+            <span>一屏先出多少张卡，点「加载更多」再加。</span>
+          </div>
+          <div class="seg" data-set="libShown">
+            <button data-v="30">30 张</button>
+            <button data-v="60">60 张</button>
+            <button data-v="120">120 张</button>
+          </div>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-window" data-desktop-only>
+        <div class="panel__title"><div><h2>桌面窗口</h2><p>只在 Windows 桌面版里生效。</p></div></div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>启动时全屏</b>
+            <span>打开应用直接进全屏，展示动效时没有窗口边框干扰。</span>
+          </div>
+          <div class="seg" data-set="fullscreen">
+            <button data-v="on">全屏</button>
+            <button data-v="off">窗口</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>随时进出全屏</b>
+            <span>全屏时按 <kbd>Esc</kbd>、点鼠标右键，或按 <kbd>F11</kbd> 切换。窗口模式下按 <kbd>F11</kbd> 回到全屏。</span>
+          </div>
+          <div class="set-row__c">
+            <button class="btn btn--ghost btn--sm" data-toggle-fullscreen>切换全屏</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>退出全屏快捷键</b>
+            <span>点右边录制，再按下你习惯的组合键。<kbd>Esc</kbd> 始终保留，不会被占用；和系统或其他功能冲突时会提示。</span>
+            <span class="set-hint" data-shortcut-msg></span>
+          </div>
+          <div class="set-row__c">
+            <button class="btn btn--ghost btn--sm" type="button" data-shortcut-record>
+              当前：<kbd data-shortcut-label>Esc</kbd>
+            </button>
+          </div>
+        </div>
+
+        <div class="set-row" data-startup-row hidden>
+          <div class="set-row__t">
+            <b>开机自动启动</b>
+            <span>登录 Windows 后自动打开。写在当前用户的启动项里，不需要管理员权限；关掉就从启动项移除。</span>
+            <span class="set-hint" data-startup-msg></span>
+          </div>
+          <div class="seg" data-startup>
+            <button type="button" data-v="on">开启</button>
+            <button type="button" data-v="off">关闭</button>
+          </div>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-ai">
+        <div class="panel__title"><div><h2>AI 接入</h2><p>把提示词交给任意 AI，名单与模板都在独立页面里管理。</p></div></div>
+        <div class="set-row" style="align-items:center;gap:12px">
+          <div class="set-row__t">
+            <b>打开 AI 接入</b>
+            <span>26 个内置站点 · 自定义 AI · 提示词模板；设置里不再重复一套</span>
+          </div>
+          <a class="btn btn--solid btn--sm" href="ai.html">打开</a>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-license">
+        <div class="panel__title"><div><h2>开源与使用</h2><p>代码 Apache-2.0、数据 CC BY 4.0。不设激活码、不设席位、不限时间与次数。</p></div></div>
+
+        <div class="lic">
+          <div class="lic__head">
+            <span class="lic__badge" data-state="ok">Apache-2.0 / CC BY 4.0</span>
+          </div>
+          <dl class="lic__meta">
+            <div><dt>使用限制</dt><dd>无。任何人、任何时间、任何次数，含商业用途</dd></div>
+            <div><dt>源码</dt><dd>完整源码与 LICENSE 随包提供</dd></div>
+            <div><dt>担保</dt><dd>按「现状」提供，不附带任何明示或默示担保</dd></div>
+            <div><dt>责任</dt><dd>使用风险自负；详见开源许可与免责声明</dd></div>
+          </dl>
+          <p class="lic__msg">完整条款见 <a href="license.html">开源许可与免责声明</a>。</p>
+        </div>
+      </section>
+
+<section class="panel set-panel" id="sec-data">
+        <div class="panel__title"><div><h2>数据与关于</h2><p>偏好与状态都只存在本机，不联网、不上传。</p></div></div>
+
+        <div class="set-row" data-app-action-row hidden>
+          <div class="set-row__t">
+            <b data-app-action-title>卸载本应用</b>
+            <span data-app-action-desc>会删除程序本体和本机保存的全部数据，操作不可撤销。</span>
+            <span class="set-hint" data-app-action-msg></span>
+          </div>
+          <div class="set-row__c" data-app-action-cta>
+            <button class="btn btn--ghost btn--sm" type="button" data-app-action>卸载</button>
+          </div>
+        </div>
+
+        <div class="set-row">
+          <div class="set-row__t">
+            <b>恢复默认设置</b>
+            <span>把上面所有选项还原成出厂状态，本地数据不受影响。</span>
+          </div>
+          <div class="set-row__c">
+            <button class="btn btn--ghost btn--sm" data-reset-settings>恢复默认</button>
+          </div>
+        </div>
+
+        <div class="set-about">
+          <div><span>应用</span><b>Zingdex · 动效组件库</b></div>
+          <div><span>版本</span><b data-about-version>1.11.0</b></div>
+          <div><span>条目</span><b data-about-count>—</b></div>
+          <div><span>开发</span><b>跃索相关团队</b></div>
+          <div><span>许可</span><b data-about-license>Apache-2.0 / CC BY 4.0</b></div>
+          <div><span>网络</span><b>完全离线，无任何请求</b></div>
+        </div>
+      
+        <div class="set-contact-block">
+  <section class="contact-block" id="sec-contact">
+          <div class="panel__title"><div><h2>技术交流</h2><p>仅限技术问题与场景建议。</p></div></div>
+          <div class="contact-mail">
+            <div class="contact-mail__item">
+              <b>邮箱</b>
+              <span>2083825368@qq.com</span>
+            </div>
+            <div class="contact-mail__item">
+              <b>反馈格式</b>
+              <span>动效编号（fx-…）+ 设备 + 现象</span>
+            </div>
+          </div>
+        </section>        </section>
+        </div>
+      </section>
+
+    </div>
+
+
+
+  </div>
+</main>
+
+<div data-footer></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="assets/version.js?v=3.21.5"></script>
+<script src="assets/settings.js?v=3.21.5"></script>
+<script src="assets/paths.js?v=3.21.5"></script>
+<script src="assets/ai.js?v=3.21.5"></script>
+<script src="assets/app.js?v=3.21.5"></script>
+</body>
+</html>

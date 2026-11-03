@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自适应图标背景：品牌荧光绿。
+     前景是黑色流星，背景必须是亮色，否则在安卓 8+ 的桌面上等于看不见。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="#B6E03F"
+        android:startColor="#D2F86A"
+        android:type="linear" />
+</shape>
