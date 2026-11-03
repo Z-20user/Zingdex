@@ -37,10 +37,13 @@ walk(WEB);
 files.sort();
 
 // 版本号取所有文件内容的合并哈希：内容一变，SW 就换缓存
+// 换行统一按 LF 计算，保证 Windows / Linux / macOS 上得出同一个版本号
 const h = crypto.createHash("sha256");
 for (const rel of files) {
   h.update(rel);
-  h.update(fs.readFileSync(path.join(WEB, rel)));
+  const buf = fs.readFileSync(path.join(WEB, rel));
+  const isText = !buf.includes(0) && !/\.(png|jpe?g|gif|webp|ico|woff2?|ttf|pdf)$/i.test(rel);
+  h.update(isText ? Buffer.from(buf.toString("utf8").replace(/\r\n/g, "\n"), "utf8") : buf);
 }
 const version = h.digest("hex").slice(0, 12);
 
