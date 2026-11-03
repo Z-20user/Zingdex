@@ -1,129 +1,127 @@
-# 帧册 / FrameFolio
+# Zingdex / 跃索
 
-离线动效规格库：**20,000 条场景条目 · 500 个基础特效 · 11 类设备系数**。
-给 AI 编码助手和前端开发者用：检索 → 取码 → 适配，三步闭环。
+离线动效规格库：**20,000 条场景条目 · 500 个基础特效 · 11 类设备适配系数**。
+给 AI 编码助手和前端开发者用：检索 → 取码 → 适配。
 
-版本 **3.0.2** · 免费 · MIT（Skill 与文档）· 应用本体不提供源码
+版本 **3.1.0** · 完全免费 · MIT（Skill 与文档）· 应用本体不提供源码
+
+> 国外有 GSAP Skills、Transitions.dev，国内还没有离线、大规模、带多端系数的 AI 动效规格库——所以做了这个。
 
 ---
 
-## 一、中文说明
+## 一、中文
 
-**是什么**
-一套能搜、能看、能复制的界面动效库。每条都是真实界面 + 作用其上的动效，不是色块换名字。
-
-**下载**（Release 里只有这两个）
+**下载**（Release 只有两个文件）
 | 文件 | 平台 | 体积 |
 |---|---|---|
-| `FrameFolio-3.0.2-android.apk` | 安卓，直接安装 | 2.4 MB |
-| `FrameFolio-3.0.2-windows.exe` | Windows，双击即用 | 112 MB |
+| `Zingdex-3.1.0-android.apk` | 安卓，直接安装 | 2.5 MB |
+| `Zingdex-3.1.0-windows-portable.zip` | Windows 便携版，解压即用、免安装 | 112 MB |
 
 **三步用起来**
 ```bash
-node skill/tools/find-motion.js "商品列表" --device phone   # 1 检索，得 fx 编号
-node skill/tools/extract-motion.js fx-n001-01               # 2 取码，得 HTML+CSS
-node skill/tools/extract-motion.js --list                   # 3 不确定时列全部特效
+node skill/tools/find-motion.js "商品列表" --device phone   # 检索 → fx 编号
+node skill/tools/extract-motion.js fx-n001-01               # 取码 → HTML + CSS
+node skill/tools/extract-motion.js --list                   # 列全部基础特效
 ```
 
-**边界**
-- 三件套同取：只拿 CSS 不动，只拿 HTML 没效果
-- 换设备必须乘系数：手表 ×0.62/×0.55、车机 ×0.75/×0.70、手机 ×0.82/×0.72、桌面 ×1.08/×1.18
-- 改节奏用 `--fx-dur` / `--fx-ease`，不改关键帧名
+**边界**：HTML+CSS 同取；换设备乘系数（手表 0.62/0.55、车机 0.75/0.70、手机 0.82/0.72、桌面 1.08/1.18）；改节奏用 `--fx-dur`/`--fx-ease`，不改关键帧名。
 
-**文档**：[MANUAL.md](MANUAL.md) 使用手册 · [LATEST.md](LATEST.md) 最新版 · [VERSIONS.md](VERSIONS.md) 版本史 · [skill/SKILL.md](skill/SKILL.md) 技能总纲
+**文档**：[MANUAL.md](MANUAL.md) 手册 · [LATEST.md](LATEST.md) 最新版 · [VERSIONS.md](VERSIONS.md) 版本史 · [skill/SKILL.md](skill/SKILL.md) 技能总纲
 
 **开源范围**：应用本体免费使用、不提供源码；Skill 与文档 MIT。
-**维护节奏**：个人独立维护，每周最多更新一次（通常周末）；收费闭环、小程序、账号暂不启动。
-**联系**：技术交流邮箱 2083825368@qq.com
+**反馈**：优先 GitHub Issues；邮箱 `hello@zingdex.com`（待域名启用）。
+
+### 维护节奏
+
+个人独立维护（在校学生），**每周最多更新一次，通常周末**；紧急 Bug 除外。
+功能请求按周排期，不承诺即时响应；收费闭环、小程序、账号系统暂不启动。
+
+### 基础设施 / Infrastructure
+
+| 项 | 规划 | 状态 |
+|---|---|---|
+| 主域名 | `zingdex.com` / `zingdex.dev` | 待注册确认 |
+| 中文域名 | 不建议 `yuesuo` 系列（有同名公司）；备选 `zingdex.cn` | 建议放弃中文域名 |
+| 文档站 | `docs.zingdex.com` | 暂不部署 |
+| 下载站 | 优先 GitHub Releases；备选 `dl.zingdex.com` | 使用 GitHub |
+| npm 包 | `zingdex` | 检索未占用，可发布；备选 `@zingdex/cli` |
+| GitHub 组织 | `zingdex` | 大概率可用；备选 `zingdex-labs` |
+| 邮箱 | `hello@zingdex.com` | 待主域名确认后启用 |
+| 社交占位 | `@zingdex`（X / GitHub / V2EX / 即刻） | 建议先占位 |
+| 商标 | 第 9 类软件、第 42 类软件设计开发 | 商业化前再查；当前不注册 |
+| 中文品牌 | 跃索 | 仅作品牌称呼，不用于域名 |
 
 ---
 
 ## 二、English
 
-**What**: an offline motion-spec library — 20,000 scene entries, 500 base effects, per-device scaling for 11 device classes. Built for AI coding assistants and front-end developers.
+**What**: an offline motion-spec library — 20,000 scene entries, 500 base effects, per-device scaling for 11 device classes.
 
-**Download** (only two assets)
+**Download**
 | File | Platform | Size |
 |---|---|---|
-| `FrameFolio-3.0.2-android.apk` | Android | 2.4 MB |
-| `FrameFolio-3.0.2-windows.exe` | Windows (double-click) | 112 MB |
+| `Zingdex-3.1.0-android.apk` | Android | 2.5 MB |
+| `Zingdex-3.1.0-windows-portable.zip` | Windows portable (no install) | 112 MB |
 
-**Three commands**
+**Commands**
 ```bash
 node skill/tools/find-motion.js "product list" --device phone
 node skill/tools/extract-motion.js fx-n001-01
 node skill/tools/extract-motion.js --list
 ```
 
-**Boundaries**: always take HTML + CSS together; scale per device (watch ×0.62/×0.55, car ×0.75/×0.70, phone ×0.82/×0.72, desktop ×1.08/×1.18); tune rhythm with `--fx-dur` / `--fx-ease`, never rename keyframes.
-
-**Docs**: [MANUAL.md](MANUAL.md) · [LATEST.md](LATEST.md) · [VERSIONS.md](VERSIONS.md) · [skill/SKILL.md](skill/SKILL.md)
-
-**Scope**: app binaries free, source not published; Skill and docs are MIT.
+**Scope**: app binaries free, source not published; skill and docs MIT.
 **Cadence**: solo-maintained, at most one update per week.
-**Contact**: 2083825368@qq.com
+**Contact**: GitHub Issues first; `hello@zingdex.com` once the domain is live.
 
 ---
 
 ## 三、For AI agents
 
 ```yaml
-project: FrameFolio
-version: 3.0.2
-license:
-  app_binaries: free-use, source not published
-  skill_and_docs: MIT
+project: Zingdex
+project_zh: 跃索
+version: 3.1.0
+license: {app_binaries: free-use-no-source, skill_and_docs: MIT}
 entrypoint: skill/SKILL.md
 
 assets:
-  - name: FrameFolio-3.0.2-android.apk
-    platform: android
-    min_sdk: 23
-    size_mb: 2.4
-  - name: FrameFolio-3.0.2-windows.exe
-    platform: windows
-    runtime: system edge/chromium
-    size_mb: 112
+  - {name: Zingdex-3.1.0-android.apk, platform: android, min_sdk: 23, size_mb: 2.5}
+  - {name: Zingdex-3.1.0-windows-portable.zip, platform: windows, install: none, size_mb: 112}
 
 commands:
-  search:
-    run: node skill/tools/find-motion.js "<keyword>" [--device <dev>] [--cat <cat>] [--max <ms>] [--json]
-    returns: scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}
-  extract:
-    run: node skill/tools/extract-motion.js <fx-id|effect-id> [--json]
-    returns: {html, css, js, note}
-  list:
-    run: node skill/tools/extract-motion.js --list [family]
-    returns: effect ids grouped by family
+  search:  {run: 'node skill/tools/find-motion.js "<kw>" [--device d] [--cat c] [--max ms] [--json]', returns: 'scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}'}
+  extract: {run: 'node skill/tools/extract-motion.js <fx-id|effect-id> [--json]', returns: '{html, css, js, note}'}
+  list:    {run: 'node skill/tools/extract-motion.js --list [family]', returns: 'effect ids by family'}
 
 data_model:
-  scenes: 201            # SCENES[] in assets/data.js + engine.js
-  entries: 20000         # cats[].fx
-  effects: 500           # ENGINE_HTML/CSS/JS
-  entry_to_code: "SCENES[].cats[].fx -> LIB_PAY[fx] -> {h,c} (100% resolve)"
+  scenes: 201
+  entries: 20000
+  effects: 500
+  chain: "SCENES[].cats[].fx -> LIB_PAY[fx] -> {h,c} (100% resolve)"
 
-device_scaling:            # duration / distance
-  phone:      [0.82, 0.72]
-  phone_lg:   [0.88, 0.80]
+device_scaling:
+  phone: [0.82, 0.72]
+  phone_lg: [0.88, 0.80]
   desktop_xl: [1.08, 1.18]
-  tablet:     [1.00, 1.00]
-  watch:      [0.62, 0.55]
-  car:        [0.75, 0.70]
-  kiosk:      [1.00, 1.10]
+  tablet: [1.00, 1.00]
+  watch: [0.62, 0.55]
+  car: [0.75, 0.70]
+  kiosk: [1.00, 1.10]
 
 invariants:
-  - html and css must be taken together
+  - take html and css together
   - never rename keyframes without updating references
-  - entrance plays once; do not use infinite
+  - entrance plays once; no infinite
   - max 2 concurrent loops per screen
   - honor prefers-reduced-motion (jump to end state)
   - stop frame loops when element is removed
 
-fallbacks:
-  - shorten keyword
-  - drop --device / --cat / --max
-  - run --list to inspect actual ids
-  - never invent ids from memory
-```
+fallbacks: [shorten keyword, drop filters, run --list, never invent ids]
 
-**Read next**: [skill/SKILL.md](skill/SKILL.md) → [skill/references/02-retrieval.md](skill/references/02-retrieval.md) → [skill/references/04-device-rules.md](skill/references/04-device-rules.md)
+infra:
+  domain: zingdex.com (pending)
+  npm: zingdex
+  github_org: zingdex
+  email: hello@zingdex.com (pending)
+```
