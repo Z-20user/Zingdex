@@ -1,4 +1,4 @@
-# 帧册 FrameFolio · Skill
+# 跃索 Zingdex · Skill
 
 给 AI 编码助手用的动效取用技能：检索场景 → 拿编号 → 取 HTML/CSS。
 
