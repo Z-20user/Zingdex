@@ -242,6 +242,7 @@ do_not:
 | [版本史](docs/VERSIONS.md) | 每个版本改了什么 |
 | [数据来源审计](docs/DATA-PROVENANCE.md) | 数据哪来的、有没有第三方内容 |
 | [仓库指标](docs/METRICS.md) | 规模、体积、健康线 |
+| [发布流程](docs/RELEASING.md) | 发 npm 包、发 Release、版本号怎么升 |
 | [商业化触发条件](docs/COMMERCIAL.md) | 什么情况下才会考虑收费（现在不收费） |
 | [治理](GOVERNANCE.md) | 谁决定什么、版本怎么走 |
 | [参与贡献](CONTRIBUTING.md) | 提 PR 的流程与红线 |

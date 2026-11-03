@@ -16,7 +16,19 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-const ASSETS = path.resolve(__dirname, "..", "..", "apps", "web", "assets");
+// 数据目录解析顺序：
+//   1. ZINGDEX_ASSETS 环境变量
+//   2. 仓库内的 apps/web/assets（源码树开发时走这条，永远是最新的）
+//   3. 包内自带的 assets/（npm 安装后走这条）
+const BUNDLED = path.join(__dirname, "assets");
+const IN_REPO = path.resolve(__dirname, "..", "..", "apps", "web", "assets");
+
+function resolveAssets() {
+  if (process.env.ZINGDEX_ASSETS) return path.resolve(process.env.ZINGDEX_ASSETS);
+  if (fs.existsSync(path.join(IN_REPO, "data.js"))) return IN_REPO;
+  if (fs.existsSync(path.join(BUNDLED, "data.js"))) return BUNDLED;
+  return null;
+}
 
 let cache = null;
 
@@ -41,14 +53,12 @@ function loadFile(file) {
 function load() {
   if (cache) return cache;
 
-  if (!fs.existsSync(ASSETS)) {
+  const assets = resolveAssets();
+  if (!assets) {
     throw new Error(
-      `找不到数据目录 ${ASSETS}。本包需要在 Zingdex 仓库内使用，或设置 ZINGDEX_ASSETS 指向 apps/web/assets。`
+      "找不到动效数据。请在 Zingdex 仓库内使用，或用 ZINGDEX_ASSETS 指向包含 data.js 的目录。"
     );
   }
-  const assets = process.env.ZINGDEX_ASSETS
-    ? path.resolve(process.env.ZINGDEX_ASSETS)
-    : ASSETS;
 
   // 场景分两处声明：data.js 120 个，engine.js 追加 81 个，合计 201
   const win = loadFile(path.join(assets, "data.js"));

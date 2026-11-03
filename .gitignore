@@ -47,6 +47,12 @@ local.properties
 Thumbs.db
 desktop.ini
 
+# npm 打包时从 apps/web/assets 生成，不入库
+packages/data/assets/
+
+# npm 打包产物
+*.tgz
+
 # 本地临时
 _scratch/
 _tmp/

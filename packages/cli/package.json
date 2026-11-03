@@ -19,7 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Z-20user/frame-folio.git",
+    "url": "git+https://github.com/Z-20user/frame-folio.git",
     "directory": "packages/cli"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "homepage": "https://github.com/Z-20user/frame-folio#readme",
+  "bugs": {
+    "url": "https://github.com/Z-20user/frame-folio/issues"
   }
 }
