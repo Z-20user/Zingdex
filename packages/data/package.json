@@ -1,6 +1,6 @@
 {
   "name": "zingdex-data",
-  "version": "3.1.1",
+  "version": "3.1.6",
   "description": "Zingdex 动效数据：201 个场景、20,000 条条目、500 个基础特效、24 条 Canvas 特效",
   "license": "CC-BY-4.0",
   "main": "index.js",
@@ -28,11 +28,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Z-20user/frame-folio.git",
+    "url": "git+https://github.com/Z-20user/Zingdex.git",
     "directory": "packages/data"
   },
-  "homepage": "https://github.com/Z-20user/frame-folio#readme",
+  "homepage": "https://github.com/Z-20user/Zingdex#readme",
   "bugs": {
-    "url": "https://github.com/Z-20user/frame-folio/issues"
+    "url": "https://github.com/Z-20user/Zingdex/issues"
   }
 }

@@ -4,7 +4,8 @@
 
 | 版本 | 日期 | 产物 | 说明 |
 |---|---|---|---|
-| **3.1.1** | 2026-11-03 | `Zingdex-3.1.1-android.apk` · `-windows-portable.zip` | 修复技术交流区块布局；品牌统一显示 Zingdex · 跃索 |
+| **3.1.6** | 2026-11-03 | `Zingdex-3.1.6-android.apk` · `-windows-portable.zip` | 仓库更名 `Z-20user/Zingdex`；版本号 3.1.1 → 3.1.6 |
+| 3.1.1 | 2026-11-03 | `Zingdex-3.1.1-android.apk` · `-windows-portable.zip` | 修复技术交流区块布局；品牌统一显示 Zingdex · 跃索；首次发布 npm 包 |
 | 3.1.0 | 2026-11-03 | `Zingdex-3.1.0-android.apk` · `-windows-portable.zip` | 开源定稿：代码 Apache-2.0、数据 CC BY 4.0；monorepo；签名密钥移出仓库 |
 | 3.0.2 | 2026-11-03 | `FrameFolio-3.0.2-android.apk` · `-windows-portable.zip` | 使用说明去掉「安装版/便携版」表述 |
 | 3.0.1 | 2026-11-03 | `FrameFolio-3.0.1-android.apk` · `-windows-portable.zip` | 移除二维码与保存入口，只留邮箱 |

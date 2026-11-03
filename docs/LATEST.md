@@ -1,11 +1,11 @@
 # 最新版 / Latest
 
-**Zingdex · 跃索 3.1.1**
+**Zingdex · 跃索 3.1.6**
 
 | 项 | 值 |
 |---|---|
 | 名称 | Zingdex · 跃索 |
-| 版本 | 3.1.1（Android versionCode 87） |
+| 版本 | 3.1.6（Android versionCode 88） |
 | 包名 | `com.transientlab.motion`（保留，保证覆盖升级） |
 | 系统 | Android 6.0+ / Windows 10+ |
 | 体积 | APK 2.5 MB · Windows 便携版 112 MB（解压约 293 MB） |
@@ -14,10 +14,17 @@
 
 ## 下载
 
-- `Zingdex-3.1.1-android.apk` —— 安卓，直接安装
-- `Zingdex-3.1.1-windows-portable.zip` —— 解压后运行 `Zingdex.exe`
+- `Zingdex-3.1.6-android.apk` —— 安卓，直接安装
+- `Zingdex-3.1.6-windows-portable.zip` —— 解压后运行 `Zingdex.exe`
 
-[前往 Releases](https://github.com/Z-20user/frame-folio/releases/latest)
+[前往 Releases](https://github.com/Z-20user/Zingdex/releases/latest)
+
+## npm
+
+```bash
+npm i zingdex-cli
+npx zingdex find "商品列表" --device phone
+```
 
 ## 文档
 
@@ -28,14 +35,14 @@
 
 ## 本轮变更
 
-- 修复设置页「技术交流」区块的空白占位
-- 品牌显示统一为 Zingdex · 跃索
+- 仓库更名为 `Z-20user/Zingdex`，全部链接与元信息同步
+- 版本号 3.1.1 → 3.1.6
 
 ## 下一步
 
-- PWA（可离线安装的网页版）
-- 插件 SDK
+- PWA 安装引导优化
 - 更多设备系数校准
+- 插件生态示例
 
 ## 反馈
 

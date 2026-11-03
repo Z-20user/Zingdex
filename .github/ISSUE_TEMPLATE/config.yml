@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: 安全问题 / Security
-    url: https://github.com/Z-20user/frame-folio/security/advisories/new
+    url: https://github.com/Z-20user/Zingdex/security/advisories/new
     about: 请走私密通道，不要开公开 Issue。详见 SECURITY.md
   - name: 使用问题 / Questions
-    url: https://github.com/Z-20user/frame-folio/discussions
+    url: https://github.com/Z-20user/Zingdex/discussions
     about: 「怎么用」「为什么不动」这类问题走讨论区
   - name: 完整文档 / Docs
-    url: https://github.com/Z-20user/frame-folio/tree/main/docs
+    url: https://github.com/Z-20user/Zingdex/tree/main/docs
     about: 手册、版本史、数据来源审计都在这里

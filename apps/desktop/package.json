@@ -1,7 +1,7 @@
 {
   "name": "zingdex-motion",
   "productName": "Zingdex",
-  "version": "3.1.1",
+  "version": "3.1.6",
   "description": "Zingdex 跃索 · 动效组件库",
   "main": "main.js",
   "author": "跃索相关团队",

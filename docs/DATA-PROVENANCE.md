@@ -104,7 +104,7 @@ grep -oiE "animate\.css|animista|gsap|framer[- ]motion|three\.js|anime\.js|motio
 
 ```
 Motion data based on Zingdex 跃索 (CC BY 4.0)
-https://github.com/Z-20user/frame-folio
+https://github.com/Z-20user/Zingdex
 ```
 
 ---

@@ -105,4 +105,4 @@ A：历史原因。改名不改包名，是为了让老用户能覆盖升级、�
 ## 七、反馈
 
 邮箱：2083825368@qq.com
-问题与建议：[GitHub Issues](https://github.com/Z-20user/frame-folio/issues)
+问题与建议：[GitHub Issues](https://github.com/Z-20user/Zingdex/issues)

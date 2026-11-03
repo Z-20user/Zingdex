@@ -3,7 +3,7 @@
 **离线界面动效库：20,000 条场景条目 · 500 个基础特效 · 11 类设备适配系数。**
 给前端开发者和 AI 编码助手用：检索 → 取码 → 适配，三步闭环。
 
-版本 **3.1.1** · 代码 [Apache-2.0](LICENSE) · 数据与文档 [CC BY 4.0](LICENSE-DATA) · 完全开源
+版本 **3.1.6** · 代码 [Apache-2.0](LICENSE) · 数据与文档 [CC BY 4.0](LICENSE-DATA) · 完全开源
 
 [下载](#下载) · [快速开始](#三步用起来) · [仓库结构](#仓库结构) · [构建](#从源码构建) · [数据来源](docs/DATA-PROVENANCE.md) · [商标](TRADEMARK.md)
 
@@ -20,8 +20,8 @@
 
 | 文件 | 平台 | 体积 |
 |---|---|---|
-| [`Zingdex-3.1.1-android.apk`](https://github.com/Z-20user/frame-folio/releases/latest) | 安卓 6.0+，直接安装 | 2.5 MB |
-| [`Zingdex-3.1.1-windows-portable.zip`](https://github.com/Z-20user/frame-folio/releases/latest) | Windows 10+，解压运行 `Zingdex.exe` | 112 MB |
+| [`Zingdex-3.1.1-android.apk`](https://github.com/Z-20user/Zingdex/releases/latest) | 安卓 6.0+，直接安装 | 2.5 MB |
+| [`Zingdex-3.1.1-windows-portable.zip`](https://github.com/Z-20user/Zingdex/releases/latest) | Windows 10+，解压运行 `Zingdex.exe` | 112 MB |
 
 也可以在浏览器里直接用：`apps/web/index.html`（无需服务器）。
 网页版是 **PWA**：首次打开后整站进缓存，断网可用，也可以「安装」到桌面/主屏。
@@ -99,7 +99,7 @@ cd apps/desktop && npm install && npm run dist
 ### 联系
 
 技术交流邮箱：2083825368@qq.com
-问题与建议请走 [Issues](https://github.com/Z-20user/frame-folio/issues)。
+问题与建议请走 [Issues](https://github.com/Z-20user/Zingdex/issues)。
 
 ---
 
@@ -111,7 +111,7 @@ motion applied to it, not a recoloured block. Fully offline: no network calls, n
 permissions, no telemetry.
 
 **Download.** Android APK (2.5 MB, Android 6.0+) and a portable Windows zip
-(112 MB, Windows 10+) from [Releases](https://github.com/Z-20user/frame-folio/releases/latest).
+(112 MB, Windows 10+) from [Releases](https://github.com/Z-20user/Zingdex/releases/latest).
 The web build runs straight from `apps/web/index.html` — no server needed.
 
 **Three commands** (no configuration after cloning):

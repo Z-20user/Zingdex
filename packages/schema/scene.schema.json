@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Z-20user/frame-folio/packages/schema/scene.schema.json",
+  "$id": "https://github.com/Z-20user/Zingdex/packages/schema/scene.schema.json",
   "title": "Zingdex Scene",
   "description": "一个场景及其下属动效条目。场景编号形如 s001 / n001 / d001。",
   "type": "object",

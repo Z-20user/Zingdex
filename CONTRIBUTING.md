@@ -6,7 +6,7 @@
 
 ## 一、报告问题
 
-开 [Issue](https://github.com/Z-20user/frame-folio/issues) 前先搜一下有没有重复。
+开 [Issue](https://github.com/Z-20user/Zingdex/issues) 前先搜一下有没有重复。
 
 请写清楚：
 

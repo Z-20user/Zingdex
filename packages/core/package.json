@@ -1,6 +1,6 @@
 {
   "name": "zingdex-core",
-  "version": "3.1.1",
+  "version": "3.1.6",
   "description": "Zingdex 动效编译核心：按设备系数缩放并输出可直接使用的 HTML/CSS/JS",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -9,22 +9,22 @@
     "README.md"
   ],
   "dependencies": {
-    "zingdex-data": "3.1.1"
+    "zingdex-data": "3.1.6"
   },
   "engines": {
     "node": ">=18"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Z-20user/frame-folio.git",
+    "url": "git+https://github.com/Z-20user/Zingdex.git",
     "directory": "packages/core"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "homepage": "https://github.com/Z-20user/frame-folio#readme",
+  "homepage": "https://github.com/Z-20user/Zingdex#readme",
   "bugs": {
-    "url": "https://github.com/Z-20user/frame-folio/issues"
+    "url": "https://github.com/Z-20user/Zingdex/issues"
   }
 }

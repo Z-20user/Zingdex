@@ -1,6 +1,6 @@
 {
   "name": "zingdex",
-  "version": "3.1.1",
+  "version": "3.1.6",
   "private": true,
   "description": "Zingdex · 跃索 —— 离线界面动效库（20,000 条条目 / 500 基础特效 / 201 场景）",
   "license": "Apache-2.0 AND CC-BY-4.0",
@@ -25,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Z-20user/frame-folio.git"
+    "url": "https://github.com/Z-20user/Zingdex.git"
   },
-  "homepage": "https://github.com/Z-20user/frame-folio#readme",
+  "homepage": "https://github.com/Z-20user/Zingdex#readme",
   "bugs": {
-    "url": "https://github.com/Z-20user/frame-folio/issues"
+    "url": "https://github.com/Z-20user/Zingdex/issues"
   }
 }

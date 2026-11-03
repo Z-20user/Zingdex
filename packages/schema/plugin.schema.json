@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Z-20user/frame-folio/packages/schema/plugin.schema.json",
+  "$id": "https://github.com/Z-20user/Zingdex/packages/schema/plugin.schema.json",
   "title": "Zingdex Plugin",
   "description": "第三方插件定义。编号必须以 x- 开头，html 与 css 必须同时提供。",
   "type": "object",

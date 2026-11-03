@@ -43,7 +43,7 @@ Framer Motion、Anime.js、Lottie 等 8 类库做过特征串扫描，命中 0�
 
 ```
 Motion data based on Zingdex 跃索 (CC BY 4.0)
-https://github.com/Z-20user/frame-folio
+https://github.com/Z-20user/Zingdex
 ```
 
 **能把 20,000 条数据打包转卖吗？**

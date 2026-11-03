@@ -9,8 +9,8 @@
 需要：Node.js 18+、任意浏览器。**不需要装依赖。**
 
 ```bash
-git clone https://github.com/Z-20user/frame-folio.git
-cd frame-folio
+git clone https://github.com/Z-20user/Zingdex.git
+cd Zingdex
 npm test            # 三道自检，确认数据完好
 ```
 
@@ -161,4 +161,4 @@ git commit -s -m "fix(core): 修正手表端时长缩放"
 
 - 先看 [`docs/ARCHITECTURE.md`](ARCHITECTURE.md) 的「哪些改动会让你踩坑」
 - 再看 [`docs/FAQ.md`](FAQ.md)
-- 还没有答案就开 [Discussion](https://github.com/Z-20user/frame-folio/discussions)
+- 还没有答案就开 [Discussion](https://github.com/Z-20user/Zingdex/discussions)

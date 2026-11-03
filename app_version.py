@@ -10,9 +10,9 @@ launcher.py / make_splash.py / build_exe.* / build_apk.sh / version.txt
 APP_NAME = "Zingdex"                 # 英文名 / 目录名 / 进程名
 DISPLAY_NAME = "跃索"                   # 中文显示名
 FULL_NAME = "Zingdex 跃索 · 动效组件库"
-VERSION_NAME = "3.1.1"                 # 三段式版本（Android versionName / 界面显示）
-VERSION_CODE = 87                       # Android versionCode，每次构建 +1
-FILE_VERSION = (3, 1, 1, 0)            # Windows 四段文件版本
+VERSION_NAME = "3.1.6"                 # 三段式版本（Android versionName / 界面显示）
+VERSION_CODE = 88                       # Android versionCode，每次构建 +1
+FILE_VERSION = (3, 1, 6, 0)            # Windows 四段文件版本
 
 PACKAGE = "com.transientlab.motion"    # Android 包名
 KEYSTORE_ALIAS = "zingdex"
