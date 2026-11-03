@@ -68,6 +68,8 @@ function scan(file) {
       const target = name === "secret-assign" ? probe : line;
       const m = rx.exec(target);
       if (!m) continue;
+      // 文档里写「C:\Users\...」这种占位示例，不算泄漏
+      if (name === "local-path" && /\.\.\.$/.test(m[0].trim())) continue;
       const rec = `${path.relative(ROOT, file)}:${i + 1}  ${name}  ${m[0].slice(0, 100).trim()}`;
       (level === "block" ? blocking : warning).push(rec);
     }

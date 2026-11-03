@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Z-20user/frame-folio/packages/schema/plugin.schema.json",
+  "title": "Zingdex Plugin",
+  "description": "第三方插件定义。编号必须以 x- 开头，html 与 css 必须同时提供。",
+  "type": "object",
+  "required": ["name", "effects"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "插件名，用于在取码结果里标注来源"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "description": { "type": "string" },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/effect" }
+    }
+  },
+  "$defs": {
+    "effect": {
+      "type": "object",
+      "required": ["id", "zh", "html", "css"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^x-[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "description": "第三方保留前缀 x-"
+        },
+        "zh": { "type": "string", "minLength": 1 },
+        "en": { "type": "string" },
+        "html": { "type": "string", "minLength": 1 },
+        "css": { "type": "string", "minLength": 1 },
+        "js": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "device": {
+          "type": "array",
+          "items": {
+            "enum": ["phone", "phone_lg", "tablet", "desktop", "desktop_xl", "watch", "car", "kiosk"]
+          }
+        }
+      }
+    }
+  }
+}

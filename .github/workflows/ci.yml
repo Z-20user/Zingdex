@@ -29,6 +29,12 @@ jobs:
       - name: Schema 与数据一致性
         run: node tools/check-schema.js
 
+      - name: PWA 预缓存清单是否过期
+        run: node tools/gen-precache.js --check
+
+      - name: 插件 SDK 冒烟测试
+        run: node packages/plugin-sdk/example/brand-motion.js
+
   gitleaks:
     name: 密钥泄漏扫描
     runs-on: ubuntu-latest

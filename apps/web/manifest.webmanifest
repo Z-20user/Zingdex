@@ -1,0 +1,49 @@
+{
+  "name": "Zingdex · 跃索",
+  "short_name": "Zingdex",
+  "description": "离线界面动效库：20,000 条条目、500 个基础特效、201 个场景，可直接复制使用的 HTML / CSS / JS。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#F3F2ED",
+  "theme_color": "#C6F24C",
+  "categories": ["design", "developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "动效库",
+      "short_name": "库",
+      "url": "./library.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "使用说明",
+      "short_name": "说明",
+      "url": "./guide.html",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

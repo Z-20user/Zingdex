@@ -1,0 +1,22 @@
+{
+  "name": "@zingdex/plugin-sdk",
+  "version": "3.1.1",
+  "description": "给 Zingdex 增加自有动效的插件 SDK，不改动核心数据",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "dependencies": {
+    "@zingdex/core": "3.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Z-20user/frame-folio.git",
+    "directory": "packages/plugin-sdk"
+  }
+}

@@ -24,6 +24,7 @@
 | [`Zingdex-3.1.1-windows-portable.zip`](https://github.com/Z-20user/frame-folio/releases/latest) | Windows 10+，解压运行 `Zingdex.exe` | 112 MB |
 
 也可以在浏览器里直接用：`apps/web/index.html`（无需服务器）。
+网页版是 **PWA**：首次打开后整站进缓存，断网可用，也可以「安装」到桌面/主屏。
 
 ### 三步用起来
 
@@ -46,16 +47,18 @@ node skill/tools/extract-motion.js --list                   # 3 不确定时列�
 ### 仓库结构
 
 ```
-apps/web/         网页版（HTML + CSS + 资源，纯静态）
+apps/web/         网页版（纯静态，含 PWA：可安装、可离线）
 apps/desktop/     Windows 版（Electron 主进程 + 打包脚本）
 apps/android/     安卓版（免 Gradle 手工构建链）
-packages/data/    动效数据（20,000 条，CC BY 4.0）
-packages/core/    动效运行时引擎
-packages/schema/  数据结构的 JSON Schema
-packages/cli/     命令行工具
-tools/            生成与打包脚本
+packages/data/    动效数据读取 API（数据本体在 apps/web/assets）
+packages/core/    按设备系数编译与缩放
+packages/schema/  数据结构与插件的 JSON Schema
+packages/cli/     命令行工具（zingdex find / get / list / stats）
+packages/plugin-sdk/  给第三方加自有动效的扩展点
+tools/            生成、打包、自检脚本
 skill/            给 AI 助手用的技能说明（6 个文件）
-docs/             手册、版本史、数据来源审计
+docs/             手册、架构、开发者指引、数据来源审计
+legacy/           不再使用的旧实现（PyInstaller 桌面版）
 ```
 
 ### 从源码构建
@@ -227,6 +230,21 @@ do_not:
 [`docs/DATA-PROVENANCE.md`](docs/DATA-PROVENANCE.md)
 
 ---
+
+## 文档
+
+| 文档 | 给谁看 |
+|---|---|
+| [使用手册](docs/MANUAL.md) | 装机、找动效、取代码、换设备 |
+| [常见问题](docs/FAQ.md) | 「能商用吗」「为什么这么大」这类问题 |
+| [架构说明](docs/ARCHITECTURE.md) | 想改代码的人：东西在哪、改哪里会炸 |
+| [开发者指引](docs/DEVELOPING.md) | 从 clone 到构建出三个端 |
+| [版本史](docs/VERSIONS.md) | 每个版本改了什么 |
+| [数据来源审计](docs/DATA-PROVENANCE.md) | 数据哪来的、有没有第三方内容 |
+| [仓库指标](docs/METRICS.md) | 规模、体积、健康线 |
+| [商业化触发条件](docs/COMMERCIAL.md) | 什么情况下才会考虑收费（现在不收费） |
+| [治理](GOVERNANCE.md) | 谁决定什么、版本怎么走 |
+| [参与贡献](CONTRIBUTING.md) | 提 PR 的流程与红线 |
 
 ## 许可
 

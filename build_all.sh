@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Zingdex 跃索 —— 一次构建两端产物
 # 用法：bash build_all.sh
-# 产物：apps/desktop/dist/Zingdex-win32-x64/Zingdex.exe 与 apps/android/dist/Zingdex-<版本>.apk
+# 产物：dist/Zingdex.exe 与 android/dist/Zingdex-<版本>.apk
 set -euo pipefail
 
 cd "$(dirname "$0")"

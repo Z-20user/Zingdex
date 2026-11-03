@@ -12,9 +12,13 @@
   "scripts": {
     "cli": "node packages/cli/bin/zingdex.js",
     "stats": "node packages/cli/bin/zingdex.js stats",
+    "precache": "node tools/gen-precache.js",
+    "metrics": "node tools/metrics.js --write",
     "check:data": "node tools/check-data.js",
     "check:secrets": "node tools/check-secrets.js",
-    "test": "npm run check:data && npm run check:secrets"
+    "check:schema": "node tools/check-schema.js",
+    "check:precache": "node tools/gen-precache.js --check",
+    "test": "npm run check:data && npm run check:secrets && npm run check:schema && npm run check:precache"
   },
   "engines": {
     "node": ">=18"

@@ -28,6 +28,13 @@
 </script>
 <link rel="stylesheet" href="assets/style.css?v=3.21.5">
 <link rel="stylesheet" href="assets/theme.css?v=3.21.5">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#C6F24C">
+<meta name="application-name" content="Zingdex 跃索">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Zingdex">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 </head>
 <body data-page="motion">
 
@@ -261,5 +268,15 @@
 <script src="assets/engine.js?v=3.21.5"></script>
 <script src="assets/effects.js?v=3.21.5"></script>
 <script src="assets/app.js?v=3.21.5"></script>
+<script>
+/* PWA：注册 Service Worker（file:// 与 WebView 内自动跳过） */
+(function () {
+  if (!("serviceWorker" in navigator)) return;
+  if (location.protocol !== "http:" && location.protocol !== "https:") return;
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js", { scope: "./" }).catch(function () {});
+  });
+})();
+</script>
 </body>
 </html>
