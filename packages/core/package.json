@@ -1,5 +1,5 @@
 {
-  "name": "@zingdex/core",
+  "name": "zingdex-core",
   "version": "3.1.1",
   "description": "Zingdex 动效编译核心：按设备系数缩放并输出可直接使用的 HTML/CSS/JS",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@zingdex/data": "3.1.1"
+    "zingdex-data": "3.1.1"
   },
   "engines": {
     "node": ">=18"

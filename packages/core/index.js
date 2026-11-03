@@ -1,9 +1,9 @@
 "use strict";
 /**
- * @zingdex/core —— 把一条动效编译成可直接使用的代码。
+ * zingdex-core —— 把一条动效编译成可直接使用的代码。
  *
  * 用法：
- *   const core = require("@zingdex/core");
+ *   const core = require("zingdex-core");
  *   const out = core.get("fx-s001-07", { device: "watch" });
  *   // -> { html, css, js, note, device, scaled: true }
  *
@@ -14,7 +14,7 @@
  */
 let data;
 try {
-  data = require("@zingdex/data");
+  data = require("zingdex-data");
 } catch (e) {
   // 未安装 workspace 依赖时退回同级目录，便于在仓库内直接运行
   data = require("../data");

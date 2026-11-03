@@ -12,8 +12,8 @@
  */
 let data, core;
 try {
-  data = require("@zingdex/data");
-  core = require("@zingdex/core");
+  data = require("zingdex-data");
+  core = require("zingdex-core");
 } catch (e) {
   // 未安装 workspace 依赖时退回同级目录，便于在仓库内直接运行
   data = require("../../data");

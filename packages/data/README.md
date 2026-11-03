@@ -1,13 +1,13 @@
-# @zingdex/data
+# zingdex-data
 
 动效数据的 Node 读取接口。数据本体在仓库的 `apps/web/assets/`，这里只做读取，不复制，避免漂移。
 
 ```bash
-npm i @zingdex/data
+npm i zingdex-data
 ```
 
 ```js
-const data = require("@zingdex/data");
+const data = require("zingdex-data");
 
 data.stats();      // { scenes:201, entries:20000, baseEffects:500, components:18, canvasEffects:24 }
 data.scenes();     // 201 个场景，每个带 cats[] 条目

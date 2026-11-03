@@ -1,15 +1,15 @@
-# @zingdex/plugin-sdk
+# zingdex-plugin-sdk
 
 给 Zingdex 加**你自己的动效**，不用改核心的那 20,000 条数据。
 
 ```bash
-npm i @zingdex/plugin-sdk
+npm i zingdex-plugin-sdk
 ```
 
 ## 最小例子
 
 ```js
-const { definePlugin, createRegistry } = require("@zingdex/plugin-sdk");
+const { definePlugin, createRegistry } = require("zingdex-plugin-sdk");
 
 const mine = definePlugin({
   name: "my-brand",

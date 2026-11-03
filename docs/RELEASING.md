@@ -42,7 +42,7 @@ cd ../plugin-sdk && npm publish
 ```
 
 **为什么先发 data**：`core` / `cli` / `plugin-sdk` 的 `dependencies` 里写死了
-`"@zingdex/data": "3.1.1"`。npm 上还没有这个版本时，后三个发不出去。
+`"zingdex-data": "3.1.1"`。npm 上还没有这个版本时，后三个发不出去。
 
 ### `prepack` 做了什么
 
@@ -55,9 +55,9 @@ cd ../plugin-sdk && npm publish
 ### 发布后验证
 
 ```bash
-npm view @zingdex/data version
+npm view zingdex-data version
 mkdir /tmp/zx && cd /tmp/zx && npm init -y
-npm i @zingdex/cli
+npm i zingdex-cli
 npx zingdex stats        # 应输出 scenes:201 entries:20000 ...
 ```
 

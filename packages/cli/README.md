@@ -1,9 +1,9 @@
-# @zingdex/cli
+# zingdex-cli
 
 命令行取用动效。
 
 ```bash
-npx @zingdex/cli find "商品列表" --device phone
+npx zingdex-cli find "商品列表" --device phone
 ```
 
 或在仓库内：

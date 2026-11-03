@@ -1,13 +1,13 @@
-# @zingdex/core
+# zingdex-core
 
 把一条动效编译成能直接用的代码，并按设备系数缩放。
 
 ```bash
-npm i @zingdex/core
+npm i zingdex-core
 ```
 
 ```js
-const core = require("@zingdex/core");
+const core = require("zingdex-core");
 
 const r = core.get("fx-s001-07", { device: "watch" });
 // { id, source, device, scaled, html, css, js, warn[] }

@@ -1,9 +1,9 @@
 "use strict";
 /**
- * @zingdex/plugin-sdk —— 给 Zingdex 加自己的动效，不动核心数据。
+ * zingdex-plugin-sdk —— 给 Zingdex 加自己的动效，不动核心数据。
  *
  * 用法：
- *   const { definePlugin, createRegistry } = require("@zingdex/plugin-sdk");
+ *   const { definePlugin, createRegistry } = require("zingdex-plugin-sdk");
  *
  *   const myPlugin = definePlugin({
  *     name: "my-brand-motion",
@@ -30,7 +30,7 @@
  */
 let core;
 try {
-  core = require("@zingdex/core");
+  core = require("zingdex-core");
 } catch (e) {
   // 未安装 workspace 依赖时退回同级目录，便于在仓库内直接运行
   core = require("../core");
