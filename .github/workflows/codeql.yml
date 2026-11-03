@@ -19,16 +19,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ["javascript-typescript", "java-kotlin"]
+        include:
+          - language: javascript-typescript
+            build-mode: none
+          # 安卓端是免 Gradle 的手工构建链（aapt2 + javac + d8），
+          # CodeQL 的 autobuild 找不到构建系统会直接失败。
+          # 用 none 模式做纯源码抽取，不执行任何构建。
+          - language: java-kotlin
+            build-mode: none
     steps:
       - uses: actions/checkout@v4
 
       - uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
           queries: security-and-quality
-
-      - uses: github/codeql-action/autobuild@v3
 
       - uses: github/codeql-action/analyze@v3
         with:
