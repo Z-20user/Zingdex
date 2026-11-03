@@ -36,6 +36,21 @@ node skill/tools/extract-motion.js --list                   # 3 不确定时列�
 
 克隆仓库后无需任何配置，工具会自动读取 `apps/web/assets/`。
 
+### 或者用 npm（不需要克隆仓库）
+
+```bash
+npm i zingdex-cli
+npx zingdex find "商品列表" --device phone
+npx zingdex get fx-s001-07 --device watch
+```
+
+| 包 | 用途 |
+|---|---|
+| [`zingdex-cli`](https://www.npmjs.com/package/zingdex-cli) | 命令行（含数据，开箱即用） |
+| [`zingdex-data`](https://www.npmjs.com/package/zingdex-data) | 20,000 条数据的 Node 读取接口 |
+| [`zingdex-core`](https://www.npmjs.com/package/zingdex-core) | 按设备缩放、生成独立预览页 |
+| [`zingdex-plugin-sdk`](https://www.npmjs.com/package/zingdex-plugin-sdk) | 加自己的动效，不动核心数据 |
+
 ### 边界（这几条是硬约束）
 
 - **HTML 与 CSS 必须同取**：只拿 CSS 不会动，只拿 HTML 是块静止的界面
@@ -107,6 +122,15 @@ node skill/tools/extract-motion.js fx-s001-07
 node skill/tools/extract-motion.js --list
 ```
 
+**Or via npm** (no clone needed):
+
+```bash
+npm i zingdex-cli
+npx zingdex find "product list" --device phone
+```
+
+Packages: `zingdex-cli`, `zingdex-data`, `zingdex-core`, `zingdex-plugin-sdk`.
+
 **Boundaries.**
 Always take HTML + CSS together — CSS alone does not animate, HTML alone is a still frame.
 Scale per device before shipping: watch ×0.62/×0.55, car ×0.75/×0.70,
@@ -173,8 +197,12 @@ assets:
     size_mb: 112
 
 commands:
+  install:
+    npm: "npm i zingdex-cli"
+    repo: "git clone <repo> && node skill/tools/…"
   search:
     run: node skill/tools/find-motion.js "<keyword>" [--device <dev>] [--cat <cat>] [--max <ms>] [--json]
+    npmm_run: npx zingdex find "<keyword>" --device <dev>
     returns: scenes[] -> {id, zh, domain, devices, cats[] -> {zh, ms, mc, fx}}
   extract:
     run: node skill/tools/extract-motion.js <fx-id|effect-id> [--json]
